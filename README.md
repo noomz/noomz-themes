@@ -7,6 +7,7 @@ Currently included for Claude Code, pi.dev, and Hermes Agent:
 - `modus-operandi`
 - `modus-operandi-tinted` (uses canonical `modus-operandi-tinted` palette values from https://protesilaos.com/emacs/modus-themes-colors)
 - `kanagawa` (Kanagawa Lotus-inspired light adaptation)
+- `kanagawa-wave` (Kanagawa Wave-inspired dark adaptation, Hermes only)
 - `tokyo-night-day` (TokyoNight Day-inspired adaptation)
 - `everforest-light` (Everforest Light Medium-inspired adaptation)
 - `noomz-rose-pine` (Rosé Pine main dark palette)
@@ -79,6 +80,7 @@ Then select one inside Hermes:
 /skin modus-operandi
 /skin modus-operandi-tinted
 /skin kanagawa
+/skin kanagawa-wave   # dark, Hermes only
 /skin tokyo-night-day
 /skin everforest-light
 /skin noomz-rose-pine
@@ -164,6 +166,7 @@ Recommended terminal profile background colors:
 | `modus-operandi` | `#fcf7ed` |
 | `modus-operandi-tinted` | `#fbf7f0` |
 | `kanagawa` | `#f2ecbc` |
+| `kanagawa-wave` (Hermes) | `#1f1f28` |
 | `tokyo-night-day` | `#e1e2e7` |
 | `everforest-light` | `#fdf6e3` |
 | `noomz-rose-pine` | `#191724` |

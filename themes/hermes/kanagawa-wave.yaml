@@ -1,0 +1,56 @@
+name: kanagawa-wave
+description: Kanagawa Wave-inspired dark skin with bright fuji ink, crystal blue, and oni violet accents
+
+colors:
+  banner_border: "#938aa9"
+  banner_title: "#dcd7ba"
+  banner_accent: "#957fb8"
+  banner_dim: "#938aa9"
+  banner_text: "#dcd7ba"
+  ui_accent: "#7e9cd8"
+  ui_label: "#7fb4ca"
+  ui_ok: "#98bb6c"
+  ui_error: "#ff5d62"
+  ui_warn: "#ff9e3b"
+  prompt: "#dcd7ba"
+  input_rule: "#54546d"
+  response_border: "#957fb8"
+  session_label: "#7e9cd8"
+  session_border: "#54546d"
+  status_bar_bg: "#2a2a37"
+  status_bar_text: "#dcd7ba"
+  status_bar_strong: "#957fb8"
+  status_bar_dim: "#938aa9"
+  status_bar_good: "#98bb6c"
+  status_bar_warn: "#e6c384"
+  status_bar_bad: "#ffa066"
+  status_bar_critical: "#ff5d62"
+  voice_status_bg: "#2a2a37"
+  selection_bg: "#2d4f67"
+  completion_menu_bg: "#223249"
+  completion_menu_current_bg: "#2d4f67"
+  completion_menu_meta_bg: "#2a2a37"
+  completion_menu_meta_current_bg: "#363646"
+
+spinner:
+  waiting_faces: ["(λ)", "(μ)", "(ν)", "(∴)"]
+  thinking_faces: ["(λ)", "(∫)", "(∴)", "(∵)"]
+  thinking_verbs:
+    - reading
+    - checking palette
+    - composing
+    - reasoning
+    - applying colors
+  wings:
+    - ["⟪", "⟫"]
+    - ["‹", "›"]
+
+branding:
+  agent_name: "Hermes Agent"
+  welcome: "Welcome to Hermes Agent! Type your message or /help for commands."
+  goodbye: "Goodbye! ⚕"
+  response_label: " ⚕ Hermes "
+  prompt_symbol: "❯"
+  help_header: "[?] Available Commands"
+
+tool_prefix: "│"
