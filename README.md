@@ -10,6 +10,10 @@ Currently included for Claude Code, pi.dev, and Hermes Agent:
 - `kanagawa-wave` (Kanagawa Wave-inspired dark adaptation)
 - `tokyo-night-day` (TokyoNight Day-inspired adaptation)
 - `everforest-light` (Everforest Light Medium-inspired adaptation)
+- `catppuccin-latte` (Catppuccin Latte light palette)
+- `catppuccin-frappe` (Catppuccin Frappé dark palette)
+- `catppuccin-macchiato` (Catppuccin Macchiato dark palette)
+- `catppuccin-mocha` (Catppuccin Mocha dark palette)
 - `noomz-rose-pine` (Rosé Pine main dark palette)
 - `noomz-rose-pine-moon` (Rosé Pine Moon dark palette)
 - `noomz-rose-pine-dawn` (Rosé Pine Dawn light palette)
@@ -17,12 +21,15 @@ Currently included for Claude Code, pi.dev, and Hermes Agent:
 
 The palettes keep readability high while darkening low-contrast text where needed, especially collapsed-output hints, file/link paths, dim metadata, neutral borders, and selection surfaces.
 
+The Catppuccin themes keep the upstream accents. Dim and comment text uses the first of Overlay 2, Subtext 0, or Subtext 1 that reaches 4.5:1 on the base color, which is Overlay 2 in the dark flavors and Subtext 1 in Latte.
+
 Palette sources:
 
 - Modus: https://protesilaos.com/emacs/modus-themes-colors
 - Kanagawa/Kawakawa adaptation: https://github.com/rebelot/kanagawa.nvim
 - Tokyo Night Day: https://github.com/folke/tokyonight.nvim
 - Everforest Light Medium: https://github.com/sainnhe/everforest/blob/master/palette.md
+- Catppuccin: https://github.com/catppuccin/palette
 - Rosé Pine: https://rosepinetheme.com/
 
 ## Install
@@ -51,6 +58,10 @@ Then select one inside Claude Code:
 /theme kanagawa-wave
 /theme tokyo-night-day
 /theme everforest-light
+/theme catppuccin-latte
+/theme catppuccin-frappe
+/theme catppuccin-macchiato
+/theme catppuccin-mocha
 /theme noomz-rose-pine
 /theme noomz-rose-pine-moon
 /theme noomz-rose-pine-dawn
@@ -66,7 +77,7 @@ mkdir -p ~/.pi/agent/themes
 cp themes/pi.dev/*.json ~/.pi/agent/themes/
 ```
 
-Then set `theme` to one theme slug in `~/.pi/agent/settings.json`, for example `modus-operandi`, `kanagawa`, `kanagawa-wave`, `tokyo-night-day`, `everforest-light`, `noomz-rose-pine`, `noomz-rose-pine-moon`, `noomz-rose-pine-dawn`, or `noomz-rose-pine-dawn-contrast`.
+Then set `theme` to one theme slug in `~/.pi/agent/settings.json`, for example `modus-operandi`, `kanagawa`, `kanagawa-wave`, `tokyo-night-day`, `everforest-light`, `catppuccin-latte`, `catppuccin-frappe`, `catppuccin-macchiato`, `catppuccin-mocha`, `noomz-rose-pine`, `noomz-rose-pine-moon`, `noomz-rose-pine-dawn`, or `noomz-rose-pine-dawn-contrast`.
 
 ### Hermes Agent
 
@@ -84,6 +95,10 @@ Then select one inside Hermes:
 /skin kanagawa-wave
 /skin tokyo-night-day
 /skin everforest-light
+/skin catppuccin-latte
+/skin catppuccin-frappe
+/skin catppuccin-macchiato
+/skin catppuccin-mocha
 /skin noomz-rose-pine
 /skin noomz-rose-pine-moon
 /skin noomz-rose-pine-dawn
@@ -170,6 +185,10 @@ Recommended terminal profile background colors:
 | `kanagawa-wave` | `#1f1f28` |
 | `tokyo-night-day` | `#e1e2e7` |
 | `everforest-light` | `#fdf6e3` |
+| `catppuccin-latte` | `#eff1f5` |
+| `catppuccin-frappe` | `#303446` |
+| `catppuccin-macchiato` | `#24273a` |
+| `catppuccin-mocha` | `#1e1e2e` |
 | `noomz-rose-pine` | `#191724` |
 | `noomz-rose-pine-moon` | `#232136` |
 | `noomz-rose-pine-dawn` | `#faf4ed` |

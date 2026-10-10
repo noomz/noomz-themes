@@ -1,0 +1,56 @@
+name: catppuccin-latte
+description: Catppuccin Latte light skin with readable dim text
+
+colors:
+  banner_border: "#5c5f77"
+  banner_title: "#4c4f69"
+  banner_accent: "#8839ef"
+  banner_dim: "#5c5f77"
+  banner_text: "#4c4f69"
+  ui_accent: "#1e66f5"
+  ui_label: "#209fb5"
+  ui_ok: "#40a02b"
+  ui_error: "#d20f39"
+  ui_warn: "#df8e1d"
+  prompt: "#4c4f69"
+  input_rule: "#acb0be"
+  response_border: "#8839ef"
+  session_label: "#1e66f5"
+  session_border: "#acb0be"
+  status_bar_bg: "#e6e9ef"
+  status_bar_text: "#4c4f69"
+  status_bar_strong: "#8839ef"
+  status_bar_dim: "#5c5f77"
+  status_bar_good: "#40a02b"
+  status_bar_warn: "#df8e1d"
+  status_bar_bad: "#fe640b"
+  status_bar_critical: "#d20f39"
+  voice_status_bg: "#e6e9ef"
+  selection_bg: "#cccfd8"
+  completion_menu_bg: "#d6e0f5"
+  completion_menu_current_bg: "#cccfd8"
+  completion_menu_meta_bg: "#e6e9ef"
+  completion_menu_meta_current_bg: "#dce0e8"
+
+spinner:
+  waiting_faces: ["(λ)", "(μ)", "(ν)", "(∴)"]
+  thinking_faces: ["(λ)", "(∫)", "(∴)", "(∵)"]
+  thinking_verbs:
+    - reading
+    - checking palette
+    - composing
+    - reasoning
+    - applying colors
+  wings:
+    - ["⟪", "⟫"]
+    - ["‹", "›"]
+
+branding:
+  agent_name: "Hermes Agent"
+  welcome: "Welcome to Hermes Agent! Type your message or /help for commands."
+  goodbye: "Goodbye! ⚕"
+  response_label: " ⚕ Hermes "
+  prompt_symbol: "❯"
+  help_header: "[?] Available Commands"
+
+tool_prefix: "│"

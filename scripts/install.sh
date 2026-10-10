@@ -47,6 +47,6 @@ printf '%s\n' "Installed noomz themes for Claude Code, pi.dev, and Hermes Agent.
 if [ "$ccs_count" -gt 0 ]; then
   printf '%s\n' "CCS profiles updated: $ccs_count."
 fi
-printf '%s\n' "Claude variants: modus-operandi, modus-operandi-tinted, kanagawa, tokyo-night-day, everforest-light, noomz-rose-pine, noomz-rose-pine-moon, noomz-rose-pine-dawn, noomz-rose-pine-dawn-contrast. Activate with /theme <variant>."
-printf '%s\n' "Hermes variants: modus-operandi, modus-operandi-tinted, kanagawa, tokyo-night-day, everforest-light, noomz-rose-pine, noomz-rose-pine-moon, noomz-rose-pine-dawn, noomz-rose-pine-dawn-contrast. Activate with /skin <variant>."
-printf '%s\n' "pi.dev variants: set theme to modus-operandi, modus-operandi-tinted, kanagawa, tokyo-night-day, everforest-light, noomz-rose-pine, noomz-rose-pine-moon, noomz-rose-pine-dawn, or noomz-rose-pine-dawn-contrast in ~/.pi/agent/settings.json."
+printf '%s\n' "Claude variants: modus-operandi, modus-operandi-tinted, kanagawa, tokyo-night-day, everforest-light, catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha, noomz-rose-pine, noomz-rose-pine-moon, noomz-rose-pine-dawn, noomz-rose-pine-dawn-contrast. Activate with /theme <variant>."
+printf '%s\n' "Hermes variants: modus-operandi, modus-operandi-tinted, kanagawa, tokyo-night-day, everforest-light, catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha, noomz-rose-pine, noomz-rose-pine-moon, noomz-rose-pine-dawn, noomz-rose-pine-dawn-contrast. Activate with /skin <variant>."
+printf '%s\n' "pi.dev variants: set theme to modus-operandi, modus-operandi-tinted, kanagawa, tokyo-night-day, everforest-light, catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha, noomz-rose-pine, noomz-rose-pine-moon, noomz-rose-pine-dawn, or noomz-rose-pine-dawn-contrast in ~/.pi/agent/settings.json."

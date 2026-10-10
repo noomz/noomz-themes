@@ -1,0 +1,56 @@
+name: catppuccin-frappe
+description: Catppuccin Frappé dark skin with readable dim text
+
+colors:
+  banner_border: "#949cbb"
+  banner_title: "#c6d0f5"
+  banner_accent: "#ca9ee6"
+  banner_dim: "#949cbb"
+  banner_text: "#c6d0f5"
+  ui_accent: "#8caaee"
+  ui_label: "#85c1dc"
+  ui_ok: "#a6d189"
+  ui_error: "#e78284"
+  ui_warn: "#e5c890"
+  prompt: "#c6d0f5"
+  input_rule: "#626880"
+  response_border: "#ca9ee6"
+  session_label: "#8caaee"
+  session_border: "#626880"
+  status_bar_bg: "#292c3c"
+  status_bar_text: "#c6d0f5"
+  status_bar_strong: "#ca9ee6"
+  status_bar_dim: "#949cbb"
+  status_bar_good: "#a6d189"
+  status_bar_warn: "#e5c890"
+  status_bar_bad: "#ef9f76"
+  status_bar_critical: "#e78284"
+  voice_status_bg: "#292c3c"
+  selection_bg: "#4e5369"
+  completion_menu_bg: "#3b425a"
+  completion_menu_current_bg: "#4e5369"
+  completion_menu_meta_bg: "#414559"
+  completion_menu_meta_current_bg: "#51576d"
+
+spinner:
+  waiting_faces: ["(λ)", "(μ)", "(ν)", "(∴)"]
+  thinking_faces: ["(λ)", "(∫)", "(∴)", "(∵)"]
+  thinking_verbs:
+    - reading
+    - checking palette
+    - composing
+    - reasoning
+    - applying colors
+  wings:
+    - ["⟪", "⟫"]
+    - ["‹", "›"]
+
+branding:
+  agent_name: "Hermes Agent"
+  welcome: "Welcome to Hermes Agent! Type your message or /help for commands."
+  goodbye: "Goodbye! ⚕"
+  response_label: " ⚕ Hermes "
+  prompt_symbol: "❯"
+  help_header: "[?] Available Commands"
+
+tool_prefix: "│"

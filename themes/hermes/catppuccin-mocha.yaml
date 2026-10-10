@@ -1,0 +1,56 @@
+name: catppuccin-mocha
+description: Catppuccin Mocha dark skin with readable dim text
+
+colors:
+  banner_border: "#9399b2"
+  banner_title: "#cdd6f4"
+  banner_accent: "#cba6f7"
+  banner_dim: "#9399b2"
+  banner_text: "#cdd6f4"
+  ui_accent: "#89b4fa"
+  ui_label: "#74c7ec"
+  ui_ok: "#a6e3a1"
+  ui_error: "#f38ba8"
+  ui_warn: "#f9e2af"
+  prompt: "#cdd6f4"
+  input_rule: "#585b70"
+  response_border: "#cba6f7"
+  session_label: "#89b4fa"
+  session_border: "#585b70"
+  status_bar_bg: "#181825"
+  status_bar_text: "#cdd6f4"
+  status_bar_strong: "#cba6f7"
+  status_bar_dim: "#9399b2"
+  status_bar_good: "#a6e3a1"
+  status_bar_warn: "#f9e2af"
+  status_bar_bad: "#fab387"
+  status_bar_critical: "#f38ba8"
+  voice_status_bg: "#181825"
+  selection_bg: "#414356"
+  completion_menu_bg: "#2b3046"
+  completion_menu_current_bg: "#414356"
+  completion_menu_meta_bg: "#313244"
+  completion_menu_meta_current_bg: "#45475a"
+
+spinner:
+  waiting_faces: ["(λ)", "(μ)", "(ν)", "(∴)"]
+  thinking_faces: ["(λ)", "(∫)", "(∴)", "(∵)"]
+  thinking_verbs:
+    - reading
+    - checking palette
+    - composing
+    - reasoning
+    - applying colors
+  wings:
+    - ["⟪", "⟫"]
+    - ["‹", "›"]
+
+branding:
+  agent_name: "Hermes Agent"
+  welcome: "Welcome to Hermes Agent! Type your message or /help for commands."
+  goodbye: "Goodbye! ⚕"
+  response_label: " ⚕ Hermes "
+  prompt_symbol: "❯"
+  help_header: "[?] Available Commands"
+
+tool_prefix: "│"
