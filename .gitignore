@@ -6,3 +6,8 @@
 # MemPalace per-project files (issue #185)
 mempalace.yaml
 entities.json
+
+# generated font measurements (rebuild with scripts/font-metrics.py)
+docs/font-metrics.json
+scripts/__pycache__/
+docs/font-inventory.json

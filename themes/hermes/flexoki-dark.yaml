@@ -1,0 +1,56 @@
+name: flexoki-dark
+description: Flexoki dark with red/blue lifted to WCAG AA on base-950
+
+colors:
+  banner_border: "#878580"
+  banner_title: "#cecdc3"
+  banner_accent: "#ce5d97"
+  banner_dim: "#878580"
+  banner_text: "#cecdc3"
+  ui_accent: "#4888c0"
+  ui_label: "#3aa99f"
+  ui_ok: "#879a39"
+  ui_error: "#d55e53"
+  ui_warn: "#d0a215"
+  prompt: "#cecdc3"
+  input_rule: "#575653"
+  response_border: "#8b7ec8"
+  session_label: "#4888c0"
+  session_border: "#575653"
+  status_bar_bg: "#282726"
+  status_bar_text: "#cecdc3"
+  status_bar_strong: "#8b7ec8"
+  status_bar_dim: "#878580"
+  status_bar_good: "#879a39"
+  status_bar_warn: "#d0a215"
+  status_bar_bad: "#da702c"
+  status_bar_critical: "#d55e53"
+  voice_status_bg: "#282726"
+  selection_bg: "#403e3c"
+  completion_menu_bg: "#282726"
+  completion_menu_current_bg: "#403e3c"
+  completion_menu_meta_bg: "#282726"
+  completion_menu_meta_current_bg: "#343331"
+
+spinner:
+  waiting_faces: ["(λ)", "(μ)", "(ν)", "(∴)"]
+  thinking_faces: ["(λ)", "(∫)", "(∴)", "(∵)"]
+  thinking_verbs:
+    - reading
+    - checking palette
+    - composing
+    - reasoning
+    - applying colors
+  wings:
+    - ["⟪", "⟫"]
+    - ["‹", "›"]
+
+branding:
+  agent_name: "Hermes Agent"
+  welcome: "Welcome to Hermes Agent! Type your message or /help for commands."
+  goodbye: "Goodbye! ⚕"
+  response_label: " ⚕ Hermes "
+  prompt_symbol: "❯"
+  help_header: "[?] Available Commands"
+
+tool_prefix: "│"

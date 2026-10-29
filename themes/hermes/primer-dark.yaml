@@ -1,0 +1,56 @@
+name: primer-dark
+description: GitHub Primer dark ANSI with gray lifted to WCAG AA on canvas
+
+colors:
+  banner_border: "#757d89"
+  banner_title: "#f0f6fc"
+  banner_accent: "#d2a8ff"
+  banner_dim: "#757d89"
+  banner_text: "#f0f6fc"
+  ui_accent: "#58a6ff"
+  ui_label: "#79c0ff"
+  ui_ok: "#3fb950"
+  ui_error: "#ff7b72"
+  ui_warn: "#d29922"
+  prompt: "#f0f6fc"
+  input_rule: "#30363d"
+  response_border: "#be8fff"
+  session_label: "#58a6ff"
+  session_border: "#30363d"
+  status_bar_bg: "#161b22"
+  status_bar_text: "#f0f6fc"
+  status_bar_strong: "#be8fff"
+  status_bar_dim: "#757d89"
+  status_bar_good: "#56d364"
+  status_bar_warn: "#e3b341"
+  status_bar_bad: "#e3b341"
+  status_bar_critical: "#ffa198"
+  voice_status_bg: "#161b22"
+  selection_bg: "#21262d"
+  completion_menu_bg: "#161b22"
+  completion_menu_current_bg: "#21262d"
+  completion_menu_meta_bg: "#161b22"
+  completion_menu_meta_current_bg: "#21262d"
+
+spinner:
+  waiting_faces: ["(λ)", "(μ)", "(ν)", "(∴)"]
+  thinking_faces: ["(λ)", "(∫)", "(∴)", "(∵)"]
+  thinking_verbs:
+    - reading
+    - checking palette
+    - composing
+    - reasoning
+    - applying colors
+  wings:
+    - ["⟪", "⟫"]
+    - ["‹", "›"]
+
+branding:
+  agent_name: "Hermes Agent"
+  welcome: "Welcome to Hermes Agent! Type your message or /help for commands."
+  goodbye: "Goodbye! ⚕"
+  response_label: " ⚕ Hermes "
+  prompt_symbol: "❯"
+  help_header: "[?] Available Commands"
+
+tool_prefix: "│"

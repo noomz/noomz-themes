@@ -1,0 +1,56 @@
+name: gruvbox-dark
+description: Gruvbox dark skin with gray and red lifted to WCAG AA on bg0
+
+colors:
+  banner_border: "#9a8c7e"
+  banner_title: "#ebdbb2"
+  banner_accent: "#d3869b"
+  banner_dim: "#9a8c7e"
+  banner_text: "#ebdbb2"
+  ui_accent: "#83a598"
+  ui_label: "#8ec07c"
+  ui_ok: "#b8bb26"
+  ui_error: "#fb5440"
+  ui_warn: "#fabd2f"
+  prompt: "#ebdbb2"
+  input_rule: "#665c54"
+  response_border: "#d3869b"
+  session_label: "#83a598"
+  session_border: "#665c54"
+  status_bar_bg: "#1d2021"
+  status_bar_text: "#ebdbb2"
+  status_bar_strong: "#d3869b"
+  status_bar_dim: "#9a8c7e"
+  status_bar_good: "#b8bb26"
+  status_bar_warn: "#fabd2f"
+  status_bar_bad: "#fe8019"
+  status_bar_critical: "#fb5440"
+  voice_status_bg: "#1d2021"
+  selection_bg: "#504945"
+  completion_menu_bg: "#3c3836"
+  completion_menu_current_bg: "#504945"
+  completion_menu_meta_bg: "#32302f"
+  completion_menu_meta_current_bg: "#665c54"
+
+spinner:
+  waiting_faces: ["(λ)", "(μ)", "(ν)", "(∴)"]
+  thinking_faces: ["(λ)", "(∫)", "(∴)", "(∵)"]
+  thinking_verbs:
+    - reading
+    - checking palette
+    - composing
+    - reasoning
+    - applying colors
+  wings:
+    - ["⟪", "⟫"]
+    - ["‹", "›"]
+
+branding:
+  agent_name: "Hermes Agent"
+  welcome: "Welcome to Hermes Agent! Type your message or /help for commands."
+  goodbye: "Goodbye! ⚕"
+  response_label: " ⚕ Hermes "
+  prompt_symbol: "❯"
+  help_header: "[?] Available Commands"
+
+tool_prefix: "│"

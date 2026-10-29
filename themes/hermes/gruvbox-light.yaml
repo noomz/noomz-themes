@@ -1,0 +1,56 @@
+name: gruvbox-light
+description: Gruvbox light with gray/green/yellow/aqua lifted to WCAG AA on bg0
+
+colors:
+  banner_border: "#776b60"
+  banner_title: "#3c3836"
+  banner_accent: "#8f3f71"
+  banner_dim: "#776b60"
+  banner_text: "#3c3836"
+  ui_accent: "#076678"
+  ui_label: "#417856"
+  ui_ok: "#75700e"
+  ui_error: "#9d0006"
+  ui_warn: "#966211"
+  prompt: "#3c3836"
+  input_rule: "#bdae93"
+  response_border: "#8f3f71"
+  session_label: "#076678"
+  session_border: "#bdae93"
+  status_bar_bg: "#f2e5bc"
+  status_bar_text: "#3c3836"
+  status_bar_strong: "#8f3f71"
+  status_bar_dim: "#776b60"
+  status_bar_good: "#75700e"
+  status_bar_warn: "#966211"
+  status_bar_bad: "#af3a03"
+  status_bar_critical: "#9d0006"
+  voice_status_bg: "#f2e5bc"
+  selection_bg: "#d5c4a1"
+  completion_menu_bg: "#ebdbb2"
+  completion_menu_current_bg: "#d5c4a1"
+  completion_menu_meta_bg: "#f2e5bc"
+  completion_menu_meta_current_bg: "#ebdbb2"
+
+spinner:
+  waiting_faces: ["(λ)", "(μ)", "(ν)", "(∴)"]
+  thinking_faces: ["(λ)", "(∫)", "(∴)", "(∵)"]
+  thinking_verbs:
+    - reading
+    - checking palette
+    - composing
+    - reasoning
+    - applying colors
+  wings:
+    - ["⟪", "⟫"]
+    - ["‹", "›"]
+
+branding:
+  agent_name: "Hermes Agent"
+  welcome: "Welcome to Hermes Agent! Type your message or /help for commands."
+  goodbye: "Goodbye! ⚕"
+  response_label: " ⚕ Hermes "
+  prompt_symbol: "❯"
+  help_header: "[?] Available Commands"
+
+tool_prefix: "│"

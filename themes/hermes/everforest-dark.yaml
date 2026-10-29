@@ -1,0 +1,56 @@
+name: everforest-dark
+description: Everforest Dark Medium with grey1 lifted to WCAG AA on bg0
+
+colors:
+  banner_border: "#939f97"
+  banner_title: "#d3c6aa"
+  banner_accent: "#d699b6"
+  banner_dim: "#939f97"
+  banner_text: "#d3c6aa"
+  ui_accent: "#7fbbb3"
+  ui_label: "#83c092"
+  ui_ok: "#a7c080"
+  ui_error: "#e67e80"
+  ui_warn: "#dbbc7f"
+  prompt: "#d3c6aa"
+  input_rule: "#4f585e"
+  response_border: "#d699b6"
+  session_label: "#7fbbb3"
+  session_border: "#4f585e"
+  status_bar_bg: "#343f44"
+  status_bar_text: "#d3c6aa"
+  status_bar_strong: "#d699b6"
+  status_bar_dim: "#939f97"
+  status_bar_good: "#a7c080"
+  status_bar_warn: "#dbbc7f"
+  status_bar_bad: "#e69875"
+  status_bar_critical: "#e67e80"
+  voice_status_bg: "#343f44"
+  selection_bg: "#543a48"
+  completion_menu_bg: "#3a515d"
+  completion_menu_current_bg: "#543a48"
+  completion_menu_meta_bg: "#343f44"
+  completion_menu_meta_current_bg: "#3d484d"
+
+spinner:
+  waiting_faces: ["(λ)", "(μ)", "(ν)", "(∴)"]
+  thinking_faces: ["(λ)", "(∫)", "(∴)", "(∵)"]
+  thinking_verbs:
+    - reading
+    - checking palette
+    - composing
+    - reasoning
+    - applying colors
+  wings:
+    - ["⟪", "⟫"]
+    - ["‹", "›"]
+
+branding:
+  agent_name: "Hermes Agent"
+  welcome: "Welcome to Hermes Agent! Type your message or /help for commands."
+  goodbye: "Goodbye! ⚕"
+  response_label: " ⚕ Hermes "
+  prompt_symbol: "❯"
+  help_header: "[?] Available Commands"
+
+tool_prefix: "│"

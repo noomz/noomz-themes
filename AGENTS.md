@@ -9,6 +9,7 @@ Guidance for coding agents working in this repo.
 - Claude Code themes: `themes/claude/*.json`
 - pi.dev themes: `themes/pi.dev/*.json`
 - Hermes Agent themes: `themes/hermes/*.yaml`
+- kitty themes: `themes/kitty/*.conf`
 
 Keep palette changes consistent across supported CLIs when possible.
 
@@ -19,9 +20,14 @@ themes/
   claude/     Claude Code JSON themes
   pi.dev/     pi.dev JSON themes
   hermes/     Hermes YAML skins
+  kitty/      kitty conf themes
 scripts/
   install.sh
   validate-claude-theme.py
+  palette-report.py        palette metrics + report generator
+  font-metrics.py          measures installed monospaced fonts -> docs/font-metrics.json
+  font-report.py           scoring + report generator -> docs/font-report.html
+  font-report-meta.json    prose and sources for the font report
 ```
 
 ## Validation
@@ -44,6 +50,21 @@ After changing install behavior, run or inspect:
 bash scripts/install.sh
 ```
 
+Terminal config snippets in the report are generated, not written by hand. Their syntax is
+version-sensitive (kitty dropped `adjust_line_height` in 0.49), so check the option against
+the installed version's man page or docs before changing a snippet template, and record the
+version in `terminal_versions` in `scripts/font-report-meta.json`.
+
+After changing the font measurement or scoring, re-run both font scripts in order — the
+report reads the JSON, not the font files:
+
+```sh
+python3 scripts/font-metrics.py && python3 scripts/font-report.py
+```
+
+`docs/font-metrics.json` is generated and untracked. The report is only as current as
+the last metrics run, so never edit the report's numbers by hand.
+
 ## Style rules
 
 - Preserve existing theme names and slugs unless user explicitly asks for rename.
@@ -52,6 +73,13 @@ bash scripts/install.sh
 - Avoid broad palette rewrites unless requested; make small, traceable changes.
 - When adding new variants, add matching README install/docs entries.
 - Keep JSON/YAML formatting stable and human-readable.
+- HTML tables in a generated report: build them through `font-report.py`'s `table()` helper,
+  which runs `check_columns` and raises when a row's cell count differs from the header's.
+  A row one cell short renders as a silently shifted table with a blank last column.
+- Reports: never hand-edit a number in `docs/*.html`. Numbers come from the generator,
+  and the generator reads measurements. Fix the measurement, then re-run.
+- Never claim a font or palette reduces eye strain. The reports measure contrast,
+  geometry and glyph properties and label each axis with what the literature supports.
 
 ## Safety notes
 
