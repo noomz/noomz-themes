@@ -2,6 +2,8 @@
 
 Guidance for coding agents working in this repo.
 
+Canonical GitHub remote is `noomz/noomz-themes`. Do not push to `noomzopendream`.
+
 ## Project purpose
 
 `noomz-themes` stores high-contrast light Modus Operandi themes for agent CLIs:
