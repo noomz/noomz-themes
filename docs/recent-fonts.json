@@ -1,0 +1,2409 @@
+{
+ "cache": ".cache/recent-fonts",
+ "catalogue": {
+  "entries": 190,
+  "fetched": "2026-11-02",
+  "repo_commit": "a33c4f364e9f54222466c354ffe7f829e9ce52d6",
+  "url": "https://www.programmingfonts.org"
+ },
+ "cutoff_year": 2019,
+ "fonts": [
+  {
+   "author": "Martin V\u00e1cha",
+   "cask": "font-azeret-mono",
+   "files": [
+    "ofl_azeretmono_AzeretMono-Italic_wght_.ttf",
+    "ofl_azeretmono_AzeretMono_wght_.ttf"
+   ],
+   "key": "azeret",
+   "license": "SIL OFL",
+   "name": "Azeret Mono",
+   "source": "cask",
+   "static_instances": [
+    "ofl_azeretmono_AzeretMono-Italic_wght_-instance-Thin_Italic.ttf",
+    "ofl_azeretmono_AzeretMono-Italic_wght_-instance-ExtraLight_Italic.ttf",
+    "ofl_azeretmono_AzeretMono-Italic_wght_-instance-Light_Italic.ttf",
+    "ofl_azeretmono_AzeretMono-Italic_wght_-instance-Italic.ttf",
+    "ofl_azeretmono_AzeretMono-Italic_wght_-instance-Medium_Italic.ttf",
+    "ofl_azeretmono_AzeretMono-Italic_wght_-instance-SemiBold_Italic.ttf",
+    "ofl_azeretmono_AzeretMono-Italic_wght_-instance-Bold_Italic.ttf",
+    "ofl_azeretmono_AzeretMono-Italic_wght_-instance-ExtraBold_Italic.ttf",
+    "ofl_azeretmono_AzeretMono-Italic_wght_-instance-Black_Italic.ttf",
+    "ofl_azeretmono_AzeretMono_wght_-instance-Thin.ttf",
+    "ofl_azeretmono_AzeretMono_wght_-instance-ExtraLight.ttf",
+    "ofl_azeretmono_AzeretMono_wght_-instance-Light.ttf",
+    "ofl_azeretmono_AzeretMono_wght_-instance-Regular.ttf",
+    "ofl_azeretmono_AzeretMono_wght_-instance-Medium.ttf",
+    "ofl_azeretmono_AzeretMono_wght_-instance-SemiBold.ttf",
+    "ofl_azeretmono_AzeretMono_wght_-instance-Bold.ttf",
+    "ofl_azeretmono_AzeretMono_wght_-instance-ExtraBold.ttf",
+    "ofl_azeretmono_AzeretMono_wght_-instance-Black.ttf"
+   ],
+   "status": "fetched",
+   "version": "latest",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/azeret/azeret.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/azeret/azeret-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/azeret/azeret-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/azeret/azeret-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://github.com/displaay/Azeret",
+   "year": 2020
+  },
+  {
+   "author": "Slavfox",
+   "cask": "font-cozette",
+   "files": [
+    "CozetteFonts_CozetteCrossedSevenVector.ttf",
+    "CozetteFonts_CozetteCrossedSevenVectorBold.ttf",
+    "CozetteFonts_CozetteVector.ttf",
+    "CozetteFonts_CozetteVectorBold.ttf"
+   ],
+   "key": "cozette",
+   "license": "MIT",
+   "name": "Cozette",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.30.0",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/cozette/cozette.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://github.com/slavfox/Cozette",
+   "year": 2020
+  },
+  {
+   "author": "Colophon Foundry",
+   "cask": "font-dm-mono",
+   "files": [
+    "ofl_dmmono_DMMono-Italic.ttf",
+    "ofl_dmmono_DMMono-Light.ttf",
+    "ofl_dmmono_DMMono-LightItalic.ttf",
+    "ofl_dmmono_DMMono-Medium.ttf",
+    "ofl_dmmono_DMMono-MediumItalic.ttf",
+    "ofl_dmmono_DMMono-Regular.ttf"
+   ],
+   "key": "dm-mono",
+   "license": "SIL OFL",
+   "name": "DM Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "latest",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/dm-mono/dm-mono.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/dm-mono/dm-mono-italic.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://fonts.google.com/specimen/DM+Mono",
+   "year": 2020
+  },
+  {
+   "author": "Connary Fagen",
+   "files": [],
+   "key": "ellograph",
+   "license": "commercial",
+   "name": "Ellograph CF",
+   "source": "none",
+   "status": "skipped: commercial licence, no free file to measure",
+   "webfont_faces": [],
+   "website": "https://connary.com/ellograph.html",
+   "year": 2020
+  },
+  {
+   "author": "Gary Lo",
+   "files": [
+    "hack-ligatured.ttf",
+    "hack-ligatured-bold.ttf",
+    "hack-ligatured-italic.ttf",
+    "hack-ligatured-bold-italic.ttf"
+   ],
+   "key": "hack-ligatured",
+   "license": "GNU GPL",
+   "name": "Hack Ligatured",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/hack-ligatured/hack-ligatured.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/hack-ligatured/hack-ligatured-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/hack-ligatured/hack-ligatured-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/hack-ligatured/hack-ligatured-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://github.com/gaplo917/Ligatured-Hack",
+   "year": 2020
+  },
+  {
+   "author": "Philipp Nurullin, Konstantin Bulenkov",
+   "cask": "font-jetbrains-mono",
+   "files": [
+    "fonts_ttf_JetBrainsMono-Bold.ttf",
+    "fonts_ttf_JetBrainsMono-BoldItalic.ttf",
+    "fonts_ttf_JetBrainsMono-ExtraBold.ttf",
+    "fonts_ttf_JetBrainsMono-ExtraBoldItalic.ttf",
+    "fonts_ttf_JetBrainsMono-ExtraLight.ttf",
+    "fonts_ttf_JetBrainsMono-ExtraLightItalic.ttf",
+    "fonts_ttf_JetBrainsMono-Italic.ttf",
+    "fonts_ttf_JetBrainsMono-Light.ttf",
+    "fonts_ttf_JetBrainsMono-LightItalic.ttf",
+    "fonts_ttf_JetBrainsMono-Medium.ttf",
+    "fonts_ttf_JetBrainsMono-MediumItalic.ttf",
+    "fonts_ttf_JetBrainsMono-Regular.ttf",
+    "fonts_ttf_JetBrainsMono-SemiBold.ttf",
+    "fonts_ttf_JetBrainsMono-SemiBoldItalic.ttf",
+    "fonts_ttf_JetBrainsMono-Thin.ttf",
+    "fonts_ttf_JetBrainsMono-ThinItalic.ttf",
+    "fonts_ttf_JetBrainsMonoNL-Bold.ttf",
+    "fonts_ttf_JetBrainsMonoNL-BoldItalic.ttf",
+    "fonts_ttf_JetBrainsMonoNL-ExtraBold.ttf",
+    "fonts_ttf_JetBrainsMonoNL-ExtraBoldItalic.ttf",
+    "fonts_ttf_JetBrainsMonoNL-ExtraLight.ttf",
+    "fonts_ttf_JetBrainsMonoNL-ExtraLightItalic.ttf",
+    "fonts_ttf_JetBrainsMonoNL-Italic.ttf",
+    "fonts_ttf_JetBrainsMonoNL-Light.ttf",
+    "fonts_ttf_JetBrainsMonoNL-LightItalic.ttf",
+    "fonts_ttf_JetBrainsMonoNL-Medium.ttf",
+    "fonts_ttf_JetBrainsMonoNL-MediumItalic.ttf",
+    "fonts_ttf_JetBrainsMonoNL-Regular.ttf",
+    "fonts_ttf_JetBrainsMonoNL-SemiBold.ttf",
+    "fonts_ttf_JetBrainsMonoNL-SemiBoldItalic.ttf",
+    "fonts_ttf_JetBrainsMonoNL-Thin.ttf",
+    "fonts_ttf_JetBrainsMonoNL-ThinItalic.ttf",
+    "fonts_variable_JetBrainsMono-Italic_wght_.ttf",
+    "fonts_variable_JetBrainsMono_wght_.ttf"
+   ],
+   "key": "jetbrainsmono",
+   "license": "SIL OFL",
+   "name": "JetBrains Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "2.304",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/jetbrainsmono/jetbrainsmono.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/jetbrainsmono/jetbrainsmono-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/jetbrainsmono/jetbrainsmono-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/jetbrainsmono/jetbrainsmono-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://www.jetbrains.com/lp/mono/",
+   "year": 2020
+  },
+  {
+   "author": "cormullion",
+   "cask": "font-juliamono",
+   "files": [
+    "JuliaMono-Black.ttf",
+    "JuliaMono-BlackItalic.ttf",
+    "JuliaMono-Bold.ttf",
+    "JuliaMono-BoldItalic.ttf",
+    "JuliaMono-ExtraBold.ttf",
+    "JuliaMono-ExtraBoldItalic.ttf",
+    "JuliaMono-Light.ttf",
+    "JuliaMono-LightItalic.ttf",
+    "JuliaMono-Medium.ttf",
+    "JuliaMono-MediumItalic.ttf",
+    "JuliaMono-Regular.ttf",
+    "JuliaMono-RegularItalic.ttf",
+    "JuliaMono-SemiBold.ttf",
+    "JuliaMono-SemiBoldItalic.ttf"
+   ],
+   "key": "julia-mono",
+   "license": "SIL OFL",
+   "name": "JuliaMono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "0.63.2",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/julia-mono/julia-mono.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/julia-mono/julia-mono-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/julia-mono/julia-mono-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/julia-mono/julia-mono-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://juliamono.netlify.app",
+   "year": 2020
+  },
+  {
+   "author": "Prof. Hans R. Heitmann, Johannes Ammon",
+   "files": [],
+   "key": "monoflow",
+   "license": "commercial",
+   "name": "Monoflow",
+   "source": "none",
+   "status": "skipped: commercial licence, no free file to measure",
+   "webfont_faces": [],
+   "website": "https://finaltype.de/en/projects/monoflow",
+   "year": 2020
+  },
+  {
+   "author": "Stephen Hutchings",
+   "cask": "font-reddit-mono",
+   "files": [
+    "bbc4469e7e252054551c58fc9b4a811077c55274843f67cf816cb093994324c3--RedditMono_wght_.ttf"
+   ],
+   "key": "reddit-sans",
+   "license": "SIL OFL",
+   "name": "Reddit Mono",
+   "source": "cask",
+   "static_instances": [
+    "bbc4469e7e252054551c58fc9b4a811077c55274843f67cf816cb093994324c3--RedditMono_wght_-instance-Light.ttf",
+    "bbc4469e7e252054551c58fc9b4a811077c55274843f67cf816cb093994324c3--RedditMono_wght_-instance-Regular.ttf",
+    "bbc4469e7e252054551c58fc9b4a811077c55274843f67cf816cb093994324c3--RedditMono_wght_-instance-Medium.ttf",
+    "bbc4469e7e252054551c58fc9b4a811077c55274843f67cf816cb093994324c3--RedditMono_wght_-instance-SemiBold.ttf",
+    "bbc4469e7e252054551c58fc9b4a811077c55274843f67cf816cb093994324c3--RedditMono_wght_-instance-Bold.ttf",
+    "bbc4469e7e252054551c58fc9b4a811077c55274843f67cf816cb093994324c3--RedditMono_wght_-instance-ExtraBold.ttf"
+   ],
+   "status": "fetched",
+   "version": "latest",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/reddit-sans/reddit-sans.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/reddit-sans/reddit-sans-bold.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://redditsans.s-ings.com",
+   "year": 2020
+  },
+  {
+   "author": "Tyler Finck",
+   "cask": "font-sono",
+   "files": [
+    "4cc2e4871b2df3453f7d4d3483f28bffab8ea7920f75eafd65150c8341dd0d30--Sono_MONO_wght_.ttf"
+   ],
+   "key": "sono",
+   "license": "SIL OFL",
+   "name": "Sono",
+   "source": "cask",
+   "static_instances": [
+    "4cc2e4871b2df3453f7d4d3483f28bffab8ea7920f75eafd65150c8341dd0d30--Sono_MONO_wght_-instance-ExtraLight.ttf",
+    "4cc2e4871b2df3453f7d4d3483f28bffab8ea7920f75eafd65150c8341dd0d30--Sono_MONO_wght_-instance-Light.ttf",
+    "4cc2e4871b2df3453f7d4d3483f28bffab8ea7920f75eafd65150c8341dd0d30--Sono_MONO_wght_-instance-Regular.ttf",
+    "4cc2e4871b2df3453f7d4d3483f28bffab8ea7920f75eafd65150c8341dd0d30--Sono_MONO_wght_-instance-Medium.ttf",
+    "4cc2e4871b2df3453f7d4d3483f28bffab8ea7920f75eafd65150c8341dd0d30--Sono_MONO_wght_-instance-SemiBold.ttf",
+    "4cc2e4871b2df3453f7d4d3483f28bffab8ea7920f75eafd65150c8341dd0d30--Sono_MONO_wght_-instance-Bold.ttf",
+    "4cc2e4871b2df3453f7d4d3483f28bffab8ea7920f75eafd65150c8341dd0d30--Sono_MONO_wght_-instance-ExtraBold.ttf"
+   ],
+   "status": "fetched",
+   "version": "latest",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/sono/sono.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/sono/sono-bold.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://etceteratype.co/pages/sono",
+   "year": 2020
+  },
+  {
+   "author": "Lucas Sharp and Huw Williams",
+   "cask": "font-twilio-sans-mono",
+   "files": [
+    "Twilio-Sans-Mono_TTF_TwilioSansMono-Bold.ttf",
+    "Twilio-Sans-Mono_TTF_TwilioSansMono-BoldItl.ttf",
+    "Twilio-Sans-Mono_TTF_TwilioSansMono-Extrabold.ttf",
+    "Twilio-Sans-Mono_TTF_TwilioSansMono-ExtraboldItl.ttf",
+    "Twilio-Sans-Mono_TTF_TwilioSansMono-Heavy.ttf",
+    "Twilio-Sans-Mono_TTF_TwilioSansMono-HeavyItl.ttf",
+    "Twilio-Sans-Mono_TTF_TwilioSansMono-Light.ttf",
+    "Twilio-Sans-Mono_TTF_TwilioSansMono-LightItl.ttf",
+    "Twilio-Sans-Mono_TTF_TwilioSansMono-Medium.ttf",
+    "Twilio-Sans-Mono_TTF_TwilioSansMono-MediumItl.ttf",
+    "Twilio-Sans-Mono_TTF_TwilioSansMono-Regular.ttf",
+    "Twilio-Sans-Mono_TTF_TwilioSansMono-RegularItl.ttf",
+    "Twilio-Sans-Mono_TTF_TwilioSansMono-Retina.ttf",
+    "Twilio-Sans-Mono_TTF_TwilioSansMono-RetinaItl.ttf",
+    "Twilio-Sans-Mono_TTF_TwilioSansMono-Semibold.ttf",
+    "Twilio-Sans-Mono_TTF_TwilioSansMono-SemiboldItl.ttf"
+   ],
+   "key": "twilio-sans-mono",
+   "license": "SIL OFL",
+   "name": "Twilio Sans Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "latest",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/twilio-sans-mono/twilio-sans-mono.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/twilio-sans-mono/twilio-sans-mono-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/twilio-sans-mono/twilio-sans-mono-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/twilio-sans-mono/twilio-sans-mono-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://github.com/twilio/twilio-sans-mono",
+   "year": 2020
+  },
+  {
+   "author": "Darren Embry",
+   "files": [
+    "courier-ibm-dotted.ttf",
+    "courier-ibm-dotted-bold.ttf",
+    "courier-ibm-dotted-italic.ttf",
+    "courier-ibm-dotted-bold-italic.ttf"
+   ],
+   "key": "courier-ibm-dotted",
+   "license": "permissive",
+   "name": "IBM Courier (dot)",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/courier-ibm-dotted/courier-ibm-dotted.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/courier-ibm-dotted/courier-ibm-dotted-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/courier-ibm-dotted/courier-ibm-dotted-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/courier-ibm-dotted/courier-ibm-dotted-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://github.com/dse/font-og-courier",
+   "year": 2021
+  },
+  {
+   "author": "Darren Embry",
+   "files": [
+    "courier-ibm-slashed.ttf",
+    "courier-ibm-slashed-bold.ttf",
+    "courier-ibm-slashed-italic.ttf",
+    "courier-ibm-slashed-bold-italic.ttf"
+   ],
+   "key": "courier-ibm-slashed",
+   "license": "permissive",
+   "name": "IBM Courier (slash)",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/courier-ibm-slashed/courier-ibm-slashed.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/courier-ibm-slashed/courier-ibm-slashed-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/courier-ibm-slashed/courier-ibm-slashed-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/courier-ibm-slashed/courier-ibm-slashed-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://github.com/dse/font-og-courier",
+   "year": 2021
+  },
+  {
+   "author": "Owen Earl",
+   "files": [
+    "drafting.ttf",
+    "drafting-bold.ttf",
+    "drafting-italic.ttf",
+    "drafting-bold-italic.ttf"
+   ],
+   "key": "drafting",
+   "license": "SIL OFL",
+   "name": "Drafting* Mono",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/drafting/drafting.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/drafting/drafting-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/drafting/drafting-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/drafting/drafting-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://indestructibletype.com/Drafting/",
+   "year": 2021
+  },
+  {
+   "author": "Marvin Dostal",
+   "files": [
+    "monofoki.otf",
+    "monofoki-bold.otf",
+    "monofoki-italic.otf",
+    "monofoki-bold-italic.otf"
+   ],
+   "key": "monofoki",
+   "license": "SIL OFL",
+   "name": "Monofoki",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/monofoki/monofoki.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/monofoki/monofoki-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/monofoki/monofoki-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/monofoki/monofoki-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://github.com/datMaffin/monofoki",
+   "year": 2021
+  },
+  {
+   "author": "Jan Engelhardt",
+   "files": [
+    "terminus-consoleet.otf",
+    "terminus-consoleet-bold.otf"
+   ],
+   "key": "terminus-consoleet",
+   "license": "SIL OFL",
+   "name": "Terminus (Consoleet)",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/terminus-consoleet/terminus-consoleet.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/terminus-consoleet/terminus-consoleet-bold.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://inai.de/projects/consoleet/terminus",
+   "year": 2021
+  },
+  {
+   "author": "Jan Engelhardt",
+   "files": [
+    "terminus-consoleet-smooth.otf"
+   ],
+   "key": "terminus-consoleet-smooth",
+   "license": "SIL OFL",
+   "name": "Terminus (Consoleet, smooth)",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/terminus-consoleet-smooth/terminus-consoleet-smooth.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://inai.de/projects/consoleet/terminus",
+   "year": 2021
+  },
+  {
+   "author": "llealloo",
+   "files": [
+    "audio-link.ttf",
+    "audio-link-bold.ttf"
+   ],
+   "key": "audio-link",
+   "license": "SIL OFL",
+   "name": "AudioLink Mono",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/audio-link/audio-link.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/audio-link/audio-link-bold.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://audiolink.dev",
+   "year": 2022
+  },
+  {
+   "author": "H\u00e9ctor Gatti & Omnibus-Type Team",
+   "cask": "font-chivo-mono",
+   "files": [
+    "ofl_chivomono_ChivoMono-Italic_wght_.ttf",
+    "ofl_chivomono_ChivoMono_wght_.ttf"
+   ],
+   "key": "chivo",
+   "license": "SIL OFL",
+   "name": "Chivo Mono",
+   "source": "cask",
+   "static_instances": [
+    "ofl_chivomono_ChivoMono-Italic_wght_-instance-Thin_Italic.ttf",
+    "ofl_chivomono_ChivoMono-Italic_wght_-instance-ExtraLight_Italic.ttf",
+    "ofl_chivomono_ChivoMono-Italic_wght_-instance-Light_Italic.ttf",
+    "ofl_chivomono_ChivoMono-Italic_wght_-instance-Italic.ttf",
+    "ofl_chivomono_ChivoMono-Italic_wght_-instance-Medium_Italic.ttf",
+    "ofl_chivomono_ChivoMono-Italic_wght_-instance-SemiBold_Italic.ttf",
+    "ofl_chivomono_ChivoMono-Italic_wght_-instance-Bold_Italic.ttf",
+    "ofl_chivomono_ChivoMono-Italic_wght_-instance-ExtraBold_Italic.ttf",
+    "ofl_chivomono_ChivoMono-Italic_wght_-instance-Black_Italic.ttf",
+    "ofl_chivomono_ChivoMono_wght_-instance-Thin.ttf",
+    "ofl_chivomono_ChivoMono_wght_-instance-ExtraLight.ttf",
+    "ofl_chivomono_ChivoMono_wght_-instance-Light.ttf",
+    "ofl_chivomono_ChivoMono_wght_-instance-Regular.ttf",
+    "ofl_chivomono_ChivoMono_wght_-instance-Medium.ttf",
+    "ofl_chivomono_ChivoMono_wght_-instance-SemiBold.ttf",
+    "ofl_chivomono_ChivoMono_wght_-instance-Bold.ttf",
+    "ofl_chivomono_ChivoMono_wght_-instance-ExtraBold.ttf",
+    "ofl_chivomono_ChivoMono_wght_-instance-Black.ttf"
+   ],
+   "status": "fetched",
+   "version": "latest",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/chivo/chivo.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/chivo/chivo-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/chivo/chivo-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/chivo/chivo-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://www.omnibus-type.com/fonts/chivo/",
+   "year": 2022
+  },
+  {
+   "author": "GGBotNet",
+   "files": [
+    "eirian.ttf",
+    "eirian-italic.ttf"
+   ],
+   "key": "eirian",
+   "license": "SIL OFL",
+   "name": "Eirian",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/eirian/eirian.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/eirian/eirian-italic.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://ggbot.itch.io/eirian-font",
+   "year": 2022
+  },
+  {
+   "author": "Wei H",
+   "cask": "font-fragment-mono",
+   "files": [
+    "ofl_fragmentmono_FragmentMono-Italic.ttf",
+    "ofl_fragmentmono_FragmentMono-Regular.ttf"
+   ],
+   "key": "fragment-mono",
+   "license": "SIL OFL",
+   "name": "Fragment Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "latest",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/fragment-mono/fragment-mono.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/fragment-mono/fragment-mono-italic.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://github.com/weiweihuanghuang/fragment-mono",
+   "year": 2022
+  },
+  {
+   "author": "subframe7536",
+   "cask": "font-maple-mono",
+   "files": [
+    "MapleMono-Italic_wght_.ttf",
+    "MapleMono_wght_.ttf"
+   ],
+   "key": "maple",
+   "license": "SIL OFL",
+   "name": "Maple Mono",
+   "source": "cask",
+   "static_instances": [
+    "MapleMono-Italic_wght_-instance-Thin_Italic.ttf",
+    "MapleMono-Italic_wght_-instance-Extra_LightItalic.ttf",
+    "MapleMono-Italic_wght_-instance-Light_Italic.ttf",
+    "MapleMono-Italic_wght_-instance-Italic.ttf",
+    "MapleMono-Italic_wght_-instance-Medium_Italic.ttf",
+    "MapleMono-Italic_wght_-instance-SemiBold_Italic.ttf",
+    "MapleMono-Italic_wght_-instance-Bold_Italic.ttf",
+    "MapleMono-Italic_wght_-instance-ExtraBold_Italic.ttf",
+    "MapleMono_wght_-instance-Thin.ttf",
+    "MapleMono_wght_-instance-ExtraLight.ttf",
+    "MapleMono_wght_-instance-Light.ttf",
+    "MapleMono_wght_-instance-Regular.ttf",
+    "MapleMono_wght_-instance-Medium.ttf",
+    "MapleMono_wght_-instance-SemiBold.ttf",
+    "MapleMono_wght_-instance-Bold.ttf",
+    "MapleMono_wght_-instance-ExtraBold.ttf"
+   ],
+   "status": "fetched",
+   "version": "7.9",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/maple/maple.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/maple/maple-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/maple/maple-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/maple/maple-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://github.com/subframe7536/maple-font",
+   "year": 2022
+  },
+  {
+   "author": "Roman Shamin",
+   "cask": "font-martian-mono",
+   "files": [
+    "MartianMono-StdBd.otf",
+    "MartianMono-StdLt.otf",
+    "MartianMono-StdMd.otf",
+    "MartianMono-StdRg.otf",
+    "MartianMono-StdTh.otf",
+    "MartianMono-StdxBd.otf",
+    "MartianMono-StdxLt.otf"
+   ],
+   "key": "martian-mono",
+   "license": "SIL OFL",
+   "name": "Martian Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.1.0",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/martian-mono/martian-mono.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/martian-mono/martian-mono-bold.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://github.com/evilmartians/mono",
+   "year": 2022
+  },
+  {
+   "author": "Idrees Hassan",
+   "cask": "font-monocraft",
+   "files": [
+    "1444f3c1a40c9c0ce8845dabcc00689af99e73da2c2fc17ef364f23773d20d37--Monocraft.ttc"
+   ],
+   "key": "monocraft",
+   "license": "SIL OFL",
+   "name": "Monocraft",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "4.2.1",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/monocraft/monocraft.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://github.com/IdreesInc/Monocraft",
+   "year": 2022
+  },
+  {
+   "author": "FaceType",
+   "files": [],
+   "key": "monolisa",
+   "license": "commercial",
+   "name": "MonoLisa",
+   "source": "none",
+   "status": "skipped: commercial licence, no free file to measure",
+   "webfont_faces": [],
+   "website": "https://www.monolisa.dev",
+   "year": 2022
+  },
+  {
+   "author": "Ariel Mart\u00edn P\u00e9rez",
+   "files": [
+    "sligoil.otf"
+   ],
+   "key": "sligoil",
+   "license": "SIL OFL",
+   "name": "Sligoil Micro",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/sligoil/sligoil.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://velvetyne.fr/fonts/sligoil/",
+   "year": 2022
+  },
+  {
+   "author": "Eigil Nikolajsen",
+   "cask": "font-commit-mono",
+   "files": [
+    "CommitMono-1.143_ttfautohint_CommitMono-400-Italic.ttf",
+    "CommitMono-1.143_ttfautohint_CommitMono-400-Regular.ttf",
+    "CommitMono-1.143_ttfautohint_CommitMono-700-Italic.ttf",
+    "CommitMono-1.143_ttfautohint_CommitMono-700-Regular.ttf"
+   ],
+   "key": "commit-mono",
+   "license": "SIL OFL",
+   "name": "Commit Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.143",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/commit-mono/commit-mono.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/commit-mono/commit-mono-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/commit-mono/commit-mono-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/commit-mono/commit-mono-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://commitmono.com",
+   "year": 2023
+  },
+  {
+   "author": "Vercel",
+   "cask": "font-geist-mono",
+   "files": [
+    "geist-font_Geist_ttf_Geist-Black.ttf",
+    "geist-font_Geist_ttf_Geist-BlackItalic.ttf",
+    "geist-font_Geist_ttf_Geist-Bold.ttf",
+    "geist-font_Geist_ttf_Geist-BoldItalic.ttf",
+    "geist-font_Geist_ttf_Geist-ExtraBold.ttf",
+    "geist-font_Geist_ttf_Geist-ExtraBoldItalic.ttf",
+    "geist-font_Geist_ttf_Geist-ExtraLight.ttf",
+    "geist-font_Geist_ttf_Geist-ExtraLightItalic.ttf",
+    "geist-font_Geist_ttf_Geist-Italic.ttf",
+    "geist-font_Geist_ttf_Geist-Light.ttf",
+    "geist-font_Geist_ttf_Geist-LightItalic.ttf",
+    "geist-font_Geist_ttf_Geist-Medium.ttf",
+    "geist-font_Geist_ttf_Geist-MediumItalic.ttf",
+    "geist-font_Geist_ttf_Geist-Regular.ttf",
+    "geist-font_Geist_ttf_Geist-SemiBold.ttf",
+    "geist-font_Geist_ttf_Geist-SemiBoldItalic.ttf",
+    "geist-font_Geist_ttf_Geist-Thin.ttf",
+    "geist-font_Geist_ttf_Geist-ThinItalic.ttf",
+    "geist-font_Geist_variable_Geist-Italic_wght_.ttf",
+    "geist-font_Geist_variable_Geist_wght_.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-Black.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-BlackItalic.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-Bold.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-BoldItalic.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-ExtraBold.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-ExtraBoldItalic.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-ExtraLight.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-ExtraLightItalic.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-Italic.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-Light.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-LightItalic.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-Medium.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-MediumItalic.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-Regular.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-SemiBold.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-SemiBoldItalic.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-Thin.ttf",
+    "geist-font_GeistMono_ttf_GeistMono-ThinItalic.ttf",
+    "geist-font_GeistMono_variable_GeistMono-Italic_wght_.ttf",
+    "geist-font_GeistMono_variable_GeistMono_wght_.ttf",
+    "geist-font_GeistPixel_ttf_GeistPixel-Circle.ttf",
+    "geist-font_GeistPixel_ttf_GeistPixel-Grid.ttf",
+    "geist-font_GeistPixel_ttf_GeistPixel-Line.ttf",
+    "geist-font_GeistPixel_ttf_GeistPixel-Square.ttf",
+    "geist-font_GeistPixel_ttf_GeistPixel-Triangle.ttf",
+    "geist-font_GeistPixel_variable_GeistPixel_ELSH_.ttf",
+    "geist-font_GeistSerif_ttf_GeistSerif-Heart.ttf",
+    "geist-font_GeistSerif_ttf_GeistSerif-Regular.ttf",
+    "geist-font_GeistSerif_ttf_GeistSerif-Square.ttf",
+    "geist-font_GeistSerif_ttf_GeistSerif-Triangle.ttf",
+    "geist-font_GeistSerif_variable_GeistSerif_ELSH_.ttf"
+   ],
+   "key": "geist",
+   "license": "SIL OFL",
+   "name": "Geist Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.9.0",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/geist/geist.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/geist/geist-bold.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://vercel.com/font/mono",
+   "year": 2023
+  },
+  {
+   "author": "Jonas Pelzer",
+   "files": [],
+   "key": "indicate",
+   "license": "commercial",
+   "name": "Indicate Mono",
+   "source": "none",
+   "status": "skipped: commercial licence, no free file to measure",
+   "webfont_faces": [],
+   "website": "https://jonastype.com/indicate-mono",
+   "year": 2023
+  },
+  {
+   "author": "Intel Brand Team, VMLY&R, Frere-Jones Type",
+   "cask": "font-intel-one-mono",
+   "files": [
+    "otf_IntelOneMono-Bold.otf",
+    "otf_IntelOneMono-BoldItalic.otf",
+    "otf_IntelOneMono-Italic.otf",
+    "otf_IntelOneMono-Light.otf",
+    "otf_IntelOneMono-LightItalic.otf",
+    "otf_IntelOneMono-Medium.otf",
+    "otf_IntelOneMono-MediumItalic.otf",
+    "otf_IntelOneMono-Regular.otf"
+   ],
+   "key": "intel-one-mono",
+   "license": "SIL OFL",
+   "name": "Intel One Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.4.0",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/intel-one-mono/intel-one-mono.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/intel-one-mono/intel-one-mono-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/intel-one-mono/intel-one-mono-italic.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://github.com/intel/intel-one-mono",
+   "year": 2023
+  },
+  {
+   "author": "Rutherford Craze",
+   "files": [],
+   "key": "md-io",
+   "license": "commercial",
+   "name": "MD IO",
+   "source": "none",
+   "status": "skipped: commercial licence, no free file to measure",
+   "webfont_faces": [],
+   "website": "https://io.mass-driver.com",
+   "year": 2023
+  },
+  {
+   "author": "Riley Cran & the Lettermatic Team",
+   "cask": "font-monaspace",
+   "files": [
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-Bold.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-BoldItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-ExtraBold.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-ExtraBoldItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-ExtraLight.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-ExtraLightItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-Italic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-Light.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-LightItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-Medium.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-MediumItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-Regular.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-SemiBold.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-SemiBoldItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-SemiWideBold.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-SemiWideBoldItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-SemiWideExtraBold.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-SemiWideExtraBoldItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-SemiWideExtraLight.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-SemiWideExtraLightItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-SemiWideItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-SemiWideLight.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-SemiWideLightItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-SemiWideMedium.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-SemiWideMediumItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-SemiWideRegular.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-SemiWideSemiBold.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-SemiWideSemiBoldItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-WideBold.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-WideBoldItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-WideExtraBold.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-WideExtraBoldItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-WideExtraLight.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-WideExtraLightItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-WideItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-WideLight.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-WideLightItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-WideMedium.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-WideMediumItalic.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-WideRegular.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-WideSemiBold.otf",
+    "Static_Fonts_Monaspace_Argon_MonaspaceArgon-WideSemiBoldItalic.otf"
+   ],
+   "key": "monaspace-argon",
+   "license": "SIL OFL",
+   "name": "Monaspace Argon",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.400",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-argon/monaspace-argon.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-argon/monaspace-argon-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-argon/monaspace-argon-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-argon/monaspace-argon-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://monaspace.githubnext.com/",
+   "year": 2023
+  },
+  {
+   "author": "Riley Cran & the Lettermatic Team",
+   "cask": "font-monaspace",
+   "files": [
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-Bold.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-BoldItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-ExtraBold.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-ExtraBoldItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-ExtraLight.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-ExtraLightItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-Italic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-Light.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-LightItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-Medium.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-MediumItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-Regular.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-SemiBold.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-SemiBoldItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-SemiWideBold.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-SemiWideBoldItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-SemiWideExtraBold.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-SemiWideExtraBoldItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-SemiWideExtraLight.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-SemiWideExtraLightItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-SemiWideItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-SemiWideLight.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-SemiWideLightItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-SemiWideMedium.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-SemiWideMediumItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-SemiWideRegular.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-SemiWideSemiBold.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-SemiWideSemiBoldItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-WideBold.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-WideBoldItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-WideExtraBold.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-WideExtraBoldItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-WideExtraLight.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-WideExtraLightItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-WideItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-WideLight.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-WideLightItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-WideMedium.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-WideMediumItalic.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-WideRegular.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-WideSemiBold.otf",
+    "Static_Fonts_Monaspace_Krypton_MonaspaceKrypton-WideSemiBoldItalic.otf"
+   ],
+   "key": "monaspace-krypton",
+   "license": "SIL OFL",
+   "name": "Monaspace Krypton",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.400",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-krypton/monaspace-krypton.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-krypton/monaspace-krypton-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-krypton/monaspace-krypton-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-krypton/monaspace-krypton-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://monaspace.githubnext.com/",
+   "year": 2023
+  },
+  {
+   "author": "Riley Cran & the Lettermatic Team",
+   "cask": "font-monaspace",
+   "files": [
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-Bold.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-BoldItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-ExtraBold.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-ExtraBoldItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-ExtraLight.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-ExtraLightItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-Italic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-Light.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-LightItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-Medium.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-MediumItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-Regular.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-SemiBold.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-SemiBoldItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-SemiWideBold.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-SemiWideBoldItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-SemiWideExtraBold.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-SemiWideExtraBoldItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-SemiWideExtraLight.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-SemiWideExtraLightItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-SemiWideItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-SemiWideLight.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-SemiWideLightItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-SemiWideMedium.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-SemiWideMediumItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-SemiWideRegular.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-SemiWideSemiBold.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-SemiWideSemiBoldItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-WideBold.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-WideBoldItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-WideExtraBold.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-WideExtraBoldItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-WideExtraLight.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-WideExtraLightItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-WideItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-WideLight.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-WideLightItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-WideMedium.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-WideMediumItalic.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-WideRegular.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-WideSemiBold.otf",
+    "Static_Fonts_Monaspace_Neon_MonaspaceNeon-WideSemiBoldItalic.otf"
+   ],
+   "key": "monaspace-neon",
+   "license": "SIL OFL",
+   "name": "Monaspace Neon",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.400",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-neon/monaspace-neon.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-neon/monaspace-neon-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-neon/monaspace-neon-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-neon/monaspace-neon-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://monaspace.githubnext.com/",
+   "year": 2023
+  },
+  {
+   "author": "Riley Cran & the Lettermatic Team",
+   "cask": "font-monaspace",
+   "files": [
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-Bold.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-BoldItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-ExtraBold.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-ExtraBoldItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-ExtraLight.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-ExtraLightItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-Italic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-Light.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-LightItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-Medium.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-MediumItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-Regular.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-SemiBold.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-SemiBoldItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-SemiWideBold.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-SemiWideBoldItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-SemiWideExtraBold.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-SemiWideExtraBoldItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-SemiWideExtraLight.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-SemiWideExtraLightItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-SemiWideItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-SemiWideLight.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-SemiWideLightItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-SemiWideMedium.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-SemiWideMediumItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-SemiWideRegular.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-SemiWideSemiBold.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-SemiWideSemiBoldItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-WideBold.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-WideBoldItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-WideExtraBold.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-WideExtraBoldItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-WideExtraLight.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-WideExtraLightItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-WideItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-WideLight.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-WideLightItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-WideMedium.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-WideMediumItalic.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-WideRegular.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-WideSemiBold.otf",
+    "Static_Fonts_Monaspace_Radon_MonaspaceRadon-WideSemiBoldItalic.otf"
+   ],
+   "key": "monaspace-radon",
+   "license": "SIL OFL",
+   "name": "Monaspace Radon",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.400",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-radon/monaspace-radon.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-radon/monaspace-radon-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-radon/monaspace-radon-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-radon/monaspace-radon-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://monaspace.githubnext.com/",
+   "year": 2023
+  },
+  {
+   "author": "Riley Cran & the Lettermatic Team",
+   "cask": "font-monaspace",
+   "files": [
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-Bold.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-BoldItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-ExtraBold.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-ExtraBoldItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-ExtraLight.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-ExtraLightItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-Italic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-Light.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-LightItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-Medium.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-MediumItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-Regular.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-SemiBold.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-SemiBoldItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-SemiWideBold.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-SemiWideBoldItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-SemiWideExtraBold.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-SemiWideExtraBoldItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-SemiWideExtraLight.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-SemiWideExtraLightItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-SemiWideItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-SemiWideLight.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-SemiWideLightItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-SemiWideMedium.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-SemiWideMediumItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-SemiWideRegular.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-SemiWideSemiBold.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-SemiWideSemiBoldItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-WideBold.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-WideBoldItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-WideExtraBold.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-WideExtraBoldItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-WideExtraLight.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-WideExtraLightItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-WideItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-WideLight.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-WideLightItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-WideMedium.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-WideMediumItalic.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-WideRegular.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-WideSemiBold.otf",
+    "Static_Fonts_Monaspace_Xenon_MonaspaceXenon-WideSemiBoldItalic.otf"
+   ],
+   "key": "monaspace-xenon",
+   "license": "SIL OFL",
+   "name": "Monaspace Xenon",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.400",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-xenon/monaspace-xenon.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-xenon/monaspace-xenon-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-xenon/monaspace-xenon-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/monaspace-xenon/monaspace-xenon-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://monaspace.githubnext.com/",
+   "year": 2023
+  },
+  {
+   "author": "Masaaki Morishita",
+   "cask": "font-0xproto",
+   "files": [
+    "fonts_0xProto-Bold.ttf",
+    "fonts_0xProto-Italic.ttf",
+    "fonts_0xProto-Regular.ttf",
+    "fonts_No-Ligatures_0xProto-Bold-NL.ttf",
+    "fonts_No-Ligatures_0xProto-Italic-NL.ttf",
+    "fonts_No-Ligatures_0xProto-Regular-NL.ttf",
+    "fonts_ZxProto_ZxProto-Bold.ttf",
+    "fonts_ZxProto_ZxProto-Italic.ttf",
+    "fonts_ZxProto_ZxProto-Regular.ttf"
+   ],
+   "key": "oxproto",
+   "license": "SIL OFL",
+   "name": "0xProto",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "2.502",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/oxproto/oxproto.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://github.com/0xType/0xProto",
+   "year": 2023
+  },
+  {
+   "author": "Kyle Beechly",
+   "files": [
+    "serious-shanns.otf",
+    "serious-shanns-bold.otf",
+    "serious-shanns-italic.otf",
+    "serious-shanns-bold-italic.otf"
+   ],
+   "key": "serious-shanns",
+   "license": "MIT",
+   "name": "Serious Shanns",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/serious-shanns/serious-shanns.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/serious-shanns/serious-shanns-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/serious-shanns/serious-shanns-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/serious-shanns/serious-shanns-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://kabeech.github.io/serious-shanns/",
+   "year": 2023
+  },
+  {
+   "author": "stgiga",
+   "files": [
+    "unifontex.ttf"
+   ],
+   "key": "unifontex",
+   "license": "GNU GPL",
+   "name": "UnifontEX",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/unifontex/unifontex.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://github.com/stgiga/UnifontEX",
+   "year": 2023
+  },
+  {
+   "author": "Helena Zhang",
+   "cask": "font-departure-mono",
+   "files": [
+    "DepartureMono-1.500_DepartureMono-Regular.otf"
+   ],
+   "key": "departure-mono",
+   "license": "SIL OFL",
+   "name": "Departure Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.500",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/departure-mono/departure-mono.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://departuremono.com/",
+   "year": 2024
+  },
+  {
+   "author": "Idrees Hassan",
+   "cask": "font-miracode",
+   "files": [
+    "b7f0cb6b77964c4dd570151a12af08029a6dc280070fbeb2029c2bc165d6dee4--Miracode.ttf"
+   ],
+   "key": "miracode",
+   "license": "SIL OFL",
+   "name": "Miracode",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.0",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/miracode/miracode.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://github.com/IdreesInc/Miracode",
+   "year": 2024
+  },
+  {
+   "author": "GNOME",
+   "cask": "font-adwaita",
+   "files": [
+    "adwaita-fonts-51.0_mono_AdwaitaMono-Bold.ttf",
+    "adwaita-fonts-51.0_mono_AdwaitaMono-BoldItalic.ttf",
+    "adwaita-fonts-51.0_mono_AdwaitaMono-Italic.ttf",
+    "adwaita-fonts-51.0_mono_AdwaitaMono-Regular.ttf"
+   ],
+   "key": "adwaita-mono",
+   "license": "SIL OFL",
+   "name": "Adwaita Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "51.0",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/adwaita-mono/adwaita-mono.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/adwaita-mono/adwaita-mono-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/adwaita-mono/adwaita-mono-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/adwaita-mono/adwaita-mono-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://gitlab.gnome.org/GNOME/adwaita-fonts",
+   "year": 2025
+  },
+  {
+   "author": "Qwerasd",
+   "cask": "font-annotation-mono",
+   "files": [
+    "dist_ttf_Black.ttf",
+    "dist_ttf_Black_Italic.ttf",
+    "dist_ttf_Black_Oblique.ttf",
+    "dist_ttf_Black_Upright_Italic.ttf",
+    "dist_ttf_Bold.ttf",
+    "dist_ttf_Bold_Italic.ttf",
+    "dist_ttf_Bold_Oblique.ttf",
+    "dist_ttf_Bold_Upright_Italic.ttf",
+    "dist_ttf_DemiBold.ttf",
+    "dist_ttf_DemiBold_Italic.ttf",
+    "dist_ttf_DemiBold_Oblique.ttf",
+    "dist_ttf_DemiBold_Upright_Italic.ttf",
+    "dist_ttf_ExtraBlack.ttf",
+    "dist_ttf_ExtraBlack_Italic.ttf",
+    "dist_ttf_ExtraBlack_Oblique.ttf",
+    "dist_ttf_ExtraBlack_Upright_Italic.ttf",
+    "dist_ttf_ExtraBold.ttf",
+    "dist_ttf_ExtraBold_Italic.ttf",
+    "dist_ttf_ExtraBold_Oblique.ttf",
+    "dist_ttf_ExtraBold_Upright_Italic.ttf",
+    "dist_ttf_ExtraLight.ttf",
+    "dist_ttf_ExtraLight_Italic.ttf",
+    "dist_ttf_ExtraLight_Oblique.ttf",
+    "dist_ttf_ExtraLight_Upright_Italic.ttf",
+    "dist_ttf_Light.ttf",
+    "dist_ttf_Light_Italic.ttf",
+    "dist_ttf_Light_Oblique.ttf",
+    "dist_ttf_Light_Upright_Italic.ttf",
+    "dist_ttf_Medium.ttf",
+    "dist_ttf_Medium_Italic.ttf",
+    "dist_ttf_Medium_Oblique.ttf",
+    "dist_ttf_Medium_Upright_Italic.ttf",
+    "dist_ttf_Regular.ttf",
+    "dist_ttf_Regular_Italic.ttf",
+    "dist_ttf_Regular_Oblique.ttf",
+    "dist_ttf_Regular_Upright_Italic.ttf",
+    "dist_ttf_Thin.ttf",
+    "dist_ttf_Thin_Italic.ttf",
+    "dist_ttf_Thin_Oblique.ttf",
+    "dist_ttf_Thin_Upright_Italic.ttf",
+    "dist_variable_AnnotationMono-VF.ttf"
+   ],
+   "key": "annotation-mono",
+   "license": "SIL OFL",
+   "name": "Annotation Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "0.4",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/annotation-mono/annotation-mono.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/annotation-mono/annotation-mono-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/annotation-mono/annotation-mono-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/annotation-mono/annotation-mono-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://qwerasd205.github.io/AnnotationMono/",
+   "year": 2025
+  },
+  {
+   "author": "Protesilaos Stavrou",
+   "cask": "font-aporetic",
+   "files": [
+    "aporetic-1.2.0_aporetic-sans-mono_TTF-Unhinted_aporetic-sans-mono-normalbolditalic.ttf",
+    "aporetic-1.2.0_aporetic-sans-mono_TTF-Unhinted_aporetic-sans-mono-normalboldupright.ttf",
+    "aporetic-1.2.0_aporetic-sans-mono_TTF-Unhinted_aporetic-sans-mono-normalregularitalic.ttf",
+    "aporetic-1.2.0_aporetic-sans-mono_TTF-Unhinted_aporetic-sans-mono-normalregularupright.ttf",
+    "aporetic-1.2.0_aporetic-sans-mono_TTF_aporetic-sans-mono-normalbolditalic.ttf",
+    "aporetic-1.2.0_aporetic-sans-mono_TTF_aporetic-sans-mono-normalboldupright.ttf",
+    "aporetic-1.2.0_aporetic-sans-mono_TTF_aporetic-sans-mono-normalregularitalic.ttf",
+    "aporetic-1.2.0_aporetic-sans-mono_TTF_aporetic-sans-mono-normalregularupright.ttf"
+   ],
+   "key": "aporetic-sans",
+   "license": "SIL OFL",
+   "name": "Aporetic Sans Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.2.0",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/aporetic-sans/aporetic-sans.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/aporetic-sans/aporetic-sans-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/aporetic-sans/aporetic-sans-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/aporetic-sans/aporetic-sans-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://github.com/protesilaos/aporetic",
+   "year": 2025
+  },
+  {
+   "author": "Protesilaos Stavrou",
+   "cask": "font-aporetic",
+   "files": [
+    "aporetic-1.2.0_aporetic-serif-mono_TTF-Unhinted_aporetic-serif-mono-normalbolditalic.ttf",
+    "aporetic-1.2.0_aporetic-serif-mono_TTF-Unhinted_aporetic-serif-mono-normalboldupright.ttf",
+    "aporetic-1.2.0_aporetic-serif-mono_TTF-Unhinted_aporetic-serif-mono-normalregularitalic.ttf",
+    "aporetic-1.2.0_aporetic-serif-mono_TTF-Unhinted_aporetic-serif-mono-normalregularupright.ttf",
+    "aporetic-1.2.0_aporetic-serif-mono_TTF_aporetic-serif-mono-normalbolditalic.ttf",
+    "aporetic-1.2.0_aporetic-serif-mono_TTF_aporetic-serif-mono-normalboldupright.ttf",
+    "aporetic-1.2.0_aporetic-serif-mono_TTF_aporetic-serif-mono-normalregularitalic.ttf",
+    "aporetic-1.2.0_aporetic-serif-mono_TTF_aporetic-serif-mono-normalregularupright.ttf"
+   ],
+   "key": "aporetic-serif",
+   "license": "SIL OFL",
+   "name": "Aporetic Serif Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.2.0",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/aporetic-serif/aporetic-serif.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/aporetic-serif/aporetic-serif-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/aporetic-serif/aporetic-serif-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/aporetic-serif/aporetic-serif-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://github.com/protesilaos/aporetic",
+   "year": 2025
+  },
+  {
+   "author": "Braille Institute",
+   "cask": "font-atkinson-hyperlegible-mono",
+   "files": [
+    "ofl_atkinsonhyperlegiblemono_AtkinsonHyperlegibleMono-Italic_wght_.ttf",
+    "ofl_atkinsonhyperlegiblemono_AtkinsonHyperlegibleMono_wght_.ttf"
+   ],
+   "key": "atkinson-hyperlegible",
+   "license": "SIL OFL",
+   "name": "Atkinson Hyperlegible Mono",
+   "source": "cask",
+   "static_instances": [
+    "ofl_atkinsonhyperlegiblemono_AtkinsonHyperlegibleMono-Italic_wght_-instance-ExtraLight_Italic.ttf",
+    "ofl_atkinsonhyperlegiblemono_AtkinsonHyperlegibleMono-Italic_wght_-instance-Light_Italic.ttf",
+    "ofl_atkinsonhyperlegiblemono_AtkinsonHyperlegibleMono-Italic_wght_-instance-Italic.ttf",
+    "ofl_atkinsonhyperlegiblemono_AtkinsonHyperlegibleMono-Italic_wght_-instance-Medium_Italic.ttf",
+    "ofl_atkinsonhyperlegiblemono_AtkinsonHyperlegibleMono-Italic_wght_-instance-SemiBold_Italic.ttf",
+    "ofl_atkinsonhyperlegiblemono_AtkinsonHyperlegibleMono-Italic_wght_-instance-Bold_Italic.ttf",
+    "ofl_atkinsonhyperlegiblemono_AtkinsonHyperlegibleMono-Italic_wght_-instance-ExtraBold_Italic.ttf",
+    "ofl_atkinsonhyperlegiblemono_AtkinsonHyperlegibleMono_wght_-instance-ExtraLight.ttf",
+    "ofl_atkinsonhyperlegiblemono_AtkinsonHyperlegibleMono_wght_-instance-Light.ttf",
+    "ofl_atkinsonhyperlegiblemono_AtkinsonHyperlegibleMono_wght_-instance-Regular.ttf",
+    "ofl_atkinsonhyperlegiblemono_AtkinsonHyperlegibleMono_wght_-instance-Medium.ttf",
+    "ofl_atkinsonhyperlegiblemono_AtkinsonHyperlegibleMono_wght_-instance-SemiBold.ttf",
+    "ofl_atkinsonhyperlegiblemono_AtkinsonHyperlegibleMono_wght_-instance-Bold.ttf",
+    "ofl_atkinsonhyperlegiblemono_AtkinsonHyperlegibleMono_wght_-instance-ExtraBold.ttf"
+   ],
+   "status": "fetched",
+   "version": "latest",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/atkinson-hyperlegible/atkinson-hyperlegible.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/atkinson-hyperlegible/atkinson-hyperlegible-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/atkinson-hyperlegible/atkinson-hyperlegible-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/atkinson-hyperlegible/atkinson-hyperlegible-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://www.brailleinstitute.org/freefont/",
+   "year": 2025
+  },
+  {
+   "author": "Chris Simpkins",
+   "cask": "font-google-sans-code",
+   "files": [
+    "ofl_googlesanscode_GoogleSansCode-Italic_wght_.ttf",
+    "ofl_googlesanscode_GoogleSansCode_wght_.ttf"
+   ],
+   "key": "google-sans-code",
+   "license": "SIL OFL",
+   "name": "Google Sans Code",
+   "source": "cask",
+   "static_instances": [
+    "ofl_googlesanscode_GoogleSansCode-Italic_wght_-instance-Light_Italic.ttf",
+    "ofl_googlesanscode_GoogleSansCode-Italic_wght_-instance-Italic.ttf",
+    "ofl_googlesanscode_GoogleSansCode-Italic_wght_-instance-Medium_Italic.ttf",
+    "ofl_googlesanscode_GoogleSansCode-Italic_wght_-instance-SemiBold_Italic.ttf",
+    "ofl_googlesanscode_GoogleSansCode-Italic_wght_-instance-Bold_Italic.ttf",
+    "ofl_googlesanscode_GoogleSansCode-Italic_wght_-instance-ExtraBold_Italic.ttf",
+    "ofl_googlesanscode_GoogleSansCode_wght_-instance-Light.ttf",
+    "ofl_googlesanscode_GoogleSansCode_wght_-instance-Regular.ttf",
+    "ofl_googlesanscode_GoogleSansCode_wght_-instance-Medium.ttf",
+    "ofl_googlesanscode_GoogleSansCode_wght_-instance-SemiBold.ttf",
+    "ofl_googlesanscode_GoogleSansCode_wght_-instance-Bold.ttf",
+    "ofl_googlesanscode_GoogleSansCode_wght_-instance-ExtraBold.ttf"
+   ],
+   "status": "fetched",
+   "version": "latest",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/google-sans-code/google-sans-code.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/google-sans-code/google-sans-code-italic.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://github.com/googlefonts/googlesans-code",
+   "year": 2025
+  },
+  {
+   "author": "Ahmed Hatem",
+   "cask": "font-ioskeley-mono",
+   "files": [
+    "Normal_Hinted_IoskeleyMono-Black.ttf",
+    "Normal_Hinted_IoskeleyMono-BlackItalic.ttf",
+    "Normal_Hinted_IoskeleyMono-Bold.ttf",
+    "Normal_Hinted_IoskeleyMono-BoldItalic.ttf",
+    "Normal_Hinted_IoskeleyMono-ExtraBold.ttf",
+    "Normal_Hinted_IoskeleyMono-ExtraBoldItalic.ttf",
+    "Normal_Hinted_IoskeleyMono-ExtraLight.ttf",
+    "Normal_Hinted_IoskeleyMono-ExtraLightItalic.ttf",
+    "Normal_Hinted_IoskeleyMono-Italic.ttf",
+    "Normal_Hinted_IoskeleyMono-Light.ttf",
+    "Normal_Hinted_IoskeleyMono-LightItalic.ttf",
+    "Normal_Hinted_IoskeleyMono-Medium.ttf",
+    "Normal_Hinted_IoskeleyMono-MediumItalic.ttf",
+    "Normal_Hinted_IoskeleyMono-Regular.ttf",
+    "Normal_Hinted_IoskeleyMono-SemiBold.ttf",
+    "Normal_Hinted_IoskeleyMono-SemiBoldItalic.ttf",
+    "Normal_Hinted_IoskeleyMono-SemiLight.ttf",
+    "Normal_Hinted_IoskeleyMono-SemiLightItalic.ttf",
+    "Normal_Hinted_IoskeleyMono-Thin.ttf",
+    "Normal_Hinted_IoskeleyMono-ThinItalic.ttf",
+    "Normal_Unhinted_IoskeleyMono-Black.ttf",
+    "Normal_Unhinted_IoskeleyMono-BlackItalic.ttf",
+    "Normal_Unhinted_IoskeleyMono-Bold.ttf",
+    "Normal_Unhinted_IoskeleyMono-BoldItalic.ttf",
+    "Normal_Unhinted_IoskeleyMono-ExtraBold.ttf",
+    "Normal_Unhinted_IoskeleyMono-ExtraBoldItalic.ttf",
+    "Normal_Unhinted_IoskeleyMono-ExtraLight.ttf",
+    "Normal_Unhinted_IoskeleyMono-ExtraLightItalic.ttf",
+    "Normal_Unhinted_IoskeleyMono-Italic.ttf",
+    "Normal_Unhinted_IoskeleyMono-Light.ttf",
+    "Normal_Unhinted_IoskeleyMono-LightItalic.ttf",
+    "Normal_Unhinted_IoskeleyMono-Medium.ttf",
+    "Normal_Unhinted_IoskeleyMono-MediumItalic.ttf",
+    "Normal_Unhinted_IoskeleyMono-Regular.ttf",
+    "Normal_Unhinted_IoskeleyMono-SemiBold.ttf",
+    "Normal_Unhinted_IoskeleyMono-SemiBoldItalic.ttf",
+    "Normal_Unhinted_IoskeleyMono-SemiLight.ttf",
+    "Normal_Unhinted_IoskeleyMono-SemiLightItalic.ttf",
+    "Normal_Unhinted_IoskeleyMono-Thin.ttf",
+    "Normal_Unhinted_IoskeleyMono-ThinItalic.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensed.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedBlack.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedBlackItalic.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedBold.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedBoldItalic.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedExtraBold.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedExtraBoldItalic.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedExtraLight.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedExtraLightItalic.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedItalic.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedLight.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedLightItalic.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedMedium.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedMediumItalic.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedSemiBold.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedSemiBoldItalic.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedSemiLight.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedSemiLightItalic.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedThin.ttf",
+    "SemiCondensed_Hinted_IoskeleyMono-SemiCondensedThinItalic.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensed.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedBlack.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedBlackItalic.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedBold.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedBoldItalic.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedExtraBold.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedExtraBoldItalic.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedExtraLight.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedExtraLightItalic.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedItalic.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedLight.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedLightItalic.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedMedium.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedMediumItalic.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedSemiBold.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedSemiBoldItalic.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedSemiLight.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedSemiLightItalic.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedThin.ttf",
+    "SemiCondensed_Unhinted_IoskeleyMono-SemiCondensedThinItalic.ttf"
+   ],
+   "key": "ioskeley",
+   "license": "SIL OFL",
+   "name": "Ioskeley Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "2.2.0",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/ioskeley/ioskeley.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/ioskeley/ioskeley-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/ioskeley/ioskeley-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/ioskeley/ioskeley-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://github.com/ahatem/IoskeleyMono",
+   "year": 2025
+  },
+  {
+   "author": "Kyle Wayne Benson",
+   "cask": "font-mona-sans",
+   "files": [
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMono-Black.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMono-Bold.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMono-ExtraBold.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMono-ExtraLight.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMono-Light.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMono-Medium.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMono-Regular.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMono-SemiBold.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoCondensed-Black.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoCondensed-Bold.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoCondensed-ExtraBold.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoCondensed-ExtraLight.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoCondensed-Light.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoCondensed-Medium.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoCondensed-Regular.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoCondensed-SemiBold.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoExpanded-Black.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoExpanded-Bold.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoExpanded-ExtraBold.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoExpanded-ExtraLight.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoExpanded-Light.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoExpanded-Medium.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoExpanded-Regular.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoExpanded-SemiBold.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoSemiCondensed-Black.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoSemiCondensed-Bold.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoSemiCondensed-ExtraBold.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoSemiCondensed-ExtraLight.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoSemiCondensed-Light.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoSemiCondensed-Medium.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoSemiCondensed-Regular.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoSemiCondensed-SemiBold.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoSemiExpanded-Black.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoSemiExpanded-Bold.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoSemiExpanded-ExtraBold.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoSemiExpanded-ExtraLight.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoSemiExpanded-Light.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoSemiExpanded-Medium.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoSemiExpanded-Regular.ttf",
+    "mona-sans-2.0.27_fonts_static_ttf_MonaSansMonoSemiExpanded-SemiBold.ttf",
+    "mona-sans-2.0.27_fonts_variable_MonaSansMonoVF-Condensed_wght_.ttf",
+    "mona-sans-2.0.27_fonts_variable_MonaSansMonoVF-Expanded_wght_.ttf",
+    "mona-sans-2.0.27_fonts_variable_MonaSansMonoVF_wdth_wght_.ttf",
+    "mona-sans-2.0.27_fonts_variable_MonaSansMonoVF_wght_.ttf"
+   ],
+   "key": "mona-sans-mono",
+   "license": "SIL OFL",
+   "name": "Mona Sans Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "2.0.27",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/mona-sans-mono/mona-sans-mono.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://github.com/github/mona-sans",
+   "year": 2025
+  },
+  {
+   "author": "Sayyad Irfan Ali",
+   "cask": "font-myna",
+   "files": [
+    "f134604f1faf1c7af1be12dbbd97fb4132550fd9046183c3bd3516361cfe8755--Myna.otf"
+   ],
+   "key": "myna",
+   "license": "SIL OFL",
+   "name": "Myna",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.0.0",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/myna/myna.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/myna/myna-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/myna/myna-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/myna/myna-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://github.com/sayyadirfanali/Myna",
+   "year": 2025
+  },
+  {
+   "author": "Darren Embry",
+   "files": [
+    "old-timey.ttf"
+   ],
+   "key": "old-timey",
+   "license": "SIL OFL",
+   "name": "Old Timey Code",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/old-timey/old-timey.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://github.com/dse/old-timey-mono-font",
+   "year": 2025
+  },
+  {
+   "author": "Guido Ferreyra, Javier Quintana Godoy",
+   "cask": "font-paper-mono",
+   "files": [
+    "paper-mono-v1.000_fonts_ttf_PaperMono-Bold.ttf",
+    "paper-mono-v1.000_fonts_ttf_PaperMono-ExtraBold.ttf",
+    "paper-mono-v1.000_fonts_ttf_PaperMono-ExtraLight.ttf",
+    "paper-mono-v1.000_fonts_ttf_PaperMono-Light.ttf",
+    "paper-mono-v1.000_fonts_ttf_PaperMono-Medium.ttf",
+    "paper-mono-v1.000_fonts_ttf_PaperMono-Regular.ttf",
+    "paper-mono-v1.000_fonts_ttf_PaperMono-SemiBold.ttf",
+    "paper-mono-v1.000_fonts_ttf_PaperMono-Thin.ttf",
+    "paper-mono-v1.000_fonts_variable_PaperMono_wght_.ttf"
+   ],
+   "key": "paper",
+   "license": "SIL OFL",
+   "name": "Paper Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.000",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/paper/paper.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://github.com/paper-design/paper-mono",
+   "year": 2025
+  },
+  {
+   "author": "Renato Setoue",
+   "cask": "font-psudofont-liga-mono",
+   "files": [
+    "psudoFont_Liga_Mono_V.2.2.0_psudoFont_Liga_Mono_-_Bold.ttf",
+    "psudoFont_Liga_Mono_V.2.2.0_psudoFont_Liga_Mono_-_BoldItalic.ttf",
+    "psudoFont_Liga_Mono_V.2.2.0_psudoFont_Liga_Mono_-_Italic.ttf",
+    "psudoFont_Liga_Mono_V.2.2.0_psudoFont_Liga_Mono_-_Regular.ttf"
+   ],
+   "key": "psudo",
+   "license": "SIL OFL",
+   "name": "psudoFont Liga Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "2.2.0",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/psudo/psudo.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/psudo/psudo-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/psudo/psudo-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/psudo/psudo-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://github.com/psudo-dev/psudofont-liga-mono",
+   "year": 2025
+  },
+  {
+   "author": "Guoyu Ou",
+   "files": [
+    "zhima-mono.ttf"
+   ],
+   "key": "zhima-mono",
+   "license": "SIL OFL",
+   "name": "ZhiMa Mono",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/zhima-mono/zhima-mono.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://github.com/ouonline/ZhiMaMono",
+   "year": 2025
+  },
+  {
+   "author": "DraftingDreamer",
+   "files": [
+    "cilantro-code-mono.ttf",
+    "cilantro-code-mono-bold.ttf"
+   ],
+   "key": "cilantro-code-mono",
+   "license": "SIL OFL",
+   "name": "Cilantro Code Mono",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/cilantro-code-mono/cilantro-code-mono.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/cilantro-code-mono/cilantro-code-mono-bold.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://github.com/DraftingDreamer/FontCilantroCode",
+   "year": 2026
+  },
+  {
+   "author": "Yuri Turov",
+   "files": [
+    "lyth-mono.ttf",
+    "lyth-mono-bold.ttf",
+    "lyth-mono-italic.ttf",
+    "lyth-mono-bold-italic.ttf"
+   ],
+   "key": "lyth-mono",
+   "license": "SIL OFL",
+   "name": "Lyth Mono",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/lyth-mono/lyth-mono.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/lyth-mono/lyth-mono-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/lyth-mono/lyth-mono-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/lyth-mono/lyth-mono-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://github.com/why-trv/LythMono",
+   "year": 2026
+  },
+  {
+   "author": "Tanguy VIVIER",
+   "cask": "font-nordwand-mono",
+   "files": [
+    "NordwandMono-Bold.ttf",
+    "NordwandMono-BoldItalic.ttf",
+    "NordwandMono-Book.ttf",
+    "NordwandMono-BookItalic.ttf",
+    "NordwandMono-ExtraLight.ttf",
+    "NordwandMono-ExtraLightItalic.ttf",
+    "NordwandMono-Italic.ttf",
+    "NordwandMono-Light.ttf",
+    "NordwandMono-LightItalic.ttf",
+    "NordwandMono-Medium.ttf",
+    "NordwandMono-MediumItalic.ttf",
+    "NordwandMono-Regular.ttf",
+    "NordwandMono-Retina.ttf",
+    "NordwandMono-RetinaItalic.ttf",
+    "NordwandMono-SemiBold.ttf",
+    "NordwandMono-SemiBoldItalic.ttf",
+    "NordwandMono-Thin.ttf",
+    "NordwandMono-ThinItalic.ttf"
+   ],
+   "key": "nordwand-mono",
+   "license": "SIL OFL",
+   "name": "Nordwand Mono",
+   "source": "cask",
+   "static_instances": [],
+   "status": "fetched",
+   "version": "1.5.0",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/nordwand-mono/nordwand-mono.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/nordwand-mono/nordwand-mono-bold.woff2",
+     "weight": "bold"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/nordwand-mono/nordwand-mono-italic.woff2",
+     "weight": "normal"
+    },
+    {
+     "style": "italic",
+     "url": "https://www.programmingfonts.org/fonts/resources/nordwand-mono/nordwand-mono-bold-italic.woff2",
+     "weight": "bold"
+    }
+   ],
+   "website": "https://github.com/tywr/Nordwand-Mono",
+   "year": 2026
+  },
+  {
+   "author": "Sergio Garc\u00eda Mondaray",
+   "files": [
+    "sergamon.otf"
+   ],
+   "key": "sergamon",
+   "license": "SIL OFL",
+   "name": "Sergamon",
+   "source": "webfont",
+   "status": "fetched",
+   "webfont_faces": [
+    {
+     "style": "normal",
+     "url": "https://www.programmingfonts.org/fonts/resources/sergamon/sergamon.woff2",
+     "weight": "normal"
+    }
+   ],
+   "website": "https://sgmonda.com/sergamon",
+   "year": 2026
+  }
+ ]
+}

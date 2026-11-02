@@ -250,6 +250,7 @@ scripts/
   install.sh
   validate-claude-theme.py
   palette-report.py
+  fetch-recent-fonts.py
   font-metrics.py
   font-report.py
   font-report-meta.json
@@ -294,7 +295,27 @@ is checked against the installed versions, which matters: kitty 0.49 removed
 `adjust_line_height` in favour of `modify_font cell_height`. Cover the top twelve fonts by
 default; `--config-fonts 0` emits a block for every ranked font.
 
-The specimen sections render with the palettes that won the palette report, read from `themes/claude/modus-operandi.json` and `themes/claude/catppuccin-mocha.json`. Specimens only display correctly where those fonts are installed; the metrics do not depend on that. `docs/font-metrics.json` is generated data — it is not tracked in git.
+The terminal preview shows every ranked font in the same session, with the palettes that won the palette report, read from `themes/claude/modus-operandi.json` and `themes/claude/catppuccin-mocha.json`. Installed fonts only display on machines that have them, and uninstalled test fonts load from programmingfonts.org. A preview that cannot get its font says so in its caption. The metrics do not depend on either. `docs/font-metrics.json` is generated data — it is not tracked in git.
+
+### Testing fonts you have not installed
+
+The report also tests every [programmingfonts.org](https://www.programmingfonts.org/) font with a release year after 2019. Nothing is installed: files go to the gitignored `.cache/recent-fonts/`, which only the measurement reads.
+
+```sh
+uv run scripts/fetch-recent-fonts.py                      # -> .cache/recent-fonts, docs/recent-fonts.json
+python3 scripts/font-metrics.py --extra-fonts .cache/recent-fonts
+python3 scripts/font-report.py
+```
+
+The Homebrew cask supplies the full release where one exists, and the catalogue's webfont is the fallback. Commercial fonts are listed but not downloaded. `docs/recent-fonts.json` records the catalogue commit and the outcome for every selected font.
+
+Test fonts are read on the installed fonts' scale, so adding one cannot change an installed font's score. Webfonts stop at four faces, so `docs/recent-fonts-control.json` records how far that moves a score. To rebuild it:
+
+```sh
+uv run scripts/fetch-recent-fonts.py --prefer webfont --cache "$DIR/cache" --manifest "$DIR/recent-fonts.json"
+python3 scripts/font-metrics.py --extra-fonts "$DIR/cache" --out "$DIR/font-metrics.json" --inventory "$DIR/font-inventory.json"
+python3 scripts/font-report.py --write-control "$DIR"
+```
 
 ## License
 

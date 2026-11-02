@@ -27,7 +27,8 @@ scripts/
   install.sh
   validate-claude-theme.py
   palette-report.py        palette metrics + report generator
-  font-metrics.py          measures installed monospaced fonts -> docs/font-metrics.json
+  fetch-recent-fonts.py    downloads post-2019 catalogue fonts -> .cache/recent-fonts, docs/recent-fonts.json
+  font-metrics.py          measures installed and --extra-fonts fonts -> docs/font-metrics.json
   font-report.py           scoring + report generator -> docs/font-report.html
   font-report-meta.json    prose and sources for the font report
 ```
@@ -61,8 +62,11 @@ After changing the font measurement or scoring, re-run both font scripts in orde
 report reads the JSON, not the font files:
 
 ```sh
-python3 scripts/font-metrics.py && python3 scripts/font-report.py
+python3 scripts/font-metrics.py --extra-fonts .cache/recent-fonts && python3 scripts/font-report.py
 ```
+
+Omit `--extra-fonts` and the post-2019 test fonts drop out of the report. If
+`.cache/recent-fonts` is missing, run `uv run scripts/fetch-recent-fonts.py` first.
 
 `docs/font-metrics.json` is generated and untracked. The report is only as current as
 the last metrics run, so never edit the report's numbers by hand.

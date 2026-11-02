@@ -16,8 +16,9 @@ import html
 import json
 import os
 import re
+import statistics
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, NamedTuple
 
 # --------------------------------------------------------------------------
 # axes and weights
@@ -126,6 +127,9 @@ DEDUCTION = {
 }
 CLOSE_FLOOR = 0.20
 
+# Differences below this are noise, as the method section states.
+NOISE_POINTS = 3.0
+
 # A pair is resolved when an explicit feature distinguishes it, whatever the
 # silhouettes look like. This floor is declared, not measured: it says "this pair
 # is separated by a deliberate cue" without pretending to be a distance.
@@ -232,6 +236,17 @@ class Family:
     excluded: bool = False
     scores: dict[str, float] = field(default_factory=dict)
     details: dict[str, str] = field(default_factory=dict)
+    # catalogue rows from docs/recent-fonts.json this design was downloaded for
+    recent: list[dict[str, Any]] = field(default_factory=list)
+    installed: bool = True
+    installed_sibling: str = ""   # a separately drawn build of this design that is installed
+    font_family: str = ""         # the name inside the file, when the row shows another
+
+    @property
+    def webfont_only(self) -> bool:
+        """True when every measured file is a catalogue webfont of at most four faces."""
+        return (not self.installed and bool(self.recent)
+                and all(row["source"] == "webfont" for row in self.recent))
 
     # -- measured passthrough -------------------------------------------------
     @property
@@ -349,7 +364,15 @@ def signatures_match(first: Any, second: Any, tolerance: float = 0.01,
     return True
 
 
-def build_families(records: list[dict[str, Any]]) -> list[Family]:
+def download_key(record: dict[str, Any], cache_root: str) -> str | None:
+    """The catalogue entry a face was downloaded for, read from its cache path."""
+    path = record.get("path") or ""
+    if not cache_root or not path.startswith(cache_root):
+        return None
+    return path[len(cache_root):].split(os.sep, 1)[0]
+
+
+def build_families(records: list[dict[str, Any]], cache_root: str = "") -> list[Family]:
     """Group faces into families, then merge families that are the same design.
 
     Bundling by name first keeps Regular, Bold and Italic together. Merging then
@@ -359,7 +382,9 @@ def build_families(records: list[dict[str, Any]]) -> list[Family]:
     glyphs hash the same, or when their names normalise to the same design and
     their outline signatures agree within one percent of contour area — the
     tolerance a curve conversion moves. A relabelled reissue with different
-    outlines stays a separate row, because it is a different drawing.
+    outlines stays a separate row, because it is a different drawing. Faces downloaded
+    for one catalogue entry always merge, because webfonts and width variants often
+    carry a separate family name per style and the catalogue lists them as one font.
     """
     by_name: dict[str, list[dict[str, Any]]] = {}
     for record in records:
@@ -390,11 +415,13 @@ def build_families(records: list[dict[str, Any]]) -> list[Family]:
         for other_index in range(index + 1, len(blocks)):
             other = blocks[other_index]
             same_build = block.fingerprint == other.fingerprint
+            key = download_key(block.representative, cache_root)
+            same_download = key is not None and key == download_key(other.representative, cache_root)
             same_name = normalize_name(block.name) == normalize_name(other.name)
             same_outline = signatures_match(
                 block.representative.get("design_signature"),
                 other.representative.get("design_signature"))
-            if same_build or (same_name and same_outline):
+            if same_build or same_download or (same_name and same_outline):
                 union(index, other_index)
 
     merged: dict[int, list[Family]] = {}
@@ -425,6 +452,46 @@ def build_families(records: list[dict[str, Any]]) -> list[Family]:
             family.details["excluded_reason"] = reason
         families.append(family)
     return families
+
+
+def cache_root_of(manifest: dict[str, Any]) -> str:
+    return os.path.abspath(manifest["cache"]) + os.sep
+
+
+def attach_recent(families: list[Family], manifest: dict[str, Any]) -> None:
+    """Tie each design to the catalogue rows its files were downloaded for.
+
+    The cache layout is the record: every downloaded face sits under <cache>/<key>/,
+    so provenance comes from the path that was measured, not from matching names.
+
+    A download of a design that is already installed adds nothing to that design's
+    score. The installed copy is what this machine renders, and crediting it with a
+    richer release would move a score without any installed file changing.
+    """
+    root = cache_root_of(manifest)
+    rows = {row["key"]: row for row in manifest["fonts"]}
+    for family in families:
+        keys = {download_key(face, root) for face in family.faces} - {None}
+        family.recent = [rows[key] for key in sorted(keys) if key in rows]
+        kept = [face for face in family.faces if download_key(face, root) is None]
+        family.installed = bool(kept)
+        if family.installed and len(kept) != len(family.faces):
+            family.faces = kept
+            if download_key(family.representative, root) is not None:
+                family.representative = _pick_regular(kept)
+    installed_names = {normalize_name(name): family.name for family in families if family.installed
+                       for name in [family.name, *family.aliases]}
+    for family in families:
+        if family.installed or len(family.recent) != 1:
+            continue
+        family.font_family = family.representative.get("family") or family.name
+        catalogue_name = family.recent[0]["name"]
+        if catalogue_name != family.name:
+            family.aliases = sorted({*family.aliases, family.name})
+            family.name = catalogue_name
+        sibling = installed_names.get(normalize_name(catalogue_name))
+        if sibling:
+            family.installed_sibling = sibling
 
 
 def _canonical_name(names: list[str]) -> str:
@@ -751,6 +818,7 @@ def base_css(path: str) -> str:
 EXTRA_CSS = """
 .specimen{background:#fff;border:1px solid var(--line);padding:10px 12px;margin-bottom:14px}
 .specimen.light .screen{color:#000;background:var(--spec-bg)}
+.specimen .screen{font-synthesis:none}
 .specimen figcaption{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;
 font-size:11.5px;color:var(--dim);margin-bottom:7px}
 .specimen figcaption code{font-size:12px;color:var(--ink)}
@@ -938,21 +1006,101 @@ def slug(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
 
 
-def specimen_block(family: Family, palette: dict[str, str], polarity: str,
-                   code_lines: list[tuple[str, str]], px: float) -> str:
-    """One font, one polarity, real code, palette from the sibling report."""
-    stack = f'"{family.name}", ui-monospace, monospace'
-    body = []
-    for text, color in code_lines:
-        body.append(f'<div class="ln" style="color:{color}">{esc(text)}</div>')
+def preview_status(family: Family) -> str:
+    if family.installed:
+        return "installed"
+    if family.webfont_only:
+        return "catalogue webfont only"
+    if family.installed_sibling:
+        return "patched build installed"
+    return "not installed"
+
+
+def face_gap(family: Family, face: str) -> str:
+    """Why a face cannot be shown for this design, or empty when it can.
+
+    A design that is not installed can only show what the catalogue hosts, which can be
+    less than the release that was measured.
+    """
+    def is_bold(weight: Any) -> bool:
+        return str(weight) in ("bold", "600", "700", "800", "900")
+
+    wants_bold, wants_italic = "bold" in face, "italic" in face
+    if not family.installed:
+        hosted = (family.recent[0].get("webfont_faces") or []) if family.recent else []
+        if any(is_bold(item["weight"]) == wants_bold
+               and (item["style"] == "italic") == wants_italic for item in hosted):
+            return ""
+    has_face = any(
+        bool(item.get("is_italic")) == wants_italic
+        and (not wants_bold or item.get("is_bold") or item.get("is_variable")
+             or (item.get("weight_class") or 400) >= 600)
+        for item in family.faces)
+    if not has_face:
+        return "not in this font"
+    return "" if family.installed else "in the release, not in the preview file"
+
+
+def face_rows(family: Family) -> list[list[Span]]:
+    rows = []
+    for face in FACE_CSS:
+        gap = face_gap(family, face)
+        label = Span(f"{face:<12}", "dim")
+        rows.append([label, Span(gap, "dim")] if gap
+                    else [label, Span(FACE_SAMPLE, "fg", face)])
+    return rows
+
+
+def preview_span(span: Span) -> str:
+    sample = span.text == FACE_SAMPLE
+    marker = f' class="face-sample" data-face="{span.face}"' if sample else ""
+    return (f'<span{marker} style="color:var(--syn-{span.role});{FACE_CSS[span.face]}">'
+            f"{esc(span.text)}</span>")
+
+
+def terminal_preview(family: Family, rank: int, polarity: str, background: str) -> str:
+    """One font in a terminal session, at a fixed size and its own default line height."""
+    lines = "".join(
+        '<div class="ln">' + "".join(preview_span(span) for span in spans) + "</div>"
+        for spans in PREVIEW_LINES + face_rows(family))
+    line_height = family.vertical.get("default_line_height_em") or 1.2
     return (
-        f'<figure class="term specimen {polarity}">'
-        f'<figcaption><code class="fontname">{esc(family.name)}</code>'
-        f'<span class="flag">{family.scores.get("distinction", 0):.0f} distinction</span>'
-        f'<span class="who">{esc(polarity)} specimen</span></figcaption>'
-        f'<div class="screen" style="font-family:{stack};font-size:{px}px;'
-        f'background:{palette["bg"]}">{"".join(body)}</div>'
-        "</figure>")
+        f'<figure class="term specimen {polarity}" data-font="{esc(family.name)}">'
+        f'<figcaption><code class="fontname">#{rank} {esc(family.name)}</code>'
+        f'<span class="flag">{family.scores.get("marathon", 0):.1f} &middot; '
+        f'{preview_status(family)}</span>'
+        f'<span class="flag preview-missing" hidden>font unavailable, showing a fallback</span>'
+        f'<span class="who">{polarity}</span></figcaption>'
+        f"<div class=\"screen\" style=\"font-family:'{esc(family.name)}', ui-monospace, monospace;"
+        f'font-size:{PREVIEW_PX}px;line-height:{line_height:.3f};background:{background}">'
+        f"{lines}</div></figure>")
+
+
+def preview_section(ranked: list[Family], light: dict[str, str], dark: dict[str, str]) -> str:
+    def pairs(rows: list[tuple[int, Family]]) -> str:
+        return "".join(terminal_preview(family, rank, "light", light["bg"])
+                       + terminal_preview(family, rank, "dark", dark["bg"])
+                       for rank, family in rows)
+
+    numbered = list(enumerate(ranked, start=1))
+    shown, rest = numbered[:PREVIEW_OPEN], numbered[PREVIEW_OPEN:]
+    more = (f'<details class="preview-more"><summary>Show the other {len(rest)} designs'
+            f'</summary><div class="term-grid">{pairs(rest)}</div></details>' if rest else "")
+    return f"""<h2>Terminal preview</h2>
+<p class="note">Every ranked design in the same terminal session, in rank order, at
+{PREVIEW_PX}&nbsp;px and the font's own default line height. Palettes are the sibling report's
+winners, modus-operandi and catppuccin-mocha, read from <code>themes/claude/</code>.</p>
+<p class="note">Installed designs render only on a machine that has them, and uninstalled
+designs load from programmingfonts.org. That file can be an older build than the release
+that was measured, so the measured numbers are the record. A preview that cannot get its font
+says so in its caption.</p>
+<p class="note">Browser synthesis is off, so every bold and italic here is a real drawn face,
+not a slanted or thickened regular. The last four rows of each preview show the four styles
+side by side, and a row names the reason when a style cannot be shown. Where a font has no
+italic, its italic comment renders upright.</p>
+<div class="term-grid">{pairs(shown)}</div>
+{more}
+"""
 
 
 def ladder_html(family: Family) -> str:
@@ -1026,7 +1174,7 @@ def card_html(family: Family, rank: int) -> str:
     worst_render = get(confusion, "render", "worst")
     aliases = ""
     if family.aliases:
-        aliases = ('<p class="meta">also installed as '
+        aliases = (f'<p class="meta">{"also installed as" if family.installed else "file names"} '
                    + ", ".join(f"<code>{esc(name)}</code>" for name in family.aliases[:6])
                    + "</p>")
 
@@ -1059,7 +1207,7 @@ def card_html(family: Family, rank: int) -> str:
 <h3>{esc(family.name)} <span class="scorebadge">{family.scores.get('marathon', 0):.1f}</span>
 <span class="scorebadge low">{family.scores.get('density_first', 0):.1f} density</span></h3>
 <p class="meta">#{rank} long-session &middot; <span class="fontname">{esc(family.representative.get('full_name') or family.name)}</span>
-&middot; {len(family.faces)} installed face{'s' if len(family.faces) != 1 else ''}</p>
+&middot; {len(family.faces)} {'installed' if family.installed else 'measured'} face{'s' if len(family.faces) != 1 else ''}{recent_marker(family)}</p>
 {aliases}
 <p class="glyphstrip" style="font-family:'{esc(family.name)}', monospace">0Oo 1lI| 5S 2Z 8B gq9 ;:, rn m</p>
 <ul class="axescore">{axes}</ul>
@@ -1116,6 +1264,15 @@ def table(header: str, body: str, label: str, css_class: str = "matrix",
     return check_columns(markup, label)
 
 
+def recent_marker(family: Family) -> str:
+    if family.installed or not family.recent:
+        return ""
+    year = max(row["year"] for row in family.recent)
+    label = f"{year}, webfont only" if family.webfont_only else str(year)
+    state = "patched build installed" if family.installed_sibling else "not installed"
+    return f' <span class="flag">{label}, {state}</span>'
+
+
 def leaderboard(rows: list[Family], title: str, note: str,
                 reference: list[Family] | None = None) -> str:
     def number(value: Any, digits: int = 1) -> str:
@@ -1132,7 +1289,8 @@ def leaderboard(rows: list[Family], title: str, note: str,
         body.append(
             "<tr>"
             f'<td class="num">{index}</td>'
-            f'<td><a href="#{esc(slug(family.name))}"><code>{esc(family.name)}</code></a></td>'
+            f'<td><a href="#{esc(slug(family.name))}"><code>{esc(family.name)}</code></a>'
+            f'{recent_marker(family)}</td>'
             f'<td class="num strong">{number(family.scores.get("marathon"))}</td>'
             f'<td class="num">{number(family.scores.get("density_first"))}</td>'
             f'<td class="num"><span class="delta '
@@ -1233,7 +1391,7 @@ def config_plan(family: Family, bands: dict[str, tuple[float, float]]) -> dict[s
     for face in family.faces:
         features.update((face.get("vertical") or {}).get("features") or [])
     return {
-        "name": family.name,
+        "name": family.font_family or family.name,
         "size": size_pt,
         "size_reason": (f"x-height {x_height:.3f} em reaches "
                         f"{CONFIG_ANCHORS['x_height_px']:.1f} px at this size"),
@@ -1391,6 +1549,10 @@ def config_section(fonts: list[Family], bands: dict[str, tuple[float, float]],
           "<code>modify_font cell_height</code>, so a snippet written from memory breaks.",
         f" {meta.get('size_note', '')}</p>",
     ]
+    missing = [family.name for family in fonts if not family.installed]
+    if missing:
+        lines.append(f"<p class=\"note\">Not installed here, so install before using: "
+                     f"{esc(', '.join(missing))}.</p>")
     blocks = []
     for index, family in enumerate(fonts):
         plan = config_plan(family, bands)
@@ -1434,8 +1596,10 @@ def inventory_note(meta: dict[str, Any]) -> str:
         return ""
     directories = ", ".join(f"<code>{esc(d.replace(os.path.expanduser('~'), '~'))}</code>"
                             for d in inventory.get("directories", []))
+    extra = (", plus the download cache for the post-2019 test,"
+             if inventory.get("extra_directories") else "")
     return (
-        f"Every font file in {directories} was opened and its printable ASCII advances "
+        f"Every font file in {directories}{extra} was opened and its printable ASCII advances "
         f"compared: {inventory.get('files_scanned', 0)} files, "
         f"{inventory.get('monospaced_faces', 0)} monospaced faces kept, "
         f"{inventory.get('proportional_faces_skipped', 0)} proportional faces skipped. "
@@ -1496,6 +1660,24 @@ def chooser_table(ranked: list[Family], all_families: list[Family],
             + f"<p class='axis-note'>{note}</p>")
 
 
+def switching_note(ranked: list[Family], names: list[str]) -> str:
+    """State the gap to the top of the ranking against the method's noise floor."""
+    wanted = {name.lower() for name in names}
+    used = [family for family in ranked if family.name.lower() in wanted]
+    if not used or not ranked:
+        return ""
+    leader, best_used = ranked[0], used[0]
+    gap = leader.scores["marathon"] - best_used.scores["marathon"]
+    if gap < NOISE_POINTS:
+        return (f"The best of them is within {NOISE_POINTS:.0f} points of the top of the "
+                f"ranking, which is under the noise floor in the method, so nothing here "
+                f"argues for switching.")
+    return (f"{esc(leader.name)} scores {gap:.1f} points above the best of them, which is over "
+            f"the {NOISE_POINTS:.0f}-point noise floor in the method. That is a closer fit to "
+            f"declared heuristics, mostly {gap_drivers(leader, best_used)}. It is not evidence "
+            f"that switching reduces strain.")
+
+
 def used_fonts_box(ranked: list[Family], meta: dict[str, Any]) -> str:
     """Say where the fonts already configured on this machine landed.
 
@@ -1521,14 +1703,172 @@ def used_fonts_box(ranked: list[Family], meta: dict[str, Any]) -> str:
             f'<li><code>{esc(name)}</code> &mdash; rank {index} of {len(ranked)} '
             f'at {family.scores.get("marathon", 0):.1f}, '
             f'x-height {family.vertical.get("x_height_em", 0):.3f} em, closest pair '
-            f'{nearest_pair_note(family)}, installed weights for light and dark '
+            f'{nearest_pair_note(family)}, weights for light and dark '
             f'{esc((light or {}).get("subfamily", "&mdash;"))} and '
             f'{esc((dark or {}).get("subfamily", "&mdash;"))}.</li>')
     return ('<div class="callout"><b>Where the fonts already configured here landed.</b>'
             '<ul class="method">' + "".join(rows) + "</ul>"
-            '<p class="note">Nothing in this document argues for switching away from '
-            'them: they sit inside the band where the differences between designs are '
-            'smaller than the uncertainty in the weightings.</p></div>')
+            f'<p class="note">{switching_note(ranked, names)}</p></div>')
+
+
+def source_label(row: dict[str, Any]) -> str:
+    if row["source"] == "cask":
+        return f"full release ({esc(row.get('version') or 'cask')})"
+    if row["source"] == "webfont":
+        return "catalogue webfont"
+    return "&mdash;"
+
+
+def status_of(row: dict[str, Any], family: Family | None, rank: int | None) -> str:
+    if row["status"] != "fetched":
+        return esc(row["status"])
+    if family is None:
+        return "fetched, but no face has uniform printable ASCII advances"
+    if rank is None:
+        return esc(family.details.get("excluded_reason") or "excluded")
+    if family.installed:
+        return f"installed as {esc(family.name)}, scored from that copy"
+    if family.installed_sibling:
+        return f"older or patched build installed as {esc(family.installed_sibling)}"
+    return "not installed"
+
+
+def recent_rows(ranked: list[Family], families: list[Family],
+                manifest: dict[str, Any]) -> list[tuple[dict[str, Any], Family | None, int | None]]:
+    """Every catalogue row, ranked ones first, so nothing selected goes unreported."""
+    rank_of = {id(family): index for index, family in enumerate(ranked, start=1)}
+    owner = {row["key"]: family for family in families for row in family.recent}
+    rows = []
+    for row in manifest["fonts"]:
+        family = owner.get(row["key"])
+        rows.append((row, family, rank_of.get(id(family)) if family else None))
+    rows.sort(key=lambda item: (item[2] is None, item[2] or 0, -item[0]["year"], item[0]["name"]))
+    return rows
+
+
+def recent_table(rows: list[tuple[dict[str, Any], Family | None, int | None]]) -> str:
+    body = []
+    for row, family, rank in rows:
+        name = esc(row["name"])
+        if family is not None and rank is not None:
+            name = f'<a href="#{esc(slug(family.name))}"><code>{name}</code></a>'
+            scored = [
+                f'<td class="num">{rank}</td>',
+                f'<td>{name}</td>',
+                f'<td class="num">{row["year"]}</td>',
+                f'<td>{esc(row.get("license") or "")}</td>',
+                f'<td>{source_label(row)}</td>',
+                f'<td class="num">{len(family.faces)}</td>',
+                f'<td class="num">{len(family.upright_weights)}</td>',
+                f'<td class="num strong">{family.scores.get("marathon", 0):.1f}</td>',
+                f'<td class="num">{family.scores.get("density_first", 0):.1f}</td>',
+                f'<td class="num">{closest_pair_cell(family)}</td>',
+                f'<td>{esc(family.disambiguation.get("zero_style") or "plain")}</td>',
+            ]
+        else:
+            scored = [
+                '<td class="num">&mdash;</td>',
+                f'<td><code>{name}</code></td>',
+                f'<td class="num">{row["year"]}</td>',
+                f'<td>{esc(row.get("license") or "")}</td>',
+                f'<td>{source_label(row)}</td>',
+            ] + ['<td class="num">&mdash;</td>'] * 5 + ['<td>&mdash;</td>']
+        status = status_of(row, family, rank)
+        body.append(f'<tr>{"".join(scored)}<td class="flag">{status}</td></tr>')
+    header = ('<tr><th class="num">rank</th><th>font</th><th class="num">year</th><th>licence</th>'
+              '<th>source</th><th class="num">faces</th><th class="num">upright<br>weights</th>'
+              '<th class="num">long-<br>session</th><th class="num">density-<br>first</th>'
+              '<th class="num">worst<br>pair</th><th>zero</th><th>status</th></tr>')
+    return table(header, "".join(body), "recent releases", "board")
+
+
+def recent_font_faces(families: list[Family]) -> str:
+    """Load uninstalled designs from the catalogue so their previews are real.
+
+    local() comes first, so a reader who has the font uses their own copy and the
+    catalogue site is asked for a file only when the specimen would otherwise fall back.
+    """
+    rules = []
+    for family in families:
+        if family.installed or not family.recent:
+            continue
+        name = family.name.replace('"', "")
+        local = (family.font_family or family.name).replace('"', "")
+        for face in family.recent[0].get("webfont_faces") or []:
+            rules.append(
+                f'@font-face{{font-family:"{name}";font-weight:{face["weight"]};'
+                f'font-style:{face["style"]};font-display:swap;'
+                f'src:local("{local}"),url("{face["url"]}") format("woff2")}}')
+    return "\n".join(rules)
+
+
+def webfont_note(control: dict[str, Any] | None) -> str:
+    if not control:
+        return ("Webfont rows carry at most four faces, and how far that moves a score was "
+                "not sized in this run, so do not read them as equal to full releases.")
+    return (
+        f"<b>Webfont rows are not equal to full-release rows.</b> The {control['fonts']} fonts "
+        f"available both ways were measured both ways: the full release scored a median "
+        f"{control['median']:+.1f} points against its own webfont, ranging "
+        f"{control['min']:+.1f} to {control['max']:+.1f}, and {control['over_threshold']} moved "
+        f"by more than {control['threshold']:.0f}. The median gain from the weight axis alone is "
+        f"{control['weights_median']:+.1f}, because a webfont stops at four faces. A webfont can "
+        f"also be an older build than the release, which is why some move down. Read a webfont "
+        f"row as a provisional score, not a verdict.")
+
+
+def gap_drivers(leader: Family, other: Family, count: int = 2) -> str:
+    """The axes that contribute most to one font's lead over another, in points."""
+    contributions = sorted(
+        ((axis, weight * (leader.scores.get(axis, 0) - other.scores.get(axis, 0)))
+         for axis, weight in MARATHON_WEIGHTS.items()), key=lambda item: -item[1])
+    return " and ".join(f"{esc(AXIS_LABELS[axis])} ({points:+.1f})"
+                        for axis, points in contributions[:count])
+
+
+def recent_section(ranked: list[Family], families: list[Family], manifest: dict[str, Any],
+                   meta: dict[str, Any]) -> str:
+    if not manifest:
+        return ""
+    rows = recent_rows(ranked, families, manifest)
+    tested = [item for item in rows if item[2] is not None]
+    skipped = [item for item in rows if item[0]["status"].startswith("skipped")]
+    failed = [item for item in rows if item[0]["status"].startswith("failed")]
+    unranked = [item for item in rows if item[2] is None and item[0]["status"] == "fetched"]
+    designs = {id(item[1]) for item in tested}
+    new = [family for family in ranked
+           if family.recent and not family.installed and not family.installed_sibling]
+    best_new = new[0] if new else None
+    best_installed = next((family for family in ranked if family.installed), None)
+    catalogue = manifest["catalogue"]
+    commit = catalogue["repo_commit"]
+    outcome = []
+    if best_new and best_installed:
+        ahead = (best_new.scores["marathon"] - best_installed.scores["marathon"])
+        outcome.append(
+            f'<p><strong>Best font not installed here: {esc(best_new.name)} '
+            f'({best_new.scores["marathon"]:.1f}, rank {ranked.index(best_new) + 1}). '
+            f'Best installed: {esc(best_installed.name)} '
+            f'({best_installed.scores["marathon"]:.1f}, rank '
+            f'{ranked.index(best_installed) + 1}).</strong> '
+            f'The gap is {ahead:+.1f} points on declared heuristic weights, mostly from '
+            f'{gap_drivers(best_new, best_installed)}. It shows a closer fit to these axes, '
+            f'not less eye strain.</p>')
+    return f"""<h2>Fonts released after {manifest["cutoff_year"]}</h2>
+<p class="note">The <a href="{esc(catalogue["url"])}">programmingfonts.org</a> catalogue
+lists {catalogue["entries"]} fonts at commit <code>{esc(commit[:7])}</code>, read on
+{esc(catalogue["fetched"])}. {len(rows)} carry a release year after {manifest["cutoff_year"]}.
+{len(tested)} of those were measured and ranked above, as {len(designs)} designs on the same
+scales as everything else. {len(skipped)} are commercial and were not downloaded,
+{len(unranked)} fetched but did not qualify, and {len(failed)} failed to download. The year is the catalogue's,
+so a reissue or a later release of an older design keeps whatever the catalogue states.</p>
+{"".join(outcome)}
+{recent_table(rows)}
+<p class="note">Nothing here was installed: files sit in a gitignored cache read only by the
+measurement. A <i>full release</i> comes from the Homebrew cask's upstream archive. A
+<i>catalogue webfont</i> is what programmingfonts.org serves, used when no cask exists.
+{webfont_note(meta.get("webfont_control"))}</p>
+"""
 
 
 def evidence_table() -> str:
@@ -1580,14 +1920,43 @@ def polarity_table(families: list[Family]) -> str:
 # document
 # --------------------------------------------------------------------------
 
-SPECIMEN_CODE = [
-    ('def rank_fonts(faces, axis="distinction"):', "var(--syn-key)"),
-    ('    """Long-session legibility, measured not asserted."""', "var(--syn-dim)"),
-    ('    scores = {face.name: face.axes[axis] for face in faces}', "var(--syn-fg)"),
-    ('    return sorted(scores.items(), key=lambda p: -p[1])', "var(--syn-fg)"),
-    ('', ""),
-    ('// 0O 1lI| 5S 2Z 8B rn m ;: -> 0.10 != 0.11 <= 0.12', "var(--syn-com)"),
-    ('warehouse = {"id": 0x4F1A, "count": 11, "ratio": 0.75}', "var(--syn-fg)"),
+PREVIEW_PX = 13
+PREVIEW_OPEN = 12
+
+
+class Span(NamedTuple):
+    text: str
+    role: str
+    face: str = "regular"
+
+
+FACE_CSS = {
+    "regular": "",
+    "bold": "font-weight:700",
+    "italic": "font-style:italic",
+    "bold italic": "font-weight:700;font-style:italic",
+}
+FACE_SAMPLE = "def f(0O, 1lI) -> ag != qy"
+
+# The session carries the confusable glyphs the distinction axis measures and the rule
+# glyphs the furniture axis measures. Bold keywords and italic comments match how themes
+# commonly use those faces.
+PREVIEW_LINES: list[list[Span]] = [
+    [Span("noomz@mbp", "str"), Span(" ", "fg"), Span("~/P/noomz-themes", "key")],
+    [Span("\u276f", "dim"), Span(' rg -n "rn m cl d" scripts/ | head -2', "fg")],
+    [Span("scripts/font-report.py", "num"), Span(":", "dim"), Span("351", "key"),
+     Span(": 0O 1lI| 5S 2Z 8B gq9 ;:, vv w ii u", "fg")],
+    [Span("def ", "key", "bold"), Span('rank(faces, axis="distinction"):', "fg")],
+    [Span("    # measured, not asserted", "com", "italic")],
+    [Span("    return ", "key", "bold"), Span("sorted(s, key=lambda p: -p[1])", "fg")],
+    [Span("id", "fg"), Span(" = ", "dim"), Span("0x4F1A", "num"), Span("  ", "fg"),
+     Span("a != b <= c -> d", "fg")],
+    [Span("\u250c\u2500 build \u2500\u2500\u2500\u252c\u2500 tests \u2500\u2500\u2500\u2510", "dim")],
+    [Span("\u2502 ", "dim"), Span("ok", "str"), Span(" 12s    \u2502 ", "dim"), Span("41/41", "str"),
+     Span("     \u2502", "dim")],
+    [Span("\u2514" + "\u2500" * 11 + "\u2534" + "\u2500" * 11 + "\u2518", "dim")],
+    [Span("\u2588\u2593\u2592\u2591 ", "num"), Span("warning", "num"), Span(" ", "fg"),
+     Span("3 files changed", "dim")],
 ]
 
 
@@ -1599,9 +1968,9 @@ def palette(name: str) -> dict[str, str]:
         with open(path) as handle:
             data = json.load(handle)
         overrides = data.get("overrides", data)
-        colours["bg"] = "#fcf7ed" if data.get("base") == "light" else "#1e1e2e"
-        if data.get("base") == "light":
-            colours["bg"] = "#fcf7ed"
+        # base can be a variant such as light-daltonized; a light one uses the palette
+        # report's canvas as its background
+        colours["bg"] = "#fcf7ed" if str(data.get("base")).startswith("light") else "#1e1e2e"
         colours["fg"] = overrides.get("text", colours["bg"])
         colours["dim"] = overrides.get("inactive", colours["fg"])
         colours["comment"] = overrides.get("subtle", colours["dim"])
@@ -1609,9 +1978,6 @@ def palette(name: str) -> dict[str, str]:
         colours["str"] = overrides.get("success", colours["fg"])
         colours["num"] = overrides.get("warning", colours["fg"])
         colours["func"] = overrides.get("ide", colours["fg"])
-        if data.get("base") == "light":
-            # the light theme's own background is the palette report's canvas
-            colours["bg"] = "#fcf7ed"
     except (OSError, ValueError):
         colours = {"bg": "#ffffff", "fg": "#000000", "dim": "#595959",
                    "comment": "#595959", "key": "#721045", "str": "#006800",
@@ -1620,7 +1986,7 @@ def palette(name: str) -> dict[str, str]:
 
 
 def specimen_css(colours: dict[str, str], polarity: str) -> str:
-    return (f'.{polarity}{{.--spec-bg:{colours["bg"]};'
+    return (f'.{polarity}{{--spec-bg:{colours["bg"]};'
             f'--syn-fg:{colours["fg"]};--syn-dim:{colours["dim"]};'
             f'--syn-com:{colours["comment"]};--syn-key:{colours["key"]};'
             f'--syn-str:{colours["str"]};--syn-num:{colours["num"]};}}')
@@ -1660,14 +2026,6 @@ def build_document(families: list[Family], bands: dict[str, tuple[float, float]]
             config_fonts.append(family)
     config_fonts = config_fonts if limit in (0, None) else config_fonts[:limit]
 
-    specimen_fonts = ranked[:8]
-    light_specimens = "".join(
-        specimen_block(family, light_palette, "light", SPECIMEN_CODE, 13)
-        for family in specimen_fonts)
-    dark_specimens = "".join(
-        specimen_block(family, dark_palette, "dark", SPECIMEN_CODE, 13)
-        for family in specimen_fonts)
-
     medals = ["#1", "#2", "#3"]
     top_lines = []
     for index, family in enumerate(ranked[:3]):
@@ -1683,7 +2041,7 @@ def build_document(families: list[Family], bands: dict[str, tuple[float, float]]
 
         top_lines.append(
             f"<li><b>{medals[index]} {esc(family.name)} &mdash; "
-            f"{family.scores.get('marathon', 0):.1f}</b>. "
+            f"{family.scores.get('marathon', 0):.1f}</b>{recent_marker(family)}. "
             f"x-height {family.vertical.get('x_height_em', 0):.3f} em, closest pair "
             f"{nearest_pair_note(family)}, zero "
             f"{esc(family.disambiguation.get('zero_style') or 'plain')}, "
@@ -1710,7 +2068,7 @@ def build_document(families: list[Family], bands: dict[str, tuple[float, float]]
         f"two cues between them, &minus;{DEDUCTION['pair_critical_close']} for each pair on "
         f"the code-critical list and &minus;{DEDUCTION['pair_close']} for each other pair "
         f"measuring below {CLOSE_FLOOR:.2f} that nothing resolves. "
-        f"Closest measured pairs over this set run {bands['confusion'][0]:.3f} to "
+        f"Closest measured pairs over the installed set run {bands['confusion'][0]:.3f} to "
         f"{bands['confusion'][1]:.3f}.",
         f"<b>observed</b> columns per 1000 px {bands['cols'][0]:.1f} &rarr; 0 and "
         f"{bands['cols'][1]:.1f} &rarr; 100 (5th&ndash;95th percentile)",
@@ -1733,10 +2091,11 @@ def build_document(families: list[Family], bands: dict[str, tuple[float, float]]
 {EXTRA_CSS}
 {specimen_css(light_palette, "light")}
 {specimen_css(dark_palette, "dark")}
+{recent_font_faces(families)}
 </style></head><body><div class="wrap">
 
 <h1>Typeface evaluation for long working sessions</h1>
-<p class="sub">Measured from the font binaries on this machine: {len(ranked)} designs,
+<p class="sub">Measured from font binaries on this machine, installed or downloaded for this test: {len(ranked)} designs,
 {meta.get('face_count', 0)} faces, outlines via fontTools and rasterisation via FreeType.
 Generated by <code>scripts/font-report.py</code> from <code>docs/font-metrics.json</code>.</p>
 <p class="note">{inventory_note(meta)}</p>
@@ -1783,12 +2142,9 @@ deliberate glyph cue keeps it apart anyway, so it is not charged against the fon
              "<i>worst pair</i>, <i>stroke contrast</i> and <i>line height</i>, where the "
              "axes are read against the bands in the method.", reference)}
 
-<h2>The same code in every winner</h2>
-<p class="note">Rendered with the palettes that won the sibling palette report:
-modus-operandi for light, catppuccin-mocha for dark, read from
-<code>themes/claude/</code>. Specimens render at 13&nbsp;px and only display correctly on
-machines with these fonts installed &mdash; the metrics above do not depend on that.</p>
-<div class="grid"><div>{light_specimens}</div><div>{dark_specimens}</div></div>
+{recent_section(ranked, families, meta.get("recent_fonts") or {}, meta)}
+
+{preview_section(ranked, light_palette, dark_palette)}
 
 <h2>Which weight, and for which polarity</h2>
 <div class="callout warn"><b>This section is convention, not evidence.</b>
@@ -1797,10 +2153,10 @@ design guidance, and the reviewed literature does not establish it: the bloom or
 halation mechanism is not even named in the two most relevant reviews, and Dobres et al.
 (2016) found no typeface &times; polarity interaction at all &mdash; one ranking of faces
 held in both polarities. What follows is therefore a recommendation you are free to
-ignore, sitting on top of a measurement you are not: the stem width of every installed
+ignore, sitting on top of a measurement you are not: the stem width of every measured
 weight, per family.</div>
 <p class="note">The declared bands are 0.070&ndash;0.090&nbsp;em of stem for light mode and
-0.090&ndash;0.112&nbsp;em for dark mode, and the recommendation is the installed weight
+0.090&ndash;0.112&nbsp;em for dark mode, and the recommendation is the measured weight
 whose measured stem lands nearest the middle of the band. Where a family has no weight in
 the band, the nearest weight is named and flagged &mdash; a two-weight family has only
 Regular and Bold to offer, and that jump is usually larger than the band asked for.</p>
@@ -1832,7 +2188,7 @@ Hover or focus a legend row to isolate it.</p>
 <div>
 <p class="note">Reading the shape: a wide, round polygon is a face that gives up
 nothing, but the axes are not equally load-bearing. <b>Glyph distinction saturates at
-100 for every design in the top eight</b> &mdash; among installed coding fonts it is a
+100 for every design in the top eight</b> &mdash; among the coding fonts measured here it is a
 solved problem, and on this evidence it separates only the legacy faces, so use it as a
 filter rather than as a ranking. X-height carries the most weight after it, and density,
 spacing and monolinearity are bands: the middle is best and both ends are worse, so a
@@ -1864,8 +2220,9 @@ implied by the ranking. One of these axes measures robustness rather than comfor
 <h3>Bands and anchors</h3>
 <p class="note">Every axis is a scale or a band. A <b>declared</b> anchor is placed
 by hand because the literature gives the direction but not the number; an
-<b>observed</b> band comes from the 5th&ndash;95th percentile of this font set, so it
-ranks the set rather than certifying it.</p>
+<b>observed</b> band comes from the 5th&ndash;95th percentile of the installed fonts, so it
+ranks against that set rather than certifying anything, and a font under test cannot move
+the scale it is read on.</p>
 <ul class="method">
 {''.join(f'<li>{point}</li>' for point in band_notes)}
 </ul>
@@ -1877,7 +2234,7 @@ ranks the set rather than certifying it.</p>
 
 <footer>Generated by <code>scripts/font-report.py</code> from
 <code>docs/font-metrics.json</code>, produced by <code>scripts/font-metrics.py</code>.
-Measurements describe the font files installed on this machine, at the rasterisation
+Measurements describe the font files on this machine, at the rasterisation
 sizes stated in the method, under FreeType and Pillow &mdash; a different rasteriser,
 hinting setting or subpixel arrangement shifts the last decimal. Re-run both scripts
 after installing or updating a font.</footer>
@@ -1919,6 +2276,21 @@ after installing or updating a font.</footer>
           }}
         }});
       }});
+  var probe = document.createElement('canvas').getContext('2d');
+  function width(stack){{
+    probe.font = '72px ' + stack;
+    return probe.measureText('mmmwwwiil0O1').width;
+  }}
+  Array.prototype.forEach.call(document.querySelectorAll('figure[data-font]'), function(figure){{
+    var name = '"' + figure.getAttribute('data-font') + '"';
+    function check(){{
+      // a missing font leaves both stacks at their generic fallback's width
+      var missing = width(name + ', monospace') === width('monospace')
+        && width(name + ', serif') === width('serif');
+      figure.querySelector('.preview-missing').hidden = !missing;
+    }}
+    document.fonts.load('13px ' + name).then(check, check);
+  }});
   var charts = document.querySelectorAll('.chart');
   Array.prototype.forEach.call(charts, function(chart){{
     var svg = chart.querySelector('svg.radar');
@@ -1949,6 +2321,52 @@ after installing or updating a font.</footer>
 """
 
 
+def score_all(families: list[Family], bands: dict[str, tuple[float, float]]) -> None:
+    for family in families:
+        score_family(family, bands)
+        family.scores["marathon"] = composite(family.scores, MARATHON_WEIGHTS)
+        family.scores["density_first"] = composite(family.scores, DENSITY_WEIGHTS)
+
+
+def write_webfont_control(families: list[Family], bands: dict[str, tuple[float, float]],
+                          control_dir: str, out: str) -> None:
+    """Size how far catalogue webfonts move a score, on the report's own scale.
+
+    control_dir holds a run of fetch-recent-fonts.py --prefer webfont and of
+    font-metrics.py over its cache, for fonts the main run measured from a full release.
+    """
+    with open(os.path.join(control_dir, "font-metrics.json")) as handle:
+        records = json.load(handle)
+    with open(os.path.join(control_dir, "recent-fonts.json")) as handle:
+        manifest = json.load(handle)
+    control = build_families(records, cache_root_of(manifest))
+    attach_recent(control, manifest)
+    score_all(control, bands)
+    webfont = {row["key"]: family for family in control if not family.installed
+               for row in family.recent}
+    moves, weight_moves = [], []
+    for family in families:
+        if family.installed:
+            continue
+        for row in family.recent:
+            other = webfont.get(row["key"])
+            if row["source"] == "cask" and other is not None:
+                moves.append(family.scores["marathon"] - other.scores["marathon"])
+                weight_moves.append(MARATHON_WEIGHTS["weights"]
+                                    * (family.scores["weights"] - other.scores["weights"]))
+    threshold = 2.0
+    summary = {
+        "fonts": len(moves), "median": round(statistics.median(moves), 1),
+        "min": round(min(moves), 1), "max": round(max(moves), 1), "threshold": threshold,
+        "over_threshold": sum(abs(move) > threshold for move in moves),
+        "weights_median": round(statistics.median(weight_moves), 1),
+    }
+    with open(out, "w") as handle:
+        json.dump(summary, handle, indent=1, sort_keys=True)
+        handle.write("\n")
+    print(f"wrote {out}: {summary}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--metrics", default="docs/font-metrics.json")
@@ -1957,6 +2375,11 @@ def main() -> None:
                         help="how many fonts get a ready-to-copy config block (0 = all)")
     parser.add_argument("--meta", default="scripts/font-report-meta.json",
                         help="JSON with verdict_note, lead_finding, method_points, sources")
+    parser.add_argument("--recent", default="docs/recent-fonts.json",
+                        help="manifest written by fetch-recent-fonts.py")
+    parser.add_argument("--control-out", default="docs/recent-fonts-control.json")
+    parser.add_argument("--write-control", metavar="DIR",
+                        help="size webfont bias from a --prefer webfont run in DIR, then exit")
     args = parser.parse_args()
 
     with open(args.metrics) as handle:
@@ -1973,13 +2396,23 @@ def main() -> None:
     else:
         print(f"note: {inventory_path} missing, the header will omit inventory counts")
 
-    families = build_families(records)
-    ranked_families = [f for f in families if not f.excluded]
-    bands = compute_bands(ranked_families)
-    for family in families:
-        score_family(family, bands)
-        family.scores["marathon"] = composite(family.scores, MARATHON_WEIGHTS)
-        family.scores["density_first"] = composite(family.scores, DENSITY_WEIGHTS)
+    manifest: dict[str, Any] = {}
+    if os.path.exists(args.recent):
+        with open(args.recent) as handle:
+            manifest = json.load(handle)
+        meta["recent_fonts"] = manifest
+    families = build_families(records, cache_root_of(manifest) if manifest else "")
+    if manifest:
+        attach_recent(families, manifest)
+    # The scale comes from the installed set, so a font under test cannot move it.
+    bands = compute_bands([f for f in families if not f.excluded and f.installed])
+    score_all(families, bands)
+    if args.write_control:
+        write_webfont_control(families, bands, args.write_control, args.control_out)
+        return
+    if os.path.exists(args.control_out):
+        with open(args.control_out) as handle:
+            meta["webfont_control"] = json.load(handle)
 
     css = base_css("docs/palette-report.html")
     document = build_document(families, bands, css, meta)

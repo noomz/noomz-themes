@@ -114,10 +114,10 @@ def _is_monospaced(font: TTFont) -> bool:
     return present >= ASCII_FLOOR and len(widths) == 1
 
 
-def _candidate_paths() -> list[str]:
+def _candidate_paths(extra_dirs: list[str]) -> list[str]:
     """Font files from the standard directories, plus anything fontconfig knows."""
     paths: set[str] = set()
-    for directory in FONT_DIRS:
+    for directory in FONT_DIRS + extra_dirs:
         for root, _dirs, files in os.walk(directory):
             for name in files:
                 if name.lower().endswith(FONT_EXTENSIONS):
@@ -134,7 +134,7 @@ def _candidate_paths() -> list[str]:
     return sorted(paths)
 
 
-def load_faces() -> tuple[list[Face], dict[str, int]]:
+def load_faces(extra_dirs: list[str]) -> tuple[list[Face], dict[str, int]]:
     """Every monospaced face on the machine, with TTC members expanded.
 
     A collection is tested member by member, because a .ttc can mix a monospaced
@@ -143,7 +143,7 @@ def load_faces() -> tuple[list[Face], dict[str, int]]:
     faces: list[Face] = []
     stats = {"files": 0, "unreadable": 0, "proportional_faces": 0, "monospaced_faces": 0}
     skipped: set[str] = set()
-    for path in _candidate_paths():
+    for path in _candidate_paths(extra_dirs):
         stats["files"] += 1
         try:
             if path.lower().endswith((".ttc", ".otc")):
@@ -177,7 +177,10 @@ def _face_from_font(font: TTFont, path: str, index: int, kind: str) -> Face:
     flags = os2.fsSelection if os2 else 0
     mac_style = font["head"].macStyle if "head" in font else 0
     is_bold = bool(mac_style & 0b1) or bool(flags & 0b100000)
-    is_italic = bool(mac_style & 0b10) or bool(flags & 0b1) or bool(flags & 0b1000000000)
+    # Some fonts leave the style bits unset on slanted faces, SF Mono among them, so a
+    # nonzero post.italicAngle counts too.
+    is_italic = (bool(mac_style & 0b10) or bool(flags & 0b1) or bool(flags & 0b1000000000)
+                 or bool(font["post"].italicAngle if "post" in font else 0))
     family = _name(font, 16) or _name(font, 1) or os.path.basename(path)
     subfamily = _name(font, 17) or _name(font, 2) or ""
     full = _name(font, 4) or family
@@ -824,9 +827,12 @@ def main() -> None:
     parser.add_argument("--inventory", default="docs/font-inventory.json")
     parser.add_argument("--family", action="append", default=[],
                         help="limit to these families (repeatable)")
+    parser.add_argument("--extra-fonts", action="append", default=[],
+                        help="also scan this directory, e.g. .cache/recent-fonts (repeatable)")
     args = parser.parse_args()
+    extra_dirs = [os.path.abspath(directory) for directory in args.extra_fonts]
 
-    faces, stats = load_faces()
+    faces, stats = load_faces(extra_dirs)
     print(f"scanned {stats['files']} font files: {stats['monospaced_faces']} monospaced faces, "
           f"{stats['proportional_faces']} proportional, {stats['unreadable']} unreadable")
     if args.family:
@@ -854,6 +860,7 @@ def main() -> None:
         "families_measured": len(by_family),
         "faces_measured": len(results),
         "directories": [d for d in FONT_DIRS if os.path.isdir(d)],
+        "extra_directories": extra_dirs,
         "field": "monospaced",
     }
     inventory["skipped_families"] = stats["skipped_families"]
