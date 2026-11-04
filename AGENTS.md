@@ -68,6 +68,11 @@ python3 scripts/font-metrics.py --extra-fonts .cache/recent-fonts && python3 scr
 Omit `--extra-fonts` and the post-2019 test fonts drop out of the report. If
 `.cache/recent-fonts` is missing, run `uv run scripts/fetch-recent-fonts.py` first.
 
+The scoring scale comes from installed fonts, so a rerun after installing or removing fonts
+moves rankings. Update `used_fonts` in `scripts/font-report-meta.json` from the terminal
+configs first. Regenerate `chooser_families` with the command in `chooser_source`, because
+kitty's picker lists families through `kitty.fonts.list.create_family_groups()`.
+
 The report's previews load `fonts/` relative to the report, because the hosted page's CSP
 allows fonts only from its own origin. To refresh them from the existing manifest without
 measuring anything, run `uv run scripts/fetch-recent-fonts.py --webfonts-only`, then

@@ -14,12 +14,14 @@ import argparse
 import json
 import logging
 import os
+import re
 import subprocess
-from dataclasses import dataclass, field, asdict
+from dataclasses import asdict, dataclass, field, replace
 from typing import Any
 
 from PIL import Image, ImageDraw, ImageFont
 from fontTools.ttLib import TTFont, TTCollection
+from fontTools.varLib import instancer
 
 # System fonts carry table quirks that fontTools warns about on every open. The
 # inventory opens a thousand files, so the warnings are noise here.
@@ -84,6 +86,7 @@ class Face:
     weight_class: int
     is_variable: bool
     file_kind: str
+    instance_of: str = ""
 
     @property
     def key(self) -> str:
@@ -170,6 +173,58 @@ def load_faces(extra_dirs: list[str]) -> tuple[list[Face], dict[str, int]]:
             continue
     stats["skipped_families"] = sorted(name for name in skipped if name)
     return faces, stats
+
+
+def variable_instances(faces: list[Face], extra_dirs: list[str], target: str) -> list[Face]:
+    """Give each installed variable-only family one static face per named instance.
+
+    A variable file measures at its default instance, so a family installed only as
+    variable files would show one weight and lose its weight range, though a terminal
+    offers every named instance. fetch-recent-fonts.py does the same for downloads,
+    inside the download cache, so this only covers installed families. Instance files
+    are rebuilt when missing or older than their source.
+    """
+    def downloaded(face: Face) -> bool:
+        return any(face.path.startswith(directory + os.sep) for directory in extra_dirs)
+
+    by_family: dict[str, list[Face]] = {}
+    for face in faces:
+        if not downloaded(face):
+            by_family.setdefault(face.family, []).append(face)
+    made: list[Face] = []
+    for members in by_family.values():
+        upright = [face for face in members if not face.is_italic]
+        if not upright or not all(face.is_variable for face in upright):
+            continue
+        for face in members:
+            if not face.is_variable or face.path.lower().endswith((".ttc", ".otc")):
+                continue
+            source = TTFont(face.path)
+            instances = list(source["fvar"].instances)
+            stem = os.path.basename(face.path).rsplit(".", 1)[0]
+            for instance in instances:
+                label = source["name"].getDebugName(instance.subfamilyNameID) or "instance"
+                name = re.sub(r"[^A-Za-z0-9._-]+", "_", f"{stem}-instance-{label}.ttf")
+                path = os.path.join(target, name)
+                if not os.path.exists(path) or os.path.getmtime(path) < os.path.getmtime(face.path):
+                    os.makedirs(target, exist_ok=True)
+                    font = instancer.instantiateVariableFont(TTFont(face.path), dict(instance.coordinates))
+                    for name_id, value in ((2, label), (17, label)):
+                        font["name"].setName(value, name_id, 3, 1, 0x409)
+                    weight = int(instance.coordinates.get("wght", font["OS/2"].usWeightClass))
+                    font["OS/2"].usWeightClass = weight
+                    if weight >= 700:
+                        font["head"].macStyle |= 0b1
+                        font["OS/2"].fsSelection = (font["OS/2"].fsSelection | 0b100000) & ~0b1000000
+                    font.save(f"{path}.part")
+                    font.close()
+                    os.replace(f"{path}.part", path)
+                font = TTFont(path, lazy=True)
+                made.append(replace(_face_from_font(font, path, 0, face.file_kind),
+                                                instance_of=face.path))
+                font.close()
+            source.close()
+    return made
 
 
 def _face_from_font(font: TTFont, path: str, index: int, kind: str) -> Face:
@@ -831,10 +886,16 @@ def main() -> None:
                         help="limit to these families (repeatable)")
     parser.add_argument("--extra-fonts", action="append", default=[],
                         help="also scan this directory, e.g. .cache/recent-fonts (repeatable)")
+    parser.add_argument("--instances", default=".cache/variable-instances",
+                        help="where named instances of installed variable-only fonts are written")
     args = parser.parse_args()
     extra_dirs = [os.path.abspath(directory) for directory in args.extra_fonts]
 
     faces, stats = load_faces(extra_dirs)
+    instances = variable_instances(faces, extra_dirs, os.path.abspath(args.instances))
+    faces += instances
+    stats["variable_instances"] = len(instances)
+    print(f"added {len(instances)} named instances of installed variable-only fonts")
     print(f"scanned {stats['files']} font files: {stats['monospaced_faces']} monospaced faces, "
           f"{stats['proportional_faces']} proportional, {stats['unreadable']} unreadable")
     if args.family:
@@ -861,6 +922,7 @@ def main() -> None:
         "proportional_faces_skipped": stats["proportional_faces"],
         "families_measured": len(by_family),
         "faces_measured": len(results),
+        "variable_instances": stats["variable_instances"],
         "directories": [d for d in FONT_DIRS if os.path.isdir(d)],
         "extra_directories": extra_dirs,
         "field": "monospaced",

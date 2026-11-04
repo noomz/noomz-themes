@@ -313,6 +313,8 @@ A fresh clone has the report but not the fonts, so run `uv run scripts/fetch-rec
 
 The Homebrew cask supplies the full release where one exists, and the catalogue's webfont is the fallback. Commercial fonts are listed but not downloaded. `docs/recent-fonts.json` records the catalogue commit and the outcome for every selected font.
 
+A variable file measures at its default instance only, so a family installed only as variable files would show one weight. `font-metrics.py` writes each named instance of such a family to the gitignored `.cache/variable-instances/` and measures those too, the way `fetch-recent-fonts.py` already does for downloads.
+
 Test fonts are read on the installed fonts' scale, so adding one cannot change an installed font's score. Webfonts stop at four faces, so `docs/recent-fonts-control.json` records how far that moves a score. To rebuild it:
 
 ```sh
