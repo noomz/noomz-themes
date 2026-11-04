@@ -616,6 +616,67 @@ ISOLATE_JS = """
 })();
 """
 
+# Click-to-sort for the leaderboards. Each tbody sorts on its own, so reference
+# rows stay below their divider. data-v overrides a cell's text as its sort
+# value; '—' counts as missing and sinks in both directions.
+SORT_JS = r"""
+(function(){
+  var NUMBER = /^[-+]?(\d+\.?\d*|\.\d+)$/;
+  function value(cell){
+    if (cell.hasAttribute('data-v')) { return cell.getAttribute('data-v'); }
+    var text = cell.textContent.trim();
+    return text === '—' ? '' : text;
+  }
+  function dataRows(body){
+    return Array.prototype.filter.call(body.rows, function(row){ return row.cells[0].tagName === 'TD'; });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('table.sortable'), function(table){
+    Array.prototype.forEach.call(table.tBodies, function(body){
+      dataRows(body).forEach(function(row, i){ row.setAttribute('data-base', i); });
+    });
+    function sortTable(index, direction){
+      Array.prototype.forEach.call(table.tBodies, function(body){
+        var rows = dataRows(body);
+        var numeric = rows.every(function(row){
+          var v = value(row.cells[index]); return v === '' || NUMBER.test(v);
+        });
+        var items = rows.map(function(row){
+          var v = value(row.cells[index]);
+          return {row: row, missing: v === '', base: +row.getAttribute('data-base'),
+                  v: v === '' ? '' : (numeric ? parseFloat(v) : v.toLowerCase())};
+        });
+        items.sort(function(a, b){
+          if (a.missing !== b.missing) { return a.missing ? 1 : -1; }
+          if (a.v !== b.v) { var c = a.v < b.v ? -1 : 1; return direction === 'down' ? -c : c; }
+          return a.base - b.base;
+        });
+        items.forEach(function(item){ body.appendChild(item.row); });
+      });
+      Array.prototype.forEach.call(table.tHead.rows[0].cells, function(th, i){
+        th.setAttribute('aria-sort', i !== index ? 'none'
+          : (direction === 'down' ? 'descending' : 'ascending'));
+      });
+    }
+    var current = {index: -1, direction: 'up'};
+    Array.prototype.forEach.call(table.tHead.rows[0].cells, function(th, index){
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'sort';
+      while (th.firstChild) { button.appendChild(th.firstChild); }
+      th.appendChild(button);
+      th.setAttribute('aria-sort', 'none');
+      button.addEventListener('click', function(){
+        var direction = current.index === index
+          ? (current.direction === 'down' ? 'up' : 'down')
+          : (th.getAttribute('data-first') || 'up');
+        current = {index: index, direction: direction};
+        sortTable(index, direction);
+      });
+    });
+  });
+})();
+"""
+
 
 # --------------------------------------------------------- terminal simulation
 ANSI_ALIASES = {
@@ -801,13 +862,16 @@ def leaderboard(rows, title, subtitle):
     contrast_ranks = {p['key']: i for i, p in enumerate(
         sorted([r for r in rows if r['contender']],
                key=lambda r: -r['scores']['contrast']), 1)}
-    out = ['<div class="table-scroll"><table class="board"><thead><tr><th>#</th><th>palette</th>'
-           '<th class="num">long-<br>session</th><th class="num">contrast-<br>first</th>'
+    # data-first="down" marks higher-is-better columns: their first click sorts
+    # best first. Rank, surface and repair columns sort ascending first.
+    down = ' data-first="down"'
+    out = ['<div class="table-scroll"><table class="board sortable"><thead><tr><th>#</th><th>palette</th>'
+           f'<th class="num"{down}>long-<br>session</th><th class="num"{down}>contrast-<br>first</th>'
            '<th class="num">contrast<br>rank</th>'
-           '<th class="num">body</th><th class="num">dim</th>'
-           '<th class="num">worst accent</th><th class="num">accents<br>≥4.5:1</th>'
-           '<th class="num">accents<br>Lc≥60</th><th class="num">worst<br>Lc</th>'
-           f'<th class="num">colour</th><th class="num">{surface_heading}</th>'
+           f'<th class="num"{down}>body</th><th class="num"{down}>dim</th>'
+           f'<th class="num"{down}>worst accent</th><th class="num"{down}>accents<br>≥4.5:1</th>'
+           f'<th class="num"{down}>accents<br>Lc≥60</th><th class="num"{down}>worst<br>Lc</th>'
+           f'<th class="num"{down}>colour</th><th class="num">{surface_heading}</th>'
            '<th class="num">max repair<br>ΔL × 100</th>'
            '</tr></thead><tbody>']
     rank = 0
@@ -826,20 +890,23 @@ def leaderboard(rows, title, subtitle):
         surface = palette['span'] if dark else rel_lum(hex2rgb(palette['bg']))
         delta = palette['scores']['session'] - palette['scores']['contrast']
         vb = variant_ref(palette)
+        n = len(palette['accents'])
+        passing = n - len(palette['fails'])
         out.append(
-            f'<tr><td class="num">{rank_label}</td><td><span class="chip" '
+            f'<tr><td class="num">{rank_label}</td><td data-v="{palette["key"]}"><span class="chip" '
             f'style="background:{palette["colour"]}"></span>'
             f'<a href="#{palette["key"]}"><code>{palette["key"]}</code></a>{vb}</td>'
             f'<td class="num strong">{palette["scores"]["session"]:.1f}</td>'
-            f'<td class="num">{palette["scores"]["contrast"]:.1f} '
+            f'<td class="num" data-v="{palette["scores"]["contrast"]:.1f}">'
+            f'{palette["scores"]["contrast"]:.1f} '
             f'<span class="delta{" up" if delta > 0.5 else (" down" if delta < -0.5 else "")}">'
             f'{delta:+.1f}</span></td>'
             f'<td class="num dimtxt">{c_rank}</td>'
             f'<td class="num">{palette["body"]["ratio"]:.4f}</td>'
             f'<td class="num">{palette["dim"]["ratio"]:.4f}</td>'
             f'<td class="num">{min(r["ratio"] for r in palette["accents"]):.4f}</td>'
-            f'<td class="num">{len(palette["accents"]) - len(palette["fails"])}/{len(palette["accents"])}</td>'
-            f'<td class="num">{len(palette["pass_both"])}/{len(palette["accents"])}</td>'
+            f'<td class="num" data-v="{passing / n:.4f}">{passing}/{n}</td>'
+            f'<td class="num" data-v="{len(palette["pass_both"]) / n:.4f}">{len(palette["pass_both"])}/{n}</td>'
             f'<td class="num">{palette["worst_lc"]:.1f}</td>'
             f'<td class="num">{palette["axes"]["color"]:.0f}</td>'
             f'<td class="num">{surface:.4f}</td><td class="num">{palette["max_repair"]:.1f}</td></tr>')
@@ -937,6 +1004,11 @@ td{padding:6px 8px;border-bottom:1px solid #f0eee7;vertical-align:middle}
 .num{text-align:right;font-variant-numeric:tabular-nums}
 .strong{font-weight:700}
 .board{margin-top:8px;border:1px solid var(--line)}
+th button.sort{font:inherit;color:inherit;text-transform:inherit;letter-spacing:inherit;
+background:none;border:0;padding:0;cursor:pointer;text-align:inherit}
+th button.sort:hover,th button.sort:focus-visible{color:var(--accent)}
+th[aria-sort=ascending] button.sort::after{content:" \\25B2";font-size:9px}
+th[aria-sort=descending] button.sort::after{content:" \\25BC";font-size:9px}
 .pill{display:inline-block;padding:1px 6px;border-radius:999px;font-size:11px;
 font-weight:600;letter-spacing:.03em}
 .pill.ok{background:#e7f2e9;color:var(--ok)}
@@ -1269,7 +1341,7 @@ switches; Hanenberg et al. (2018, 390 subjects) found no comprehension benefit. 
 
 <footer>Generated by <code>scripts/palette-report.py</code>. Hexes are canonical upstream
 values, not local ports &mdash; ports drift. Re-run after any palette change.</footer>
-</div><script>{ISOLATE_JS}</script></body></html>"""
+</div><script>{ISOLATE_JS}{SORT_JS}</script></body></html>"""
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(html, encoding='utf-8')
