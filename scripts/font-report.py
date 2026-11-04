@@ -885,11 +885,7 @@ border:1px solid var(--line);border-radius:3px;padding:3px 7px;cursor:pointer;
 color:var(--dim)}
 button.copy:hover{border-color:var(--accent);color:var(--accent)}
 button.copy.done{border-color:var(--ok);color:var(--ok)}
-th button.sort{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;
-text-align:inherit}
-th button.sort:hover,th button.sort:focus-visible{color:var(--accent)}
-th[aria-sort=ascending] button.sort::after{content:" \\25B2";font-size:9px}
-th[aria-sort=descending] button.sort::after{content:" \\25BC";font-size:9px}
+th button.sort{text-transform:none;letter-spacing:normal}
 .explorer .g-axes,.explorer .g-coverage,.explorer .g-facts{display:none}
 .explorer.show-axes .g-axes,.explorer.show-coverage .g-coverage,
 .explorer.show-facts .g-facts{display:table-cell}
