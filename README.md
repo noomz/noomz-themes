@@ -295,6 +295,8 @@ is checked against the installed versions, which matters: kitty 0.49 removed
 `adjust_line_height` in favour of `modify_font cell_height`. Cover the top twelve fonts by
 default; `--config-fonts 0` emits a block for every ranked font.
 
+The leaderboard sorts on any column and filters by where the font is installed, licence, release year, zero style, ligatures, real italic, variable axes, a weight in the dark-mode band, built-in Nerd icons, and Cyrillic or Greek coverage. Three hidden column groups add the eight axis scores, glyph coverage, and licence and faces. Named views such as *Small screen*, *Hex and IDs* and *New and free* set a sort and filters together, and the URL keeps the state, so `font-report.html#board?view=hex` opens that view. The post-2019, polarity and ambiguity tables sort on any column too. Licence comes from each font file's licence text (name ID 13 and 14), then the catalogue, then whether macOS ships the file.
+
 The terminal preview shows every ranked font in the same session, with the palettes that won the palette report, read from `themes/claude/modus-operandi.json` and `themes/claude/catppuccin-mocha.json`. Installed fonts only display on machines that have them, and uninstalled test fonts load from `docs/fonts/`, so that directory must be published beside the report. A preview that cannot get its font says so in its caption. The metrics do not depend on either. `docs/font-metrics.json` is generated data — it is not tracked in git.
 
 ### Testing fonts you have not installed

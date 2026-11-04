@@ -310,6 +310,18 @@ class Family:
             seen.setdefault(item["weight_class"], item)
         return [seen[key] for key in sorted(seen)]
 
+    @property
+    def has_italic(self) -> bool:
+        return any(face.get("is_italic") for face in self.faces)
+
+    @property
+    def is_variable(self) -> bool:
+        return any(face.get("is_variable") for face in self.faces)
+
+    @property
+    def has_ligatures(self) -> bool:
+        return bool(family_features(self) & {"liga", "calt"})
+
     def weight_for(self, polarity: str) -> dict[str, Any] | None:
         low, high = STEM_TARGET[polarity]
         centre = (low + high) / 2
@@ -873,9 +885,233 @@ border:1px solid var(--line);border-radius:3px;padding:3px 7px;cursor:pointer;
 color:var(--dim)}
 button.copy:hover{border-color:var(--accent);color:var(--accent)}
 button.copy.done{border-color:var(--ok);color:var(--ok)}
+th button.sort{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;
+text-align:inherit}
+th button.sort:hover,th button.sort:focus-visible{color:var(--accent)}
+th[aria-sort=ascending] button.sort::after{content:" \\25B2";font-size:9px}
+th[aria-sort=descending] button.sort::after{content:" \\25BC";font-size:9px}
+.explorer .g-axes,.explorer .g-coverage,.explorer .g-facts{display:none}
+.explorer.show-axes .g-axes,.explorer.show-coverage .g-coverage,
+.explorer.show-facts .g-facts{display:table-cell}
+.inband{background:#eef4e6;padding:0 2px}
+.board-controls{background:#fff;border:1px solid var(--line);padding:8px 10px;margin:8px 0;
+font-size:12px}
+.board-controls .row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:3px 0}
+.board-controls .lbl{color:var(--dim);width:52px;flex:none}
+.board-controls label{color:var(--ink);margin-right:6px}
+.pick{font:11.5px/1.2 -apple-system,sans-serif;background:#fff;border:1px solid var(--line);
+border-radius:12px;padding:3px 9px;cursor:pointer;color:var(--ink)}
+.pick:hover{border-color:var(--accent)}
+.pick[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.board-search{font:12px -apple-system,sans-serif;border:1px solid var(--line);border-radius:3px;
+padding:3px 6px;margin-left:auto;width:150px}
+.board-count{color:var(--dim);font-variant-numeric:tabular-nums}
+@media(max-width:600px){.board-controls .lbl{width:100%}.board-search{margin-left:0}}
+@media print{.board-controls{display:none}}
 @media print{details.cfg{break-inside:avoid}details.cfg>summary{list-style:none}
 .cfg-grid{display:block}figure.cfg-block{border-right:0}}
 """
+
+BOARD_JS = r'''
+(function(){
+  var NUMBER = /^[-+]?(\d+\.?\d*|\.\d+)/;
+  function value(cell){
+    if (!cell || cell.tagName !== 'TD') { return null; }
+    if (cell.hasAttribute('data-v')) { return cell.getAttribute('data-v'); }
+    var text = cell.textContent.trim();
+    return text === '—' ? '' : text;
+  }
+  function dataRows(body){
+    return Array.prototype.filter.call(body.rows, function(row){ return row.cells[0].tagName === 'TD'; });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('table.sortable tbody tr'), function(row, i){
+    row.setAttribute('data-base', i);
+  });
+  function sortTable(table, index, direction){
+    Array.prototype.forEach.call(table.tBodies, function(body){
+      var rows = dataRows(body);
+      var numeric = rows.every(function(row){
+        var v = value(row.cells[index]); return v === '' || NUMBER.test(v);
+      });
+      var items = rows.map(function(row){
+        var v = value(row.cells[index]);
+        return {row: row, missing: v === '', base: +row.getAttribute('data-base'),
+                v: v === '' ? '' : (numeric ? parseFloat(v) : v.toLowerCase())};
+      });
+      items.sort(function(a, b){
+        // missing values sink in both directions, ties keep the ranked order
+        if (a.missing !== b.missing) { return a.missing ? 1 : -1; }
+        if (a.v !== b.v) { var c = a.v < b.v ? -1 : 1; return direction === 'down' ? -c : c; }
+        return a.base - b.base;
+      });
+      items.forEach(function(item){ body.appendChild(item.row); });
+    });
+    Array.prototype.forEach.call(table.tHead.rows[0].cells, function(th, i){
+      th.setAttribute('aria-sort', i !== index ? 'none'
+        : (direction === 'down' ? 'descending' : 'ascending'));
+    });
+  }
+  var board = document.getElementById('board');
+  var onBoardSort = null;
+  Array.prototype.forEach.call(document.querySelectorAll('table.sortable'), function(table){
+    var current = {index: -1, direction: 'up'};
+    Array.prototype.forEach.call(table.tHead.rows[0].cells, function(th, index){
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'sort';
+      while (th.firstChild) { button.appendChild(th.firstChild); }
+      th.appendChild(button);
+      th.setAttribute('aria-sort', 'none');
+      button.addEventListener('click', function(){
+        var direction = current.index === index
+          ? (current.direction === 'down' ? 'up' : 'down')
+          : (th.getAttribute('data-first') || 'up');
+        current = {index: index, direction: direction};
+        if (table === board && onBoardSort) { onBoardSort(th.getAttribute('data-key'), direction); }
+        else { sortTable(table, index, direction); }
+      });
+    });
+    table.sortTo = function(index, direction){ current = {index: index, direction: direction}; };
+  });
+  if (!board) { return; }
+
+  var controls = document.querySelector('.board-controls');
+  var views = JSON.parse(document.getElementById('board-views').textContent);
+  var heads = Array.prototype.slice.call(board.tHead.rows[0].cells);
+  var keys = heads.map(function(th){ return th.getAttribute('data-key'); });
+  var search = controls.querySelector('.board-search');
+  var empty = document.querySelector('.board-empty');
+  var divider = board.querySelector('tr.divider th');
+  var total = board.querySelectorAll('tbody tr[data-name]').length;
+  function fresh(){ return {view: 'all', sort: 'rank', dir: 'up', f: {}, show: [], q: ''}; }
+  function fromView(key){
+    var v = views[key];
+    var f = {};
+    Object.keys(v.f).forEach(function(k){ f[k] = v.f[k].slice(); });
+    return {view: key, sort: v.sort, dir: v.dir, f: f, show: v.show.slice(), q: ''};
+  }
+  var state = fresh();
+
+  function render(){
+    var index = keys.indexOf(state.sort);
+    if (index < 0) { state.sort = 'rank'; index = 0; }
+    sortTable(board, index, state.dir);
+    board.sortTo(index, state.dir);
+    ['axes', 'coverage', 'facts'].forEach(function(group){
+      var on = state.show.indexOf(group) >= 0;
+      board.classList.toggle('show-' + group, on);
+      controls.querySelector('[data-group="' + group + '"]').checked = on;
+    });
+    if (divider) {
+      divider.colSpan = heads.filter(function(th){ return th.offsetParent !== null || th.getClientRects().length; }).length;
+    }
+    var q = state.q.toLowerCase();
+    var shown = 0;
+    Array.prototype.forEach.call(board.querySelectorAll('tbody tr[data-name]'), function(row){
+      var ok = !q || row.getAttribute('data-name').indexOf(q) >= 0;
+      Object.keys(state.f).forEach(function(facet){
+        var wanted = state.f[facet];
+        if (ok && wanted.length) { ok = wanted.indexOf(row.getAttribute('data-f-' + facet)) >= 0; }
+      });
+      row.hidden = !ok;
+      if (ok) { shown += 1; }
+    });
+    var references = board.querySelector('tbody.references');
+    if (references) { references.hidden = !references.querySelector('tr[data-name]:not([hidden])'); }
+    controls.querySelector('.board-count').textContent =
+      shown === total ? total + ' fonts' : 'showing ' + shown + ' of ' + total;
+    empty.hidden = shown > 0;
+    Array.prototype.forEach.call(controls.querySelectorAll('[data-facet]'), function(chip){
+      var wanted = state.f[chip.getAttribute('data-facet')] || [];
+      chip.setAttribute('aria-pressed', String(wanted.indexOf(chip.getAttribute('data-value')) >= 0));
+    });
+    Array.prototype.forEach.call(controls.querySelectorAll('[data-view]'), function(chip){
+      chip.setAttribute('aria-pressed', String(chip.getAttribute('data-view') === state.view));
+    });
+    if (search.value !== state.q) { search.value = state.q; }
+  }
+
+  function toHash(){
+    if (state.view === 'all') { return ''; }
+    var params = new URLSearchParams();
+    if (state.view) { params.set('view', state.view); return '#board?' + params.toString(); }
+    params.set('sort', state.sort);
+    params.set('dir', state.dir);
+    var f = Object.keys(state.f).filter(function(k){ return state.f[k].length; })
+      .map(function(k){ return k + ':' + state.f[k].join('.'); });
+    if (f.length) { params.set('f', f.join(',')); }
+    if (state.show.length) { params.set('show', state.show.join(',')); }
+    if (state.q) { params.set('q', state.q); }
+    return '#board?' + params.toString();
+  }
+  function fromHash(hash){
+    if (hash.indexOf('#board?') !== 0) { return null; }
+    var params = new URLSearchParams(hash.slice(7));
+    var view = params.get('view');
+    if (view && views[view]) { return fromView(view); }
+    var next = fresh();
+    next.view = '';
+    next.sort = params.get('sort') || 'rank';
+    next.dir = params.get('dir') === 'down' ? 'down' : 'up';
+    (params.get('f') || '').split(',').filter(Boolean).forEach(function(pair){
+      var parts = pair.split(':');
+      next.f[parts[0]] = (parts[1] || '').split('.').filter(Boolean);
+    });
+    next.show = (params.get('show') || '').split(',').filter(function(g){
+      return ['axes', 'coverage', 'facts'].indexOf(g) >= 0; });
+    next.q = params.get('q') || '';
+    return next;
+  }
+  function changed(){
+    render();
+    var hash = toHash();
+    history.replaceState(null, '', location.pathname + location.search + hash);
+  }
+
+  onBoardSort = function(key, direction){
+    state.view = '';
+    state.sort = key;
+    state.dir = direction;
+    changed();
+  };
+  controls.addEventListener('click', function(event){
+    var chip = event.target.closest('button');
+    if (!chip) { return; }
+    if (chip.hasAttribute('data-view')) { state = fromView(chip.getAttribute('data-view')); }
+    else if (chip.classList.contains('reset')) { state = fresh(); }
+    else if (chip.hasAttribute('data-facet')) {
+      var facet = chip.getAttribute('data-facet');
+      var wanted = state.f[facet] = state.f[facet] || [];
+      var at = wanted.indexOf(chip.getAttribute('data-value'));
+      if (at >= 0) { wanted.splice(at, 1); } else { wanted.push(chip.getAttribute('data-value')); }
+      state.view = '';
+    } else { return; }
+    changed();
+  });
+  controls.addEventListener('change', function(event){
+    var group = event.target.getAttribute('data-group');
+    if (!group) { return; }
+    state.show = state.show.filter(function(g){ return g !== group; });
+    if (event.target.checked) { state.show.push(group); }
+    state.view = '';
+    changed();
+  });
+  search.addEventListener('input', function(){
+    state.q = search.value.trim();
+    state.view = '';
+    changed();
+  });
+  controls.hidden = false;
+  var linked = fromHash(location.hash);
+  if (linked) {
+    state = linked;
+    render();
+    board.scrollIntoView();
+  } else {
+    render();
+  }
+})();
+'''
 
 
 def esc(text: Any) -> str:
@@ -992,7 +1228,7 @@ def matrix_table(families: list[Family]) -> str:
     return (table("<tr><th>font</th><th>zero</th><th>0/O</th><th>1/l</th><th>1/I</th>"
                   "<th>l/I</th><th>rn/m</th><th>; / :</th><th>zero cue</th>"
                   "<th>one cue</th><th>ell cue</th><th>eye cue</th></tr>",
-                  "".join(rows), "ambiguity matrix")
+                  "".join(rows), "ambiguity matrix", "matrix sortable")
             + "<p class='axis-note'>The first seven numeric columns are the raw measured "
             "symmetric-difference distance for that pair: below 0.18 is a problem, "
             "0.18&ndash;0.29 is workable, above that the shapes are clearly apart. A "
@@ -1134,12 +1370,7 @@ def ladder_html(family: Family) -> str:
 
 
 def ligature_note(family: Family) -> str:
-    tags = set()
-    for face in family.faces:
-        vertical = face.get("vertical") or {}
-        if "error" in vertical:
-            continue
-        tags.update(vertical.get("features") or [])
+    tags = family_features(family)
     interesting = [tag for tag in ("liga", "calt", "zero", "ss01", "ss02", "cv01")
                    if tag in tags]
     if not interesting:
@@ -1245,7 +1476,7 @@ def check_columns(table_html: str, label: str) -> str:
     if not head or not body:
         return table_html
     headers = len(re.findall(r"<th[ >]", head.group(0)))
-    for offset, row in enumerate(re.findall(r"<tr>(.*?)</tr>", body.group(1), re.S), start=1):
+    for offset, row in enumerate(re.findall(r"<tr[^>]*>(.*?)</tr>", body.group(1), re.S), start=1):
         cells = len(re.findall(r"<td[ >]", row))
         if cells != headers:
             raise ValueError(
@@ -1274,75 +1505,306 @@ def recent_marker(family: Family) -> str:
     return f' <span class="flag">{label}, {state}</span>'
 
 
-def leaderboard(rows: list[Family], title: str, note: str,
-                reference: list[Family] | None = None) -> str:
-    def number(value: Any, digits: int = 1) -> str:
-        if value is None:
-            return "&mdash;"
-        return f"{value:.{digits}f}"
+def fmt(value: Any, digits: int = 1) -> str:
+    return "&mdash;" if value is None else f"{value:.{digits}f}"
 
-    body = []
-    for index, family in enumerate(rows, start=1):
-        vertical = family.vertical
-        ink = family.ink
-        pair_cell = closest_pair_cell(family)
-        zero = (family.disambiguation.get("zero_style") or "plain")
-        body.append(
-            "<tr>"
-            f'<td class="num">{index}</td>'
-            f'<td><a href="#{esc(slug(family.name))}"><code>{esc(family.name)}</code></a>'
-            f'{recent_marker(family)}</td>'
-            f'<td class="num strong">{number(family.scores.get("marathon"))}</td>'
-            f'<td class="num">{number(family.scores.get("density_first"))}</td>'
-            f'<td class="num"><span class="delta '
-            f'{"up" if (family.scores.get("marathon", 0) - family.scores.get("density_first", 0)) > 0 else "down"}">'
-            f'{(family.scores.get("marathon", 0) - family.scores.get("density_first", 0)):+.1f}'
-            f'</span></td>'
-            f'<td class="num">{number(vertical.get("x_height_em"), 3)}</td>'
-            f'<td class="num">{number(ink.get("cols_per_1000px"))}</td>'
-            f'<td class="num">{pair_cell}</td>'
-            f'<td>{esc(zero)}</td>'
-            f'<td class="num">{number(get(family.stroke, "contrast"), 2)}</td>'
-            f'<td class="num">{number(ink.get("ink_body"), 4)}</td>'
-            f'<td class="num">{len(family.upright_weights)}</td>'
-            f'<td class="num">{number(vertical.get("default_line_height_em"), 3)}</td>'
-            "</tr>")
-    reference_rows = []
-    for family in reference or []:
-        vertical = family.vertical
-        ink = family.ink
-        pair_cell = closest_pair_cell(family)
-        reference_rows.append(
-            "<tr>"
-            '<td class="num">&mdash;</td>'
-            f'<td><a href="#{esc(slug(family.name))}"><code>{esc(family.name)}</code></a></td>'
-            f'<td class="num strong">{number(family.scores.get("marathon"))}</td>'
-            f'<td class="num">{number(family.scores.get("density_first"))}</td>'
-            f'<td class="num">&mdash;</td>'
-            f'<td class="num">{number(vertical.get("x_height_em"), 3)}</td>'
-            f'<td class="num">{number(ink.get("cols_per_1000px"))}</td>'
-            f'<td class="num">{pair_cell}</td>'
-            f'<td>{esc(family.disambiguation.get("zero_style") or "plain")}</td>'
-            f'<td class="num">{number(get(family.stroke, "contrast"), 2)}</td>'
-            f'<td class="num">{number(ink.get("ink_body"), 4)}</td>'
-            f'<td class="num">{len(family.upright_weights)}</td>'
-            f'<td class="num">{number(vertical.get("default_line_height_em"), 3)}</td>'
-            "</tr>")
-    head = ("<thead><tr><th>#</th><th>font</th><th class=\"num\">long-<br>session</th>"
-            "<th class=\"num\">density-<br>first</th><th class=\"num\">&Delta;</th>"
-            "<th class=\"num\">x-height<br>em</th><th class=\"num\">cols/<br>1000px</th>"
-            "<th class=\"num\">worst<br>pair</th><th>zero</th>"
-            "<th class=\"num\">stroke<br>contrast</th><th class=\"num\">ink<br>density</th>"
-            "<th class=\"num\">weights</th><th class=\"num\">line<br>height</th></tr></thead>")
+
+def family_features(family: Family) -> set[str]:
+    tags: set[str] = set()
+    for face in family.faces:
+        vertical = face.get("vertical") or {}
+        if "error" not in vertical:
+            tags.update(vertical.get("features") or [])
+    return tags
+
+
+# Licence text from name ID 13, first match wins. Read from the file, so it covers
+# installed fonts too. Catalogue rows add their own label for files that carry none.
+LICENCES = [
+    ("OFL", re.compile(r"open ?font ?licen[cs]e|\bOFL\b|scripts\.sil\.org", re.I)),
+    ("Apache", re.compile(r"apache licen[cs]e", re.I)),
+    ("MIT", re.compile(r"\bMIT licen[cs]e|permission is hereby granted, free of charge", re.I)),
+    ("GPL", re.compile(r"\bGPL\b|general public licen[cs]e", re.I)),
+    ("Ubuntu", re.compile(r"ubuntu font licen[cs]e", re.I)),
+    ("Bitstream Vera", re.compile(r"bitstream vera", re.I)),
+    ("CC", re.compile(r"creative commons", re.I)),
+    ("ParaType", re.compile(r"paratype", re.I)),
+    ("EULA", re.compile(r"\bEULA\b|monotype\.com/.*licen", re.I)),
+    ("Apple", re.compile(r"\bapple\b", re.I)),
+    ("Microsoft", re.compile(r"\bmicrosoft\b", re.I)),
+]
+CATALOGUE_LICENCES = {"SIL OFL": "OFL", "MIT": "MIT", "GNU GPL": "GPL", "permissive": "permissive",
+                      "Apache": "Apache", "commercial": "commercial"}
+FREE_LICENCES = {"OFL", "Apache", "MIT", "GPL", "Ubuntu", "Bitstream Vera", "CC", "ParaType",
+                 "permissive"}
+
+
+def licence_of(family: Family) -> str:
+    texts = [str((face.get("vertical") or {}).get("license") or "") for face in family.faces]
+    texts += [" ".join((face.get("vertical") or {}).get("license_url") or [])
+              for face in family.faces]
+    text = " ".join(texts)
+    for label, pattern in LICENCES:
+        if pattern.search(text):
+            return label
+    for row in family.recent:
+        if row.get("license") in CATALOGUE_LICENCES:
+            return CATALOGUE_LICENCES[row["license"]]
+    # Fonts that ship with macOS often carry no licence text and are not redistributable.
+    if family.faces and all(str(face.get("path", "")).startswith("/System/Library/")
+                            for face in family.faces):
+        return "macOS"
+    return "other" if text.strip() else "unknown"
+
+
+def licence_kind(family: Family) -> str:
+    licence = licence_of(family)
+    if licence in FREE_LICENCES:
+        return "free"
+    return "unknown" if licence == "unknown" else "restricted"
+
+
+def coverage_share(family: Family, key: str) -> float | None:
+    value = family.coverage.get(f"{key}_pct")
+    return None if value is None else round(value * 100, 1)
+
+
+def release_year(family: Family) -> int | None:
+    return max((row["year"] for row in family.recent), default=None)
+
+
+def worst_pair_distance(family: Family) -> float | None:
+    raw, _effective, _lifted = pair_distances(family)
+    return min(raw.values()) if raw else None
+
+
+class Column(NamedTuple):
+    """One leaderboard column. The browser sorts on `value` and shows `cell`.
+
+    `first` is the direction of the first click: down for a column where more is
+    better, up for one scored against a band, where neither end is better.
+    """
+    key: str
+    label: str
+    value: Any
+    cell: Any
+    first: str = "down"
+    group: str = "core"
+    num: bool = True
+
+
+def board_columns(bands: dict[str, tuple[float, float]]) -> list[Column]:
+    def score(key: str) -> Any:
+        return lambda family, rank: family.scores.get(key)
+
+    def in_band(value: float | None, band: str, digits: int) -> str:
+        """Shade a value inside its scoring band: these columns have no better end."""
+        low, high = bands[band][:2]
+        if value is not None and low <= value <= high:
+            return f'<span class="inband">{fmt(value, digits)}</span>'
+        return fmt(value, digits)
+
+    def delta(family: Family) -> float:
+        return round(family.scores.get("marathon", 0) - family.scores.get("density_first", 0), 1)
+
+    def name_cell(family: Family, rank: int | None) -> str:
+        return (f'<a href="#{esc(slug(family.name))}"><code>{esc(family.name)}</code></a>'
+                f'{recent_marker(family) if rank else ""}')
+
+    def share(key: str) -> Column:
+        label = {"nerd_icons": "nerd<br>icons %", "powerline_pua": "power-<br>line %",
+                 "box_drawing": "box<br>drawing %", "braille": "braille<br>%",
+                 "cyrillic": "cyrillic<br>%", "greek": "greek<br>%", "cjk_smoke": "CJK<br>%"}[key]
+        return Column(key, label, lambda f, r: coverage_share(f, key),
+                      lambda f, r: fmt(coverage_share(f, key), 0), group="coverage")
+
+    def yes(value: bool) -> str:
+        return "yes" if value else "no"
+
+    columns = [
+        Column("rank", "#", lambda f, r: r, lambda f, r: str(r) if r else "&mdash;", first="up"),
+        Column("font", "font", lambda f, r: f.name.lower(), name_cell, first="up", num=False),
+        Column("marathon", "long-<br>session", score("marathon"),
+               lambda f, r: fmt(f.scores.get("marathon"))),
+        Column("density_first", "density-<br>first", score("density_first"),
+               lambda f, r: fmt(f.scores.get("density_first"))),
+        Column("delta", "&Delta;", lambda f, r: delta(f) if r else None,
+               lambda f, r: (f'<span class="delta {"up" if delta(f) > 0 else "down"}">'
+                             f'{delta(f):+.1f}</span>') if r else "&mdash;"),
+        Column("x_height", "x-height<br>em", lambda f, r: f.vertical.get("x_height_em"),
+               lambda f, r: fmt(f.vertical.get("x_height_em"), 3)),
+        Column("cols", "cols/<br>1000px", lambda f, r: f.ink.get("cols_per_1000px"),
+               lambda f, r: fmt(f.ink.get("cols_per_1000px"))),
+        Column("worst_pair", "worst<br>pair", lambda f, r: worst_pair_distance(f),
+               lambda f, r: closest_pair_cell(f)),
+        Column("zero", "zero", lambda f, r: f.disambiguation.get("zero_style") or "plain",
+               lambda f, r: esc(f.disambiguation.get("zero_style") or "plain"),
+               first="up", num=False),
+        Column("contrast", "stroke<br>contrast", lambda f, r: get(f.stroke, "contrast"),
+               lambda f, r: fmt(get(f.stroke, "contrast"), 2), first="up"),
+        Column("ink", "ink<br>density", lambda f, r: f.ink.get("ink_body"),
+               lambda f, r: in_band(f.ink.get("ink_body"), "density", 4), first="up"),
+        Column("weights", "weights", lambda f, r: len(f.upright_weights),
+               lambda f, r: str(len(f.upright_weights))),
+        Column("line_height", "line<br>height", lambda f, r: f.vertical.get("default_line_height_em"),
+               lambda f, r: in_band(f.vertical.get("default_line_height_em"), "rhythm", 3),
+               first="up"),
+    ]
+    columns += [Column(f"axis_{axis}", esc(AXIS_LABELS[axis]).replace(" ", "<br>", 1),
+                       score(axis), (lambda key: lambda f, r: fmt(f.scores.get(key), 0))(axis),
+                       group="axes")
+                for axis in RADAR_AXES]
+    columns += [share(key) for key in ("nerd_icons", "powerline_pua", "box_drawing", "braille",
+                                       "cyrillic", "greek", "cjk_smoke")]
+    columns += [
+        Column("year", "year", lambda f, r: release_year(f),
+               lambda f, r: fmt(release_year(f), 0), group="facts"),
+        Column("licence", "licence", lambda f, r: licence_of(f),
+               lambda f, r: esc(licence_of(f)), first="up", group="facts", num=False),
+        Column("faces", "faces", lambda f, r: len(f.faces), lambda f, r: str(len(f.faces)),
+               group="facts"),
+        Column("italic", "real<br>italic", lambda f, r: yes(f.has_italic),
+               lambda f, r: yes(f.has_italic), group="facts", num=False),
+        Column("variable", "variable", lambda f, r: yes(f.is_variable),
+               lambda f, r: yes(f.is_variable), group="facts", num=False),
+        Column("ligatures", "liga-<br>tures", lambda f, r: yes(f.has_ligatures),
+               lambda f, r: yes(f.has_ligatures), group="facts", num=False),
+    ]
+    return columns
+
+
+COLUMN_GROUPS = [("axes", "axis scores"), ("coverage", "glyph coverage"),
+                 ("facts", "licence and faces")]
+
+
+class Facet(NamedTuple):
+    """A filter group. Chips in one facet are alternatives, separate facets all apply."""
+    key: str
+    label: str
+    value: Any
+    chips: tuple[tuple[str, str], ...]
+
+
+def board_facets(cutoff: int | None) -> list[Facet]:
+    def full(key: str, threshold: float = 95.0) -> Any:
+        return lambda f: "full" if (coverage_share(f, key) or 0) >= threshold else "partial"
+
+    def dark_band(family: Family) -> str:
+        pick = family.weight_for("dark")
+        return "yes" if pick and pick["in_band"] else "no"
+
+    return [
+        Facet("installed", "where", lambda f: "yes" if f.installed else "no",
+              (("yes", "installed here"), ("no", "not installed"))),
+        Facet("licence", "licence", licence_kind,
+              (("free", "free licence"), ("restricted", "restricted"))),
+        Facet("new", "release", lambda f: "yes" if release_year(f) else "no",
+              (("yes", f"released after {cutoff}" if cutoff else "recent release"),)),
+        Facet("zero", "zero", lambda f: f.disambiguation.get("zero_style") or "plain",
+              (("slashed", "slashed zero"), ("dotted", "dotted zero"), ("plain", "plain zero"))),
+        Facet("ligatures", "ligatures", lambda f: "yes" if f.has_ligatures else "no",
+              (("yes", "ligatures"), ("no", "no ligatures"))),
+        Facet("italic", "italic", lambda f: "yes" if f.has_italic else "no",
+              (("yes", "real italic"),)),
+        Facet("variable", "variable", lambda f: "yes" if f.is_variable else "no",
+              (("yes", "variable"),)),
+        Facet("dark", "dark mode", dark_band, (("yes", "weight in the dark band"),)),
+        # A Nerd Fonts patch fills 90% of the sampled icon range, which has unassigned points.
+        Facet("nerd", "icons", full("nerd_icons", 85.0), (("full", "Nerd icons built in"),)),
+        Facet("cyrillic", "cyrillic", full("cyrillic"), (("full", "full Cyrillic"),)),
+        Facet("greek", "greek", full("greek"), (("full", "full Greek"),)),
+    ]
+
+
+class View(NamedTuple):
+    key: str
+    label: str
+    sort: str
+    direction: str
+    facets: dict[str, list[str]]
+    groups: list[str]
+
+
+BOARD_VIEWS = [
+    View("all", "Long-session ranking", "rank", "up", {}, []),
+    View("small-screen", "Small screen", "density_first", "down", {}, []),
+    View("hex", "Hex and IDs", "axis_distinction", "down", {"zero": ["slashed", "dotted"]}, ["axes"]),
+    View("dark", "Dark mode", "axis_weights", "down", {"dark": ["yes"]}, ["axes"]),
+    View("icons", "Icons built in", "rank", "up", {"nerd": ["full"]}, ["coverage"]),
+    View("new-free", "New and free", "rank", "up", {"new": ["yes"], "licence": ["free"]},
+         ["facts"]),
+    View("not-latin", "Beyond Latin", "rank", "up", {"cyrillic": ["full"], "greek": ["full"]},
+         ["coverage"]),
+]
+
+
+def sort_attr(value: Any) -> str:
+    if value is None:
+        return ""
+    return f' data-v="{esc(value if isinstance(value, str) else repr(round(float(value), 6)))}"'
+
+
+def board_row(family: Family, rank: int | None, columns: list[Column],
+              facets: list[Facet]) -> str:
+    names = " ".join([family.name, *family.aliases]).lower()
+    data = "".join(f' data-f-{facet.key}="{esc(facet.value(family))}"' for facet in facets)
+    cells = "".join(
+        f'<td class="{" ".join(c for c in ("num" if column.num else "", f"g-{column.group}") if c)}"'
+        f'{sort_attr(column.value(family, rank))}>{column.cell(family, rank)}</td>'
+        for column in columns)
+    return f'<tr data-name="{esc(names)}"{data}>{cells}</tr>'
+
+
+def board_controls(columns: list[Column], facets: list[Facet], total: int) -> str:
+    states = {view.key: {"sort": view.sort, "dir": view.direction, "f": view.facets,
+                         "show": view.groups} for view in BOARD_VIEWS}
+    views_json = json.dumps(states).replace("</", "<\\/")
+    views = "".join(f'<button type="button" class="pick view" data-view="{view.key}">'
+                    f'{esc(view.label)}</button>' for view in BOARD_VIEWS)
+    chips = "".join(
+        f'<button type="button" class="pick" data-facet="{facet.key}" data-value="{value}" '
+        f'aria-pressed="false">{esc(label)}</button>'
+        for facet in facets for value, label in facet.chips)
+    groups = "".join(f'<label><input type="checkbox" data-group="{key}"> {esc(label)}</label>'
+                     for key, label in COLUMN_GROUPS)
+    return f"""<script type="application/json" id="board-views">{views_json}</script>
+<div class="board-controls" hidden>
+<div class="row"><span class="lbl">views</span>{views}</div>
+<div class="row"><span class="lbl">filter</span>{chips}</div>
+<div class="row"><span class="lbl">columns</span>{groups}
+<input type="search" class="board-search" placeholder="find a font" aria-label="find a font">
+<span class="board-count" aria-live="polite">{total} fonts</span>
+<button type="button" class="pick reset">reset</button></div>
+</div>"""
+
+
+def leaderboard(rows: list[Family], title: str, note: str,
+                bands: dict[str, tuple[float, float]], cutoff: int | None,
+                reference: list[Family] | None = None) -> str:
+    columns = board_columns(bands)
+    facets = board_facets(cutoff)
+    head = "<thead><tr>" + "".join(
+        f'<th class="{" ".join(c for c in ("num" if column.num else "", f"g-{column.group}") if c)}"'
+        f' data-key="{column.key}" data-first="{column.first}">{column.label}</th>'
+        for column in columns) + "</tr></thead>"
+    body = "".join(board_row(family, rank, columns, facets)
+                   for rank, family in enumerate(rows, start=1))
     reference_block = ""
-    if reference_rows:
-        reference_block = ("<tbody class=\"references\"><tr><th colspan=\"13\">Reference only "
-                           "&middot; unranked</th></tr>" + "".join(reference_rows) + "</tbody>")
+    if reference:
+        reference_block = (
+            f'<tbody class="references"><tr class="divider"><th colspan="'
+            f'{sum(column.group == "core" for column in columns)}">'
+            "Reference only &middot; unranked</th></tr>"
+            + "".join(board_row(family, None, columns, facets) for family in reference)
+            + "</tbody>")
     markup = check_columns(
-        "<table class=\"board\">" + head + "<tbody>" + "".join(body) + "</tbody>"
-        + reference_block + "</table>", f"leaderboard {title}")
+        '<table class="board sortable explorer" id="board">' + head + "<tbody>" + body
+        + "</tbody>" + reference_block + "</table>", f"leaderboard {title}")
     return (f"<h3>{esc(title)}</h3><p class=\"note\">{note}</p>"
-            "<div class=\"table-scroll\">" + markup + "</div>")
+            + board_controls(columns, facets, len(rows) + len(reference or []))
+            + '<p class="board-empty note" hidden>No font matches every filter. '
+              "Remove one to see more.</p>"
+            + "<div class=\"table-scroll\">" + markup + "</div>")
 
 
 def nearest_pair_note(family: Family) -> str:
@@ -1388,9 +1850,6 @@ def config_plan(family: Family, bands: dict[str, tuple[float, float]]) -> dict[s
                         if item["italic"] and item["weight_class"] == 700), None)
     coverage = family.coverage
     needs_symbol_fallback = (coverage.get("powerline_pua_pct") or 0) < 0.5
-    features = set()
-    for face in family.faces:
-        features.update((face.get("vertical") or {}).get("features") or [])
     return {
         "name": family.font_family or family.name,
         "size": size_pt,
@@ -1406,7 +1865,7 @@ def config_plan(family: Family, bands: dict[str, tuple[float, float]]) -> dict[s
         "bold": (bold or {}).get("subfamily"),
         "italic": (italic or {}).get("subfamily"),
         "bold_italic": (bold_italic or {}).get("subfamily"),
-        "has_ligatures": bool(features & {"calt", "liga"}),
+        "has_ligatures": family.has_ligatures,
         "needs_symbol_fallback": needs_symbol_fallback,
         "symbol_fallback": "Symbols Nerd Font Mono",
     }
@@ -1763,7 +2222,8 @@ def recent_table(rows: list[tuple[dict[str, Any], Family | None, int | None]]) -
                 f'<td class="num">{len(family.upright_weights)}</td>',
                 f'<td class="num strong">{family.scores.get("marathon", 0):.1f}</td>',
                 f'<td class="num">{family.scores.get("density_first", 0):.1f}</td>',
-                f'<td class="num">{closest_pair_cell(family)}</td>',
+                f'<td class="num"{sort_attr(worst_pair_distance(family))}>'
+                f'{closest_pair_cell(family)}</td>',
                 f'<td>{esc(family.disambiguation.get("zero_style") or "plain")}</td>',
             ]
         else:
@@ -1780,7 +2240,7 @@ def recent_table(rows: list[tuple[dict[str, Any], Family | None, int | None]]) -
               '<th>source</th><th class="num">faces</th><th class="num">upright<br>weights</th>'
               '<th class="num">long-<br>session</th><th class="num">density-<br>first</th>'
               '<th class="num">worst<br>pair</th><th>zero</th><th>status</th></tr>')
-    return table(header, "".join(body), "recent releases", "board")
+    return table(header, "".join(body), "recent releases", "board sortable")
 
 
 def recent_font_faces(families: list[Family]) -> str:
@@ -1912,11 +2372,12 @@ def polarity_table(families: list[Family]) -> str:
             verdict = "step up for dark"
         rows.append(
             f'<tr><td><a href="#{esc(slug(family.name))}"><code>{esc(family.name)}</code></a></td>'
-            f"<td>{cell(light)}</td><td>{cell(dark)}</td>"
+            f"<td{sort_attr(light and light['stem_em'])}>{cell(light)}</td>"
+            f"<td{sort_attr(dark and dark['stem_em'])}>{cell(dark)}</td>"
             f"<td>{esc(verdict)}</td></tr>")
     return table("<tr><th>font</th><th>light mode (dark ink on light paper)</th>"
                  "<th>dark mode (light ink on dark paper)</th><th>verdict</th></tr>",
-                 "".join(rows), "polarity table", "matrix weights-table")
+                 "".join(rows), "polarity table", "matrix weights-table sortable")
 
 
 # --------------------------------------------------------------------------
@@ -2143,7 +2604,8 @@ deliberate glyph cue keeps it apart anyway, so it is not charged against the fon
 {leaderboard(ranked, "Long-session leaderboard",
              "Ranked by long-session score. Higher is better on every column except "
              "<i>worst pair</i>, <i>stroke contrast</i> and <i>line height</i>, where the "
-             "axes are read against the bands in the method.", reference)}
+             "axes are read against the bands in the method.", bands,
+             (meta.get("recent_fonts") or {}).get("cutoff_year"), reference)}
 
 {recent_section(ranked, families, meta.get("recent_fonts") or {}, meta)}
 
@@ -2320,7 +2782,8 @@ after installing or updating a font.</footer>
       }});
   }});
 }})();
-</script></body></html>
+</script>
+<script>{BOARD_JS}</script></body></html>
 """
 
 

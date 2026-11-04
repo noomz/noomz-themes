@@ -77,6 +77,13 @@ takes one 32 MiB tar per publish.
 `docs/font-metrics.json` is generated and untracked. The report is only as current as
 the last metrics run, so never edit the report's numbers by hand.
 
+The leaderboard is built from three registries in `font-report.py`: `board_columns` (one
+`Column` per column, with its sort value, cell, first-click direction and group),
+`board_facets` (filter chips) and `BOARD_VIEWS` (named sort and filter presets). Add a column
+or filter there, not in the row markup. The page's sort script is `BOARD_JS`. Its classes must
+not reuse names from the palette report's stylesheet, which the font report loads too:
+`.chip` is already a colour swatch there.
+
 ## Style rules
 
 - Preserve existing theme names and slugs unless user explicitly asks for rename.

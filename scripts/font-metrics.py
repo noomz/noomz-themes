@@ -534,6 +534,8 @@ def vertical_metrics(path: str, index: int) -> dict[str, Any]:
     out["version"] = _name(font, 5)
     out["license_url"] = [r.toUnicode() for r in font["name"].names
                           if r.nameID == 14][:1]
+    out["license"] = _name(font, 13)
+    out["fs_type"] = getattr(os2, "fsType", None)
     font.close()
     return out
 
