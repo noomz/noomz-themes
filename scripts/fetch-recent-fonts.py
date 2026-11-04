@@ -11,6 +11,9 @@ reads, through --extra-fonts, so the terminal's font list stays as it was.
 docs/recent-fonts.json gets one row per catalogue entry, including the ones not
 tested, so the report can say what was left out and why.
 
+The catalogue's webfonts also go in docs/fonts, for the report's previews.
+--webfonts-only refreshes just those from the existing manifest.
+
 Run with: uv run scripts/fetch-recent-fonts.py
 """
 
@@ -39,6 +42,13 @@ CUTOFF_YEAR = 2019
 SITE = "https://www.programmingfonts.org"
 REPO = "https://github.com/braver/programmingfonts"
 RAW = "https://raw.githubusercontent.com/braver/programmingfonts"
+REPORT_DIR = "docs"
+CATALOGUE_KEY = re.compile(r"[A-Za-z0-9][\w.-]*")
+WEBFONT_URL = re.compile(
+    re.escape(SITE) + r"/fonts/resources/([A-Za-z0-9][\w.-]*/[A-Za-z0-9][\w.-]*\.woff2)")
+# artifact-host takes one 32 MiB tar per publish and every font comes to about 37 MiB.
+# Only Cilantro Code Mono's two files pass this, and without them the site fits.
+MAX_SERVED_BYTES = 5 * 2 ** 19
 
 # Catalogue key -> Homebrew cask and, where one archive holds several catalogue
 # entries or proportional siblings, a filename pattern selecting this entry.
@@ -263,22 +273,63 @@ def fetch_one(key: str, entry: dict[str, Any], faces: list[dict[str, str]], cach
     return row
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--cache", default=".cache/recent-fonts")
-    parser.add_argument("--manifest", default="docs/recent-fonts.json")
-    parser.add_argument("--prefer", choices=["cask", "webfont"], default="cask",
-                        help="webfont measures only the catalogue's files, to size their bias")
-    parser.add_argument("--workers", type=int, default=6)
-    args = parser.parse_args()
+def serve_webfont(face: dict[str, str]) -> str | None:
+    """Put one webfont beside the report. `file` is set only if the font is on disk."""
+    face.pop("file", None)
+    match = WEBFONT_URL.fullmatch(face["url"])
+    if not match:
+        print(f"  not served, unexpected url: {face['url']}")
+        return None
+    relative = f"fonts/{match.group(1)}"
+    path = os.path.join(REPORT_DIR, relative)
+    if not os.path.exists(path):
+        try:
+            data = read_url(face["url"])
+        except Exception as error:
+            print(f"  not served, {relative}: {error}")
+            return None
+        if data[:4] != b"wOF2":
+            print(f"  not served, not a woff2 file: {relative}")
+            return None
+        if len(data) > MAX_SERVED_BYTES:
+            print(f"  not served, {len(data) / 2 ** 20:.2f} MiB is over the cap: {relative}")
+            return None
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(f"{path}.part", "wb") as out:
+            out.write(data)
+        os.replace(f"{path}.part", path)
+    face["file"] = relative
+    return relative
 
+
+def serve_webfonts(rows: list[dict[str, Any]], workers: int) -> None:
+    faces = [face for row in rows for face in row["webfont_faces"]]
+    with ThreadPoolExecutor(workers) as pool:
+        served = {relative for relative in pool.map(serve_webfont, faces) if relative}
+    # Whatever no face claims would still be published: a crashed run's .part, a dropped font.
+    size = 0
+    for root, _dirs, names in os.walk(os.path.join(REPORT_DIR, "fonts")):
+        for name in names:
+            path = os.path.join(root, name)
+            if os.path.relpath(path, REPORT_DIR) in served:
+                size += os.path.getsize(path)
+            else:
+                os.remove(path)
+    print(f"served {len(served)} of {len(faces)} webfonts, {size / 2 ** 20:.2f} MiB")
+
+
+def fetch_manifest(args: argparse.Namespace) -> dict[str, Any]:
     commit = subprocess.run(["git", "ls-remote", REPO, "gh-pages"], check=True,
                             capture_output=True, text=True).stdout.split()[0]
     catalogue = json.loads(read_url(f"{RAW}/{commit}/fonts.json"))
     stylesheet = read_url(f"{RAW}/{commit}/fonts/stylesheet.css").decode()
     faces = webfont_faces(stylesheet)
+    # A key names a cache directory that fetch_one deletes and recreates.
+    unsafe = [key for key in catalogue if not CATALOGUE_KEY.fullmatch(key)]
+    for key in unsafe:
+        print(f"  skipped, unsafe catalogue key: {key!r}")
     selected = sorted(((key, entry) for key, entry in catalogue.items()
-                       if entry["year"] > CUTOFF_YEAR),
+                       if key not in unsafe and entry["year"] > CUTOFF_YEAR),
                       key=lambda item: (item[1]["year"], item[0]))
 
     os.makedirs(args.cache, exist_ok=True)
@@ -303,21 +354,42 @@ def main() -> None:
                                    args.prefer, version_cache),
             selected))
 
-    manifest = {
+    for row in rows:
+        print(f"{row['year']} {row['key']:<28} {row['source']:<8} {len(row['files']):>4} "
+              f"{row['status'] if row['status'] != 'fetched' else ''}")
+    return {
         "catalogue": {"url": SITE, "repo_commit": commit, "entries": len(catalogue),
                       "fetched": date.today().isoformat()},
         "cutoff_year": CUTOFF_YEAR,
         "cache": args.cache,
         "fonts": rows,
     }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--cache", default=".cache/recent-fonts")
+    parser.add_argument("--manifest", default="docs/recent-fonts.json")
+    parser.add_argument("--prefer", choices=["cask", "webfont"], default="cask",
+                        help="webfont measures only the catalogue's files, to size their bias")
+    parser.add_argument("--workers", type=int, default=6)
+    parser.add_argument("--webfonts-only", action="store_true",
+                        help="refresh docs/fonts from the existing manifest, measuring nothing")
+    args = parser.parse_args()
+
+    if args.webfonts_only:
+        with open(args.manifest) as handle:
+            manifest = json.load(handle)
+    else:
+        manifest = fetch_manifest(args)
+    # A --prefer webfont run only sizes a bias. The report never reads its manifest.
+    if args.prefer == "cask":
+        serve_webfonts(manifest["fonts"], args.workers)
     os.makedirs(os.path.dirname(args.manifest), exist_ok=True)
     with open(args.manifest, "w") as handle:
         json.dump(manifest, handle, indent=1, sort_keys=True)
         handle.write("\n")
-    for row in rows:
-        print(f"{row['year']} {row['key']:<28} {row['source']:<8} {len(row['files']):>4} "
-              f"{row['status'] if row['status'] != 'fetched' else ''}")
-    print(f"wrote {args.manifest}: {len(rows)} entries")
+    print(f"wrote {args.manifest}: {len(manifest['fonts'])} entries")
 
 
 if __name__ == "__main__":

@@ -27,7 +27,7 @@ scripts/
   install.sh
   validate-claude-theme.py
   palette-report.py        palette metrics + report generator
-  fetch-recent-fonts.py    downloads post-2019 catalogue fonts -> .cache/recent-fonts, docs/recent-fonts.json
+  fetch-recent-fonts.py    downloads post-2019 catalogue fonts -> .cache/recent-fonts, docs/fonts, docs/recent-fonts.json
   font-metrics.py          measures installed and --extra-fonts fonts -> docs/font-metrics.json
   font-report.py           scoring + report generator -> docs/font-report.html
   font-report-meta.json    prose and sources for the font report
@@ -67,6 +67,12 @@ python3 scripts/font-metrics.py --extra-fonts .cache/recent-fonts && python3 scr
 
 Omit `--extra-fonts` and the post-2019 test fonts drop out of the report. If
 `.cache/recent-fonts` is missing, run `uv run scripts/fetch-recent-fonts.py` first.
+
+The report's previews load `fonts/` relative to the report, because the hosted page's CSP
+allows fonts only from its own origin. To refresh them from the existing manifest without
+measuring anything, run `uv run scripts/fetch-recent-fonts.py --webfonts-only`, then
+regenerate the report. Publish the reports and `fonts/`, not all of `docs/`: artifact-host
+takes one 32 MiB tar per publish.
 
 `docs/font-metrics.json` is generated and untracked. The report is only as current as
 the last metrics run, so never edit the report's numbers by hand.

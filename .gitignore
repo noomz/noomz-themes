@@ -14,3 +14,4 @@ docs/font-inventory.json
 
 # downloaded fonts for the recent-release test (rebuild with scripts/fetch-recent-fonts.py)
 .cache/
+docs/fonts/

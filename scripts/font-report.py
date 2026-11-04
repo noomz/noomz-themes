@@ -1028,7 +1028,7 @@ def face_gap(family: Family, face: str) -> str:
     wants_bold, wants_italic = "bold" in face, "italic" in face
     if not family.installed:
         hosted = (family.recent[0].get("webfont_faces") or []) if family.recent else []
-        if any(is_bold(item["weight"]) == wants_bold
+        if any(item.get("file") and is_bold(item["weight"]) == wants_bold
                and (item["style"] == "italic") == wants_italic for item in hosted):
             return ""
     has_face = any(
@@ -1091,9 +1091,10 @@ def preview_section(ranked: list[Family], light: dict[str, str], dark: dict[str,
 {PREVIEW_PX}&nbsp;px and the font's own default line height. Palettes are the sibling report's
 winners, modus-operandi and catppuccin-mocha, read from <code>themes/claude/</code>.</p>
 <p class="note">Installed designs render only on a machine that has them, and uninstalled
-designs load from programmingfonts.org. That file can be an older build than the release
-that was measured, so the measured numbers are the record. A preview that cannot get its font
-says so in its caption.</p>
+designs load from a copy of the programmingfonts.org webfont served with this report. That file
+can be an older build than the release that was measured, so the measured numbers are the
+record. Files over 2.5&nbsp;MiB are not served. A preview that cannot get its font says so in
+its caption.</p>
 <p class="note">Browser synthesis is off, so every bold and italic here is a real drawn face,
 not a slanted or thickened regular. The last four rows of each preview show the four styles
 side by side, and a row names the reason when a style cannot be shown. Where a font has no
@@ -1783,10 +1784,11 @@ def recent_table(rows: list[tuple[dict[str, Any], Family | None, int | None]]) -
 
 
 def recent_font_faces(families: list[Family]) -> str:
-    """Load uninstalled designs from the catalogue so their previews are real.
+    """Load uninstalled designs from files beside the report so their previews are real.
 
-    local() comes first, so a reader who has the font uses their own copy and the
-    catalogue site is asked for a file only when the specimen would otherwise fall back.
+    The hosted report's CSP allows fonts only from its own origin, so the urls are relative.
+    local() comes first, so a reader who has the font uses their own copy. A face with no
+    `file` was not served, and only that local copy can show it.
     """
     rules = []
     for family in families:
@@ -1795,10 +1797,11 @@ def recent_font_faces(families: list[Family]) -> str:
         name = family.name.replace('"', "")
         local = (family.font_family or family.name).replace('"', "")
         for face in family.recent[0].get("webfont_faces") or []:
+            served = f',url("{face["file"]}") format("woff2")' if face.get("file") else ""
             rules.append(
                 f'@font-face{{font-family:"{name}";font-weight:{face["weight"]};'
                 f'font-style:{face["style"]};font-display:swap;'
-                f'src:local("{local}"),url("{face["url"]}") format("woff2")}}')
+                f'src:local("{local}"){served}}}')
     return "\n".join(rules)
 
 

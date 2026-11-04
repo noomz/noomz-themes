@@ -295,17 +295,19 @@ is checked against the installed versions, which matters: kitty 0.49 removed
 `adjust_line_height` in favour of `modify_font cell_height`. Cover the top twelve fonts by
 default; `--config-fonts 0` emits a block for every ranked font.
 
-The terminal preview shows every ranked font in the same session, with the palettes that won the palette report, read from `themes/claude/modus-operandi.json` and `themes/claude/catppuccin-mocha.json`. Installed fonts only display on machines that have them, and uninstalled test fonts load from programmingfonts.org. A preview that cannot get its font says so in its caption. The metrics do not depend on either. `docs/font-metrics.json` is generated data — it is not tracked in git.
+The terminal preview shows every ranked font in the same session, with the palettes that won the palette report, read from `themes/claude/modus-operandi.json` and `themes/claude/catppuccin-mocha.json`. Installed fonts only display on machines that have them, and uninstalled test fonts load from `docs/fonts/`, so that directory must be published beside the report. A preview that cannot get its font says so in its caption. The metrics do not depend on either. `docs/font-metrics.json` is generated data — it is not tracked in git.
 
 ### Testing fonts you have not installed
 
-The report also tests every [programmingfonts.org](https://www.programmingfonts.org/) font with a release year after 2019. Nothing is installed: files go to the gitignored `.cache/recent-fonts/`, which only the measurement reads.
+The report also tests every [programmingfonts.org](https://www.programmingfonts.org/) font with a release year after 2019. Nothing is installed: files go to the gitignored `.cache/recent-fonts/`, which only the measurement reads, and the catalogue's webfonts go to the gitignored `docs/fonts/` for the previews.
 
 ```sh
-uv run scripts/fetch-recent-fonts.py                      # -> .cache/recent-fonts, docs/recent-fonts.json
+uv run scripts/fetch-recent-fonts.py                      # -> .cache/recent-fonts, docs/fonts, docs/recent-fonts.json
 python3 scripts/font-metrics.py --extra-fonts .cache/recent-fonts
 python3 scripts/font-report.py
 ```
+
+A fresh clone has the report but not the fonts, so run `uv run scripts/fetch-recent-fonts.py --webfonts-only` to get the previews. It works from the tracked manifest and measures nothing. Files over 2.5 MiB are left out so the published site fits artifact-host's 32 MiB limit, so publish the reports and `fonts/` rather than all of `docs/`, whose JSON would push it over.
 
 The Homebrew cask supplies the full release where one exists, and the catalogue's webfont is the fallback. Commercial fonts are listed but not downloaded. `docs/recent-fonts.json` records the catalogue commit and the outcome for every selected font.
 

@@ -43,21 +43,25 @@
    "version": "latest",
    "webfont_faces": [
     {
+     "file": "fonts/azeret/azeret.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/azeret/azeret.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/azeret/azeret-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/azeret/azeret-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/azeret/azeret-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/azeret/azeret-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/azeret/azeret-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/azeret/azeret-bold-italic.woff2",
      "weight": "bold"
@@ -84,6 +88,7 @@
    "version": "1.30.0",
    "webfont_faces": [
     {
+     "file": "fonts/cozette/cozette.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/cozette/cozette.woff2",
      "weight": "normal"
@@ -112,11 +117,13 @@
    "version": "latest",
    "webfont_faces": [
     {
+     "file": "fonts/dm-mono/dm-mono.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/dm-mono/dm-mono.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/dm-mono/dm-mono-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/dm-mono/dm-mono-italic.woff2",
      "weight": "normal"
@@ -152,21 +159,25 @@
    "status": "fetched",
    "webfont_faces": [
     {
+     "file": "fonts/hack-ligatured/hack-ligatured.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/hack-ligatured/hack-ligatured.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/hack-ligatured/hack-ligatured-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/hack-ligatured/hack-ligatured-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/hack-ligatured/hack-ligatured-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/hack-ligatured/hack-ligatured-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/hack-ligatured/hack-ligatured-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/hack-ligatured/hack-ligatured-bold-italic.woff2",
      "weight": "bold"
@@ -223,21 +234,25 @@
    "version": "2.304",
    "webfont_faces": [
     {
+     "file": "fonts/jetbrainsmono/jetbrainsmono.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/jetbrainsmono/jetbrainsmono.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/jetbrainsmono/jetbrainsmono-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/jetbrainsmono/jetbrainsmono-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/jetbrainsmono/jetbrainsmono-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/jetbrainsmono/jetbrainsmono-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/jetbrainsmono/jetbrainsmono-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/jetbrainsmono/jetbrainsmono-bold-italic.woff2",
      "weight": "bold"
@@ -274,21 +289,25 @@
    "version": "0.63.2",
    "webfont_faces": [
     {
+     "file": "fonts/julia-mono/julia-mono.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/julia-mono/julia-mono.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/julia-mono/julia-mono-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/julia-mono/julia-mono-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/julia-mono/julia-mono-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/julia-mono/julia-mono-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/julia-mono/julia-mono-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/julia-mono/julia-mono-bold-italic.woff2",
      "weight": "bold"
@@ -331,11 +350,13 @@
    "version": "latest",
    "webfont_faces": [
     {
+     "file": "fonts/reddit-sans/reddit-sans.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/reddit-sans/reddit-sans.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/reddit-sans/reddit-sans-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/reddit-sans/reddit-sans-bold.woff2",
      "weight": "bold"
@@ -367,11 +388,13 @@
    "version": "latest",
    "webfont_faces": [
     {
+     "file": "fonts/sono/sono.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/sono/sono.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/sono/sono-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/sono/sono-bold.woff2",
      "weight": "bold"
@@ -410,21 +433,25 @@
    "version": "latest",
    "webfont_faces": [
     {
+     "file": "fonts/twilio-sans-mono/twilio-sans-mono.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/twilio-sans-mono/twilio-sans-mono.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/twilio-sans-mono/twilio-sans-mono-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/twilio-sans-mono/twilio-sans-mono-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/twilio-sans-mono/twilio-sans-mono-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/twilio-sans-mono/twilio-sans-mono-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/twilio-sans-mono/twilio-sans-mono-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/twilio-sans-mono/twilio-sans-mono-bold-italic.woff2",
      "weight": "bold"
@@ -448,21 +475,25 @@
    "status": "fetched",
    "webfont_faces": [
     {
+     "file": "fonts/courier-ibm-dotted/courier-ibm-dotted.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/courier-ibm-dotted/courier-ibm-dotted.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/courier-ibm-dotted/courier-ibm-dotted-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/courier-ibm-dotted/courier-ibm-dotted-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/courier-ibm-dotted/courier-ibm-dotted-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/courier-ibm-dotted/courier-ibm-dotted-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/courier-ibm-dotted/courier-ibm-dotted-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/courier-ibm-dotted/courier-ibm-dotted-bold-italic.woff2",
      "weight": "bold"
@@ -486,21 +517,25 @@
    "status": "fetched",
    "webfont_faces": [
     {
+     "file": "fonts/courier-ibm-slashed/courier-ibm-slashed.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/courier-ibm-slashed/courier-ibm-slashed.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/courier-ibm-slashed/courier-ibm-slashed-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/courier-ibm-slashed/courier-ibm-slashed-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/courier-ibm-slashed/courier-ibm-slashed-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/courier-ibm-slashed/courier-ibm-slashed-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/courier-ibm-slashed/courier-ibm-slashed-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/courier-ibm-slashed/courier-ibm-slashed-bold-italic.woff2",
      "weight": "bold"
@@ -524,21 +559,25 @@
    "status": "fetched",
    "webfont_faces": [
     {
+     "file": "fonts/drafting/drafting.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/drafting/drafting.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/drafting/drafting-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/drafting/drafting-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/drafting/drafting-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/drafting/drafting-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/drafting/drafting-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/drafting/drafting-bold-italic.woff2",
      "weight": "bold"
@@ -562,21 +601,25 @@
    "status": "fetched",
    "webfont_faces": [
     {
+     "file": "fonts/monofoki/monofoki.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/monofoki/monofoki.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/monofoki/monofoki-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/monofoki/monofoki-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/monofoki/monofoki-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/monofoki/monofoki-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/monofoki/monofoki-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/monofoki/monofoki-bold-italic.woff2",
      "weight": "bold"
@@ -598,11 +641,13 @@
    "status": "fetched",
    "webfont_faces": [
     {
+     "file": "fonts/terminus-consoleet/terminus-consoleet.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/terminus-consoleet/terminus-consoleet.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/terminus-consoleet/terminus-consoleet-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/terminus-consoleet/terminus-consoleet-bold.woff2",
      "weight": "bold"
@@ -623,6 +668,7 @@
    "status": "fetched",
    "webfont_faces": [
     {
+     "file": "fonts/terminus-consoleet-smooth/terminus-consoleet-smooth.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/terminus-consoleet-smooth/terminus-consoleet-smooth.woff2",
      "weight": "normal"
@@ -644,11 +690,13 @@
    "status": "fetched",
    "webfont_faces": [
     {
+     "file": "fonts/audio-link/audio-link.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/audio-link/audio-link.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/audio-link/audio-link-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/audio-link/audio-link-bold.woff2",
      "weight": "bold"
@@ -692,21 +740,25 @@
    "version": "latest",
    "webfont_faces": [
     {
+     "file": "fonts/chivo/chivo.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/chivo/chivo.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/chivo/chivo-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/chivo/chivo-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/chivo/chivo-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/chivo/chivo-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/chivo/chivo-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/chivo/chivo-bold-italic.woff2",
      "weight": "bold"
@@ -728,11 +780,13 @@
    "status": "fetched",
    "webfont_faces": [
     {
+     "file": "fonts/eirian/eirian.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/eirian/eirian.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/eirian/eirian-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/eirian/eirian-italic.woff2",
      "weight": "normal"
@@ -757,11 +811,13 @@
    "version": "latest",
    "webfont_faces": [
     {
+     "file": "fonts/fragment-mono/fragment-mono.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/fragment-mono/fragment-mono.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/fragment-mono/fragment-mono-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/fragment-mono/fragment-mono-italic.woff2",
      "weight": "normal"
@@ -803,21 +859,25 @@
    "version": "7.9",
    "webfont_faces": [
     {
+     "file": "fonts/maple/maple.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/maple/maple.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/maple/maple-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/maple/maple-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/maple/maple-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/maple/maple-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/maple/maple-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/maple/maple-bold-italic.woff2",
      "weight": "bold"
@@ -847,11 +907,13 @@
    "version": "1.1.0",
    "webfont_faces": [
     {
+     "file": "fonts/martian-mono/martian-mono.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/martian-mono/martian-mono.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/martian-mono/martian-mono-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/martian-mono/martian-mono-bold.woff2",
      "weight": "bold"
@@ -875,6 +937,7 @@
    "version": "4.2.1",
    "webfont_faces": [
     {
+     "file": "fonts/monocraft/monocraft.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/monocraft/monocraft.woff2",
      "weight": "normal"
@@ -907,6 +970,7 @@
    "status": "fetched",
    "webfont_faces": [
     {
+     "file": "fonts/sligoil/sligoil.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/sligoil/sligoil.woff2",
      "weight": "normal"
@@ -933,21 +997,25 @@
    "version": "1.143",
    "webfont_faces": [
     {
+     "file": "fonts/commit-mono/commit-mono.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/commit-mono/commit-mono.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/commit-mono/commit-mono-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/commit-mono/commit-mono-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/commit-mono/commit-mono-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/commit-mono/commit-mono-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/commit-mono/commit-mono-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/commit-mono/commit-mono-bold-italic.woff2",
      "weight": "bold"
@@ -1021,11 +1089,13 @@
    "version": "1.9.0",
    "webfont_faces": [
     {
+     "file": "fonts/geist/geist.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/geist/geist.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/geist/geist-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/geist/geist-bold.woff2",
      "weight": "bold"
@@ -1068,16 +1138,19 @@
    "version": "1.4.0",
    "webfont_faces": [
     {
+     "file": "fonts/intel-one-mono/intel-one-mono.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/intel-one-mono/intel-one-mono.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/intel-one-mono/intel-one-mono-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/intel-one-mono/intel-one-mono-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/intel-one-mono/intel-one-mono-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/intel-one-mono/intel-one-mono-italic.woff2",
      "weight": "normal"
@@ -1154,21 +1227,25 @@
    "version": "1.400",
    "webfont_faces": [
     {
+     "file": "fonts/monaspace-argon/monaspace-argon.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-argon/monaspace-argon.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/monaspace-argon/monaspace-argon-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-argon/monaspace-argon-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/monaspace-argon/monaspace-argon-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-argon/monaspace-argon-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/monaspace-argon/monaspace-argon-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-argon/monaspace-argon-bold-italic.woff2",
      "weight": "bold"
@@ -1233,21 +1310,25 @@
    "version": "1.400",
    "webfont_faces": [
     {
+     "file": "fonts/monaspace-krypton/monaspace-krypton.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-krypton/monaspace-krypton.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/monaspace-krypton/monaspace-krypton-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-krypton/monaspace-krypton-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/monaspace-krypton/monaspace-krypton-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-krypton/monaspace-krypton-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/monaspace-krypton/monaspace-krypton-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-krypton/monaspace-krypton-bold-italic.woff2",
      "weight": "bold"
@@ -1312,21 +1393,25 @@
    "version": "1.400",
    "webfont_faces": [
     {
+     "file": "fonts/monaspace-neon/monaspace-neon.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-neon/monaspace-neon.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/monaspace-neon/monaspace-neon-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-neon/monaspace-neon-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/monaspace-neon/monaspace-neon-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-neon/monaspace-neon-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/monaspace-neon/monaspace-neon-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-neon/monaspace-neon-bold-italic.woff2",
      "weight": "bold"
@@ -1391,21 +1476,25 @@
    "version": "1.400",
    "webfont_faces": [
     {
+     "file": "fonts/monaspace-radon/monaspace-radon.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-radon/monaspace-radon.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/monaspace-radon/monaspace-radon-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-radon/monaspace-radon-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/monaspace-radon/monaspace-radon-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-radon/monaspace-radon-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/monaspace-radon/monaspace-radon-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-radon/monaspace-radon-bold-italic.woff2",
      "weight": "bold"
@@ -1470,21 +1559,25 @@
    "version": "1.400",
    "webfont_faces": [
     {
+     "file": "fonts/monaspace-xenon/monaspace-xenon.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-xenon/monaspace-xenon.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/monaspace-xenon/monaspace-xenon-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-xenon/monaspace-xenon-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/monaspace-xenon/monaspace-xenon-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-xenon/monaspace-xenon-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/monaspace-xenon/monaspace-xenon-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/monaspace-xenon/monaspace-xenon-bold-italic.woff2",
      "weight": "bold"
@@ -1516,6 +1609,7 @@
    "version": "2.502",
    "webfont_faces": [
     {
+     "file": "fonts/oxproto/oxproto.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/oxproto/oxproto.woff2",
      "weight": "normal"
@@ -1539,21 +1633,25 @@
    "status": "fetched",
    "webfont_faces": [
     {
+     "file": "fonts/serious-shanns/serious-shanns.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/serious-shanns/serious-shanns.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/serious-shanns/serious-shanns-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/serious-shanns/serious-shanns-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/serious-shanns/serious-shanns-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/serious-shanns/serious-shanns-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/serious-shanns/serious-shanns-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/serious-shanns/serious-shanns-bold-italic.woff2",
      "weight": "bold"
@@ -1574,6 +1672,7 @@
    "status": "fetched",
    "webfont_faces": [
     {
+     "file": "fonts/unifontex/unifontex.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/unifontex/unifontex.woff2",
      "weight": "normal"
@@ -1597,6 +1696,7 @@
    "version": "1.500",
    "webfont_faces": [
     {
+     "file": "fonts/departure-mono/departure-mono.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/departure-mono/departure-mono.woff2",
      "weight": "normal"
@@ -1620,6 +1720,7 @@
    "version": "1.0",
    "webfont_faces": [
     {
+     "file": "fonts/miracode/miracode.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/miracode/miracode.woff2",
      "weight": "normal"
@@ -1646,21 +1747,25 @@
    "version": "51.0",
    "webfont_faces": [
     {
+     "file": "fonts/adwaita-mono/adwaita-mono.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/adwaita-mono/adwaita-mono.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/adwaita-mono/adwaita-mono-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/adwaita-mono/adwaita-mono-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/adwaita-mono/adwaita-mono-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/adwaita-mono/adwaita-mono-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/adwaita-mono/adwaita-mono-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/adwaita-mono/adwaita-mono-bold-italic.woff2",
      "weight": "bold"
@@ -1724,21 +1829,25 @@
    "version": "0.4",
    "webfont_faces": [
     {
+     "file": "fonts/annotation-mono/annotation-mono.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/annotation-mono/annotation-mono.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/annotation-mono/annotation-mono-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/annotation-mono/annotation-mono-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/annotation-mono/annotation-mono-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/annotation-mono/annotation-mono-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/annotation-mono/annotation-mono-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/annotation-mono/annotation-mono-bold-italic.woff2",
      "weight": "bold"
@@ -1769,21 +1878,25 @@
    "version": "1.2.0",
    "webfont_faces": [
     {
+     "file": "fonts/aporetic-sans/aporetic-sans.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/aporetic-sans/aporetic-sans.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/aporetic-sans/aporetic-sans-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/aporetic-sans/aporetic-sans-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/aporetic-sans/aporetic-sans-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/aporetic-sans/aporetic-sans-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/aporetic-sans/aporetic-sans-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/aporetic-sans/aporetic-sans-bold-italic.woff2",
      "weight": "bold"
@@ -1814,21 +1927,25 @@
    "version": "1.2.0",
    "webfont_faces": [
     {
+     "file": "fonts/aporetic-serif/aporetic-serif.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/aporetic-serif/aporetic-serif.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/aporetic-serif/aporetic-serif-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/aporetic-serif/aporetic-serif-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/aporetic-serif/aporetic-serif-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/aporetic-serif/aporetic-serif-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/aporetic-serif/aporetic-serif-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/aporetic-serif/aporetic-serif-bold-italic.woff2",
      "weight": "bold"
@@ -1868,21 +1985,25 @@
    "version": "latest",
    "webfont_faces": [
     {
+     "file": "fonts/atkinson-hyperlegible/atkinson-hyperlegible.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/atkinson-hyperlegible/atkinson-hyperlegible.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/atkinson-hyperlegible/atkinson-hyperlegible-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/atkinson-hyperlegible/atkinson-hyperlegible-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/atkinson-hyperlegible/atkinson-hyperlegible-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/atkinson-hyperlegible/atkinson-hyperlegible-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/atkinson-hyperlegible/atkinson-hyperlegible-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/atkinson-hyperlegible/atkinson-hyperlegible-bold-italic.woff2",
      "weight": "bold"
@@ -1920,11 +2041,13 @@
    "version": "latest",
    "webfont_faces": [
     {
+     "file": "fonts/google-sans-code/google-sans-code.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/google-sans-code/google-sans-code.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/google-sans-code/google-sans-code-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/google-sans-code/google-sans-code-italic.woff2",
      "weight": "normal"
@@ -2027,21 +2150,25 @@
    "version": "2.2.0",
    "webfont_faces": [
     {
+     "file": "fonts/ioskeley/ioskeley.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/ioskeley/ioskeley.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/ioskeley/ioskeley-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/ioskeley/ioskeley-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/ioskeley/ioskeley-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/ioskeley/ioskeley-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/ioskeley/ioskeley-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/ioskeley/ioskeley-bold-italic.woff2",
      "weight": "bold"
@@ -2108,6 +2235,7 @@
    "version": "2.0.27",
    "webfont_faces": [
     {
+     "file": "fonts/mona-sans-mono/mona-sans-mono.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/mona-sans-mono/mona-sans-mono.woff2",
      "weight": "normal"
@@ -2131,21 +2259,25 @@
    "version": "1.0.0",
    "webfont_faces": [
     {
+     "file": "fonts/myna/myna.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/myna/myna.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/myna/myna-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/myna/myna-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/myna/myna-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/myna/myna-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/myna/myna-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/myna/myna-bold-italic.woff2",
      "weight": "bold"
@@ -2166,6 +2298,7 @@
    "status": "fetched",
    "webfont_faces": [
     {
+     "file": "fonts/old-timey/old-timey.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/old-timey/old-timey.woff2",
      "weight": "normal"
@@ -2197,6 +2330,7 @@
    "version": "1.000",
    "webfont_faces": [
     {
+     "file": "fonts/paper/paper.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/paper/paper.woff2",
      "weight": "normal"
@@ -2223,21 +2357,25 @@
    "version": "2.2.0",
    "webfont_faces": [
     {
+     "file": "fonts/psudo/psudo.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/psudo/psudo.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/psudo/psudo-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/psudo/psudo-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/psudo/psudo-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/psudo/psudo-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/psudo/psudo-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/psudo/psudo-bold-italic.woff2",
      "weight": "bold"
@@ -2258,6 +2396,7 @@
    "status": "fetched",
    "webfont_faces": [
     {
+     "file": "fonts/zhima-mono/zhima-mono.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/zhima-mono/zhima-mono.woff2",
      "weight": "normal"
@@ -2307,21 +2446,25 @@
    "status": "fetched",
    "webfont_faces": [
     {
+     "file": "fonts/lyth-mono/lyth-mono.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/lyth-mono/lyth-mono.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/lyth-mono/lyth-mono-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/lyth-mono/lyth-mono-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/lyth-mono/lyth-mono-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/lyth-mono/lyth-mono-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/lyth-mono/lyth-mono-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/lyth-mono/lyth-mono-bold-italic.woff2",
      "weight": "bold"
@@ -2362,21 +2505,25 @@
    "version": "1.5.0",
    "webfont_faces": [
     {
+     "file": "fonts/nordwand-mono/nordwand-mono.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/nordwand-mono/nordwand-mono.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/nordwand-mono/nordwand-mono-bold.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/nordwand-mono/nordwand-mono-bold.woff2",
      "weight": "bold"
     },
     {
+     "file": "fonts/nordwand-mono/nordwand-mono-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/nordwand-mono/nordwand-mono-italic.woff2",
      "weight": "normal"
     },
     {
+     "file": "fonts/nordwand-mono/nordwand-mono-bold-italic.woff2",
      "style": "italic",
      "url": "https://www.programmingfonts.org/fonts/resources/nordwand-mono/nordwand-mono-bold-italic.woff2",
      "weight": "bold"
@@ -2397,6 +2544,7 @@
    "status": "fetched",
    "webfont_faces": [
     {
+     "file": "fonts/sergamon/sergamon.woff2",
      "style": "normal",
      "url": "https://www.programmingfonts.org/fonts/resources/sergamon/sergamon.woff2",
      "weight": "normal"
