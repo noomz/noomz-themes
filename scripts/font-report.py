@@ -2243,6 +2243,18 @@ def recent_table(rows: list[tuple[dict[str, Any], Family | None, int | None]]) -
     return table(header, "".join(body), "recent releases", "board sortable")
 
 
+CSS_FACE_VALUE = re.compile(r"normal|italic|oblique|bold|[1-9]00")
+
+
+def css_string(text: str) -> str:
+    """Text safe inside a double-quoted CSS string in a <style> element.
+
+    Catalogue names come from a third party, so quotes, backslashes, angle brackets
+    and line breaks become CSS escapes and cannot close the string or the element.
+    """
+    return re.sub(r'["\\<>\n\r\f]', lambda match: f"\\{ord(match.group()):x} ", text)
+
+
 def recent_font_faces(families: list[Family]) -> str:
     """Load uninstalled designs from files beside the report so their previews are real.
 
@@ -2254,9 +2266,11 @@ def recent_font_faces(families: list[Family]) -> str:
     for family in families:
         if family.installed or not family.recent:
             continue
-        name = family.name.replace('"', "")
-        local = (family.font_family or family.name).replace('"', "")
+        name = css_string(family.name)
+        local = css_string(family.font_family or family.name)
         for face in family.recent[0].get("webfont_faces") or []:
+            if not (CSS_FACE_VALUE.fullmatch(face["weight"]) and CSS_FACE_VALUE.fullmatch(face["style"])):
+                continue
             served = f',url("{face["file"]}") format("woff2")' if face.get("file") else ""
             rules.append(
                 f'@font-face{{font-family:"{name}";font-weight:{face["weight"]};'

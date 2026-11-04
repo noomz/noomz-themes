@@ -273,6 +273,15 @@ def fetch_one(key: str, entry: dict[str, Any], faces: list[dict[str, str]], cach
     return row
 
 
+def webfont_problem(data: bytes, relative: str) -> str:
+    """Why a file must not be served, or "" when it may."""
+    if data[:4] != b"wOF2":
+        return f"not a woff2 file: {relative}"
+    if len(data) > MAX_SERVED_BYTES:
+        return f"{len(data) / 2 ** 20:.2f} MiB is over the cap: {relative}"
+    return ""
+
+
 def serve_webfont(face: dict[str, str]) -> str | None:
     """Put one webfont beside the report. `file` is set only if the font is on disk."""
     face.pop("file", None)
@@ -282,22 +291,26 @@ def serve_webfont(face: dict[str, str]) -> str | None:
         return None
     relative = f"fonts/{match.group(1)}"
     path = os.path.join(REPORT_DIR, relative)
-    if not os.path.exists(path):
-        try:
-            data = read_url(face["url"])
-        except Exception as error:
-            print(f"  not served, {relative}: {error}")
-            return None
-        if data[:4] != b"wOF2":
-            print(f"  not served, not a woff2 file: {relative}")
-            return None
-        if len(data) > MAX_SERVED_BYTES:
-            print(f"  not served, {len(data) / 2 ** 20:.2f} MiB is over the cap: {relative}")
-            return None
-        os.makedirs(os.path.dirname(path), exist_ok=True)
-        with open(f"{path}.part", "wb") as out:
-            out.write(data)
-        os.replace(f"{path}.part", path)
+    if os.path.exists(path):
+        with open(path, "rb") as handle:
+            kept = handle.read()
+        if not webfont_problem(kept, relative):
+            face["file"] = relative
+            return relative
+        os.remove(path)
+    try:
+        data = read_url(face["url"])
+    except Exception as error:
+        print(f"  not served, {relative}: {error}")
+        return None
+    problem = webfont_problem(data, relative)
+    if problem:
+        print(f"  not served, {problem}")
+        return None
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(f"{path}.part", "wb") as out:
+        out.write(data)
+    os.replace(f"{path}.part", path)
     face["file"] = relative
     return relative
 
@@ -344,6 +357,9 @@ def fetch_manifest(args: argparse.Namespace) -> dict[str, Any]:
                 fetch_cask_archive(token, version_cache)
             except subprocess.CalledProcessError as error:
                 print(f"  cask {token} failed: {error.stderr.strip()[:200]}")
+            except OSError as error:
+                # no brew on this machine: fetch_one falls back to the catalogue webfont
+                print(f"  cask {token} failed: {error}")
 
         with ThreadPoolExecutor(args.workers) as pool:
             list(pool.map(prefetch, tokens))

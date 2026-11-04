@@ -11,6 +11,7 @@ via fontTools, and FreeType rasterisation via Pillow at a fixed pixel size.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import logging
 import os
@@ -202,9 +203,11 @@ def variable_instances(faces: list[Face], extra_dirs: list[str], target: str) ->
             source = TTFont(face.path)
             instances = list(source["fvar"].instances)
             stem = os.path.basename(face.path).rsplit(".", 1)[0]
+            # two installed files can share a name in different font directories
+            source_id = hashlib.sha256(face.path.encode()).hexdigest()[:8]
             for instance in instances:
                 label = source["name"].getDebugName(instance.subfamilyNameID) or "instance"
-                name = re.sub(r"[^A-Za-z0-9._-]+", "_", f"{stem}-instance-{label}.ttf")
+                name = re.sub(r"[^A-Za-z0-9._-]+", "_", f"{stem}-{source_id}-instance-{label}.ttf")
                 path = os.path.join(target, name)
                 if not os.path.exists(path) or os.path.getmtime(path) < os.path.getmtime(face.path):
                     os.makedirs(target, exist_ok=True)
