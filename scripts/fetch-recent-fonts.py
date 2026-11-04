@@ -20,6 +20,8 @@ Run with: uv run scripts/fetch-recent-fonts.py
 from __future__ import annotations
 
 import argparse
+import hashlib
+import io
 import json
 import os
 import re
@@ -273,35 +275,68 @@ def fetch_one(key: str, entry: dict[str, Any], faces: list[dict[str, str]], cach
     return row
 
 
+def git_blob_sha(data: bytes) -> str:
+    return hashlib.sha1(b"blob %d\0" % len(data) + data).hexdigest()
+
+
+def webfont_shas(commit: str) -> dict[str, str]:
+    """Repo path -> git blob sha of every file in the catalogue at `commit`."""
+    tree = json.loads(read_url(
+        f"https://api.github.com/repos/braver/programmingfonts/git/trees/{commit}?recursive=1"))
+    if tree["truncated"]:
+        raise SystemExit(f"catalogue tree at {commit} came back truncated")
+    return {entry["path"]: entry["sha"] for entry in tree["tree"] if entry["type"] == "blob"}
+
+
 def webfont_problem(data: bytes, relative: str) -> str:
     """Why a file must not be served, or "" when it may."""
-    if data[:4] != b"wOF2":
-        return f"not a woff2 file: {relative}"
     if len(data) > MAX_SERVED_BYTES:
         return f"{len(data) / 2 ** 20:.2f} MiB is over the cap: {relative}"
+    try:
+        font = TTFont(io.BytesIO(data))
+        flavor = font.flavor
+        font["head"], font["cmap"], font.getGlyphOrder()
+        font.close()
+    except Exception as error:
+        return f"not a usable font ({error}): {relative}"
+    if flavor != "woff2":
+        return f"not a woff2 file: {relative}"
     return ""
 
 
-def serve_webfont(face: dict[str, str]) -> str | None:
-    """Put one webfont beside the report. `file` is set only if the font is on disk."""
+def serve_webfont(face: dict[str, str], commit: str, shas: dict[str, str]) -> str | None:
+    """Put one webfont beside the report, as it is in the catalogue at `commit`.
+
+    A file already on disk is reused only when its blob sha matches that commit's, so a
+    font the catalogue replaced, or a corrupt file, is downloaded again.
+    `file` is set only if the font is on disk.
+    """
     face.pop("file", None)
     match = WEBFONT_URL.fullmatch(face["url"])
     if not match:
         print(f"  not served, unexpected url: {face['url']}")
         return None
     relative = f"fonts/{match.group(1)}"
+    repo_path = f"fonts/resources/{match.group(1)}"
+    expected = shas.get(repo_path)
+    if not expected:
+        print(f"  not served, not in the catalogue at {commit[:12]}: {relative}")
+        return None
     path = os.path.join(REPORT_DIR, relative)
     if os.path.exists(path):
         with open(path, "rb") as handle:
             kept = handle.read()
-        if not webfont_problem(kept, relative):
+        if git_blob_sha(kept) == expected and not webfont_problem(kept, relative):
             face["file"] = relative
             return relative
         os.remove(path)
     try:
-        data = read_url(face["url"])
+        data = read_url(f"{RAW}/{commit}/{repo_path}")
     except Exception as error:
         print(f"  not served, {relative}: {error}")
+        return None
+    if git_blob_sha(data) != expected:
+        print(f"  not served, download does not match the catalogue: {relative}")
         return None
     problem = webfont_problem(data, relative)
     if problem:
@@ -315,10 +350,12 @@ def serve_webfont(face: dict[str, str]) -> str | None:
     return relative
 
 
-def serve_webfonts(rows: list[dict[str, Any]], workers: int) -> None:
+def serve_webfonts(rows: list[dict[str, Any]], workers: int, commit: str) -> None:
     faces = [face for row in rows for face in row["webfont_faces"]]
+    shas = webfont_shas(commit)
     with ThreadPoolExecutor(workers) as pool:
-        served = {relative for relative in pool.map(serve_webfont, faces) if relative}
+        served = {relative for relative in pool.map(lambda face: serve_webfont(face, commit, shas), faces)
+                  if relative}
     # Whatever no face claims would still be published: a crashed run's .part, a dropped font.
     size = 0
     for root, _dirs, names in os.walk(os.path.join(REPORT_DIR, "fonts")):
@@ -400,7 +437,7 @@ def main() -> None:
         manifest = fetch_manifest(args)
     # A --prefer webfont run only sizes a bias. The report never reads its manifest.
     if args.prefer == "cask":
-        serve_webfonts(manifest["fonts"], args.workers)
+        serve_webfonts(manifest["fonts"], args.workers, manifest["catalogue"]["repo_commit"])
     os.makedirs(os.path.dirname(args.manifest), exist_ok=True)
     with open(args.manifest, "w") as handle:
         json.dump(manifest, handle, indent=1, sort_keys=True)

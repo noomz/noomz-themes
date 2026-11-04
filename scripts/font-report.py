@@ -2239,7 +2239,10 @@ def recent_table(rows: list[tuple[dict[str, Any], Family | None, int | None]]) -
     return table(header, "".join(body), "recent releases", "board sortable")
 
 
-CSS_FACE_VALUE = re.compile(r"normal|italic|oblique|bold|[1-9]00")
+# Every valid @font-face weight and style, and nothing that can leave the declaration.
+_CSS_WEIGHT_NUMBER = r"(?:1000|[1-9]\d{0,2}(?:\.\d+)?)"
+CSS_WEIGHT = re.compile(rf"normal|bold|{_CSS_WEIGHT_NUMBER}(?: +{_CSS_WEIGHT_NUMBER})?")
+CSS_STYLE = re.compile(r"normal|italic|oblique(?: +-?\d{1,2}(?:\.\d+)?deg){0,2}")
 
 
 def css_string(text: str) -> str:
@@ -2265,7 +2268,7 @@ def recent_font_faces(families: list[Family]) -> str:
         name = css_string(family.name)
         local = css_string(family.font_family or family.name)
         for face in family.recent[0].get("webfont_faces") or []:
-            if not (CSS_FACE_VALUE.fullmatch(face["weight"]) and CSS_FACE_VALUE.fullmatch(face["style"])):
+            if not (CSS_WEIGHT.fullmatch(face["weight"]) and CSS_STYLE.fullmatch(face["style"])):
                 continue
             served = f',url("{face["file"]}") format("woff2")' if face.get("file") else ""
             rules.append(

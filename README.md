@@ -309,7 +309,7 @@ python3 scripts/font-metrics.py --extra-fonts .cache/recent-fonts
 python3 scripts/font-report.py
 ```
 
-A fresh clone has the report but not the fonts, so run `uv run scripts/fetch-recent-fonts.py --webfonts-only` to get the previews. It works from the tracked manifest and measures nothing. Files over 2.5 MiB are left out so the published site fits artifact-host's 32 MiB limit, so publish the reports and `fonts/` rather than all of `docs/`, whose JSON would push it over.
+A fresh clone has the report but not the fonts, so run `uv run scripts/fetch-recent-fonts.py --webfonts-only` to get the previews. It works from the tracked manifest and measures nothing. Each file comes from the catalogue commit the manifest records, and a file already in `docs/fonts` is kept only while its git blob hash matches that commit and it parses as a WOFF2 font. Files over 2.5 MiB are left out so the published site fits artifact-host's 32 MiB limit, so publish the reports and `fonts/` rather than all of `docs/`, whose JSON would push it over.
 
 The Homebrew cask supplies the full release where one exists, and the catalogue's webfont is the fallback. Commercial fonts are listed but not downloaded. `docs/recent-fonts.json` records the catalogue commit and the outcome for every selected font.
 
